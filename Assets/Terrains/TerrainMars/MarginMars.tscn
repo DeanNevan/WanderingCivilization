@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Assets/Art/Hexagons-pack/BasicPack/PNG/Tiles/Terrain/Mars/mars_01.png" type="Texture" id=1]
+
+[node name="MarginMars" type="Sprite"]
+texture = ExtResource( 1 )
