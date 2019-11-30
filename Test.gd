@@ -6,8 +6,8 @@ extends Node2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	OS.shell_open("D:/download/1.jpg")
+	print($Area2D.get_overlapping_areas())
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func _process(delta):
+	print($Area2D.get_overlapping_areas())

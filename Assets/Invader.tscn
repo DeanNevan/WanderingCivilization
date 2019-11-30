@@ -1,18 +1,45 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://Assets/Scripts/Invader.gd" type="Script" id=1]
+[ext_resource path="res://Assets/Art/Hexagons-pack/BasicPack/PNG/Tiles/Terrain/Stone/stone_01.png" type="Texture" id=2]
 
 [node name="Invader" type="Node2D"]
+z_index = 1
 script = ExtResource( 1 )
 
 [node name="Sprite0" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+offset = Vector2( 29, -52 )
+region_enabled = true
+region_rect = Rect2( 60, 0, 60, 40 )
 
 [node name="Sprite1" type="Sprite" parent="."]
+position = Vector2( 0.263519, 0 )
+texture = ExtResource( 2 )
+offset = Vector2( 56, 0 )
+region_enabled = true
+region_rect = Rect2( 110, 32, 10, 76 )
 
 [node name="Sprite2" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+offset = Vector2( 29, 52 )
+region_enabled = true
+region_rect = Rect2( 60, 100, 60, 40 )
 
 [node name="Sprite3" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+offset = Vector2( -29, 52 )
+region_enabled = true
+region_rect = Rect2( 0, 100, 60, 40 )
 
 [node name="Sprite4" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+offset = Vector2( -56, 0 )
+region_enabled = true
+region_rect = Rect2( 0, 33, 10, 74 )
 
 [node name="Sprite5" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+offset = Vector2( -29, -52 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 60, 40 )
