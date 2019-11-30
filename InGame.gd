@@ -81,20 +81,21 @@ func _element_init(element_init_settings):
 	emit_signal("_element_init_done")
 
 ###玩家初始化###
-func _player_init(player_combination_init_settings = [100, [], Global.PLAYER_COMBINATION_INIT_SETTINGS_MODE.RANDOM]):
-	_player_combination_init_done(player_combination_init_settings)
+func _player_init(player_combination_draw_settings = [100, [], Global.COMBINATION_DRAW_SETTINGS_MODE.RANDOM]):
+	combination_draw_init(player_combination, player_combination_draw_settings)
 	pass
 
 
-###玩家地块组初始化###
-###player_combination_init_settings[地块总数， 禁止哪些地块， 生成模式]
-func _player_combination_init_done(player_combination_init_settings):
-	var _count = player_combination_init_settings[0]
-	var _ban = player_combination_init_settings[1]
-	var _mode = player_combination_init_settings[2]
+###地块组绘制和初始化###
+###传入一个地块组和相应的绘制设置，将会绘制并初始化该地块组
+###settings：[地块总数， 禁止哪些地块， 生成模式]
+func combination_draw_init(combination, combination_draw_settings):
+	var _count = combination_draw_settings[0]
+	var _ban = combination_draw_settings[1]
+	var _mode = combination_draw_settings[2]
 	
 	match _mode:
-		Global.PLAYER_COMBINATION_INIT_SETTINGS_MODE.RANDOM:
+		Global.COMBINATION_DRAW_SETTINGS_MODE.RANDOM:
 			var location_array = []
 			var i = -1
 			while true:
@@ -158,12 +159,17 @@ func _player_combination_init_done(player_combination_init_settings):
 					break
 			for i in _count:
 				var new_terrain = Global.TERRAINS[randi() % (Global.TERRAINS.size() - 1)].instance()
-				new_terrain.tag = 0
+				new_terrain.tag = combination.tag
 				new_terrain.location = location_array[i]
-				player_combination.add_child(new_terrain)
+				combination.add_child(new_terrain)
 				new_terrain.set_position_with_location(new_terrain.location)
 				new_terrain.activate_detect_area()
 				#yield(get_tree(), "idle_frame")
 			for i in _count:
 				yield(get_tree(), "idle_frame")
-				player_combination.get_child(i).update_neighbour_terrains()
+				combination.get_child(i).update_neighbour_terrains()
+
+###地块组的层级生成和初始化
+###settings:[层数标准值，层数波动范围，层数生成模式，地平面层级标准值，地平面层级波动范围，地平面层级生成模式，资源标准值，资源波动范围，资源生成模式]
+func combination_layers_init(layers_count_standard = 12, layers_count_standard_range = 2, layers_count_settings = [], surface_standard = 6, surface_standard_range = 2, surface_settings = [], resources_standard = clamp(1, 0, 10), resources_standard_range = 0.2, resources_setting = []):
+	pass

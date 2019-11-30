@@ -14,16 +14,6 @@ var invader = [null, null, null, null, null, null]
 var invader_display_array = [false, false, false, false, false, false]
 var neighbour_terrains = []#与本Terrain接壤的Terrains
 
-var surface_resources = []#地表资源
-var surface_artifact = []#地表人造建筑
-var surface_addition = {}#地表污染
-var underground_resources = []#地下资源
-var underground_artifact = []#地下人造建筑
-var undergroud_addition = {}#地下污染
-var atmosphere_resources = []#大气资源
-var atmosphere_artifact = []#大气人造建筑
-var atmosphere_addition = {}#大气污染
-
 var atmosphere_gas = {}#大气层的气体组成
 var units_on_self = {}#在此地块的单位(可移动、变化位置的单位)
 var geologic_stability = {0:100, 1:100, 2:100, 3:100, 4:100, 5:100, 6:100, 7:100, 8:100, 9:100}#地质稳定性
@@ -34,9 +24,12 @@ onready var detect_area = Area2D.new()
 onready var detect_shape = CollisionShape2D.new()
 var detected_area_temp = []
 
+onready var Layers = Node.new()
+
+
 func _ready():
 	
-	space_override = Area2D.SPACE_OVERRIDE_REPLACE
+	add_child(Layers)
 	
 	for i in $Invader.get_child_count():
 		$Invader.get_child(i).texture = null

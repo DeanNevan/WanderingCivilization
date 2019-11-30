@@ -12,20 +12,20 @@ func _ready():
 func _process(delta):
 	var vec = Vector2()
 	if Input.is_key_pressed(KEY_W):
-		vec += Vector2(0, -8)
+		vec += Vector2(0, -10)
 	if Input.is_key_pressed(KEY_A):
-		vec += Vector2(-8, 0)
+		vec += Vector2(-10, 0)
 	if Input.is_key_pressed(KEY_S):
-		vec += Vector2(0, 8)
+		vec += Vector2(0, 10)
 	if Input.is_key_pressed(KEY_D):
-		vec += Vector2(8, 0)
+		vec += Vector2(10, 0)
 	position += vec * zoom
 	if Input.is_action_just_released("wheel_up"):
-		self.zoom -= Vector2(0.08, 0.08)
+		self.zoom -= Vector2(0.09, 0.09)
 		#self.position = self.position + () * 0.1
 		#print("UP!!!")
 	elif Input.is_action_just_released("wheel_down"):
-		self.zoom += Vector2(0.08, 0.08)
+		self.zoom += Vector2(0.09, 0.09)
 		#self.position = self.position - (get_global_mouse_position() - self.position) * 0.1
 	var _zoom = zoom.x
 	_zoom = clamp(_zoom, min_zoom, max_zoom)
