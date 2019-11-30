@@ -44,6 +44,11 @@ custom_fonts/font = SubResource( 1 )
 
 [node name="PlayerCombination" parent="World/Player" instance=ExtResource( 4 )]
 
-[node name="PlayerCamera" type="Camera2D" parent="."]
+[node name="PlayerCamera" type="Camera2D" parent="World"]
 current = true
+smoothing_speed = 3.0
+drag_margin_left = 0.0
+drag_margin_top = 0.0
+drag_margin_right = 0.0
+drag_margin_bottom = 0.0
 script = ExtResource( 5 )

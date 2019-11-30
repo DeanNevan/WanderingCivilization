@@ -33,7 +33,8 @@ func _ready():
 			pass
 
 func _process(delta):
-	#update()
+	if Input.is_action_pressed("right_mouse_button"):
+		update()
 	pass
 
 func get_terrain_with_location(location):

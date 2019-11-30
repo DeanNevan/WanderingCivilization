@@ -81,7 +81,7 @@ func _element_init(element_init_settings):
 	emit_signal("_element_init_done")
 
 ###玩家初始化###
-func _player_init(player_combination_init_settings = [500, [], Global.PLAYER_COMBINATION_INIT_SETTINGS_MODE.RANDOM]):
+func _player_init(player_combination_init_settings = [100, [], Global.PLAYER_COMBINATION_INIT_SETTINGS_MODE.RANDOM]):
 	_player_combination_init_done(player_combination_init_settings)
 	pass
 
@@ -156,7 +156,6 @@ func _player_combination_init_done(player_combination_init_settings):
 							#print("nmsl")
 				if location_array.size() == _count:
 					break
-			yield(get_tree(), "idle_frame")
 			for i in _count:
 				var new_terrain = Global.TERRAINS[randi() % (Global.TERRAINS.size() - 1)].instance()
 				new_terrain.tag = 0
@@ -164,10 +163,7 @@ func _player_combination_init_done(player_combination_init_settings):
 				player_combination.add_child(new_terrain)
 				new_terrain.set_position_with_location(new_terrain.location)
 				new_terrain.activate_detect_area()
-				yield(get_tree(), "idle_frame")
+				#yield(get_tree(), "idle_frame")
 			for i in _count:
 				yield(get_tree(), "idle_frame")
 				player_combination.get_child(i).update_neighbour_terrains()
-				
-				yield(get_tree(), "idle_frame")
-				yield(get_tree(), "idle_frame")

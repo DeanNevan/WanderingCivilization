@@ -1,20 +1,32 @@
 extends Camera2D
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
+var min_zoom = 0.3
+var max_zoom = 5
 
-# Called when the node enters the scene tree for the first time.
+var player_combination
+
 func _ready():
-	pass # Replace with function body.
+	player_combination = get_parent().get_node("Player/PlayerCombination")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	var vec = Vector2()
+	if Input.is_key_pressed(KEY_W):
+		vec += Vector2(0, -8)
+	if Input.is_key_pressed(KEY_A):
+		vec += Vector2(-8, 0)
+	if Input.is_key_pressed(KEY_S):
+		vec += Vector2(0, 8)
+	if Input.is_key_pressed(KEY_D):
+		vec += Vector2(8, 0)
+	position += vec * zoom
 	if Input.is_action_just_released("wheel_up"):
-		self.zoom -= Vector2(0.04, 0.04)
+		self.zoom -= Vector2(0.08, 0.08)
+		#self.position = self.position + () * 0.1
 		#print("UP!!!")
 	elif Input.is_action_just_released("wheel_down"):
-		self.zoom += Vector2(0.04, 0.04)
+		self.zoom += Vector2(0.08, 0.08)
+		#self.position = self.position - (get_global_mouse_position() - self.position) * 0.1
 	var _zoom = zoom.x
-	_zoom = clamp(_zoom, 0.3, 5)
+	_zoom = clamp(_zoom, min_zoom, max_zoom)
 	self.zoom = Vector2(_zoom, _zoom)
