@@ -34,7 +34,11 @@ func _ready():
 
 func _process(delta):
 	if Input.is_action_pressed("right_mouse_button"):
-		update()
+		var arr = []
+		for i in get_node("/root/InGame/WorldData"). substances_smell_rank.size():
+			arr.append(get_node("/root/InGame/WorldData").substances_smell_rank[i].standard_para[0])
+		#print(get_node("/root/InGame/WorldData").substances_smell_rank)
+		print(arr)
 	pass
 
 func get_terrain_with_location(location):

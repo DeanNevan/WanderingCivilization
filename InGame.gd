@@ -75,14 +75,19 @@ func _element_init(element_init_settings):
 					para.append(temp_para)
 		var new_element = Node.new()
 		$WorldData/Element.add_child(new_element)
-		new_element.script = preload("res://Assets/Scripts/BasicMaterial.gd")
+		new_element.script = preload("res://Assets/Scripts/BasicSubstance.gd")
 		new_element.standard_para = para
-		#print(str(x) + str(new_element.standard_para))
+		element.append(new_element)
+	$WorldData.rank_substances(element)
 	emit_signal("_element_init_done")
 
 ###玩家初始化###
-func _player_init(player_combination_draw_settings = [100, [], Global.COMBINATION_DRAW_SETTINGS_MODE.RANDOM]):
+func _player_init(player_combination_draw_settings = [2, [], Global.COMBINATION_DRAW_SETTINGS_MODE.RANDOM]):
 	combination_draw_init(player_combination, player_combination_draw_settings)
+	yield(get_tree(), "idle_frame")
+	for i in player_combination.get_child_count():
+		terrain_layers_init(player_combination.get_child(i), [12, 2, Global.LAYERS_COUNT_SETTINGS_MODE.RANDOM], [6, 2, Global.SURFACE_LAYER_SETTINGS_MODE.RANDOM], [clamp(1, 0, 10), 0.2, Global.LAYERS_RESOURCES_SETTINGS_MODE.RANDOM])
+		print()
 	pass
 
 
@@ -169,7 +174,24 @@ func combination_draw_init(combination, combination_draw_settings):
 				yield(get_tree(), "idle_frame")
 				combination.get_child(i).update_neighbour_terrains()
 
-###地块组的层级生成和初始化
-###settings:[层数标准值，层数波动范围，层数生成模式，地平面层级标准值，地平面层级波动范围，地平面层级生成模式，资源标准值，资源波动范围，资源生成模式]
-func combination_layers_init(layers_count_standard = 12, layers_count_standard_range = 2, layers_count_settings = [], surface_standard = 6, surface_standard_range = 2, surface_settings = [], resources_standard = clamp(1, 0, 10), resources_standard_range = 0.2, resources_setting = []):
-	pass
+###地块的层级生成和初始化
+###settings:[指定地块， [层数标准值，层数波动范围，层数生成模式]，[地平面层级标准值，地平面层级波动范围，地平面层级生成模式]，[资源标准值，资源波动范围，资源生成模式]]
+func terrain_layers_init(terrain, layers_count_settings = [12, 2, Global.LAYERS_COUNT_SETTINGS_MODE.RANDOM], surface_layer_settings = [6, 2, Global.SURFACE_LAYER_SETTINGS_MODE.RANDOM], layers_resources_setting = [clamp(1, 0, 10), 0.2, Global.LAYERS_RESOURCES_SETTINGS_MODE.RANDOM]):
+	var layers_count
+	var surface_layer
+	match layers_count_settings[2]:
+		Global.LAYERS_COUNT_SETTINGS_MODE.RANDOM:
+			layers_count = layers_count_settings[0] + (randi() % (layers_count_settings[1] * 2) + 1) - layers_count_settings[1]
+	
+	match surface_layer_settings[2]:
+		Global.SURFACE_LAYER_SETTINGS_MODE.RANDOM:
+			surface_layer = surface_layer_settings[0] + (randi() % (surface_layer_settings[1] * 2) + 1) - surface_layer_settings[1]
+	
+	###添加层###
+	for i in layers_count:
+		var layer = Global.LAYER.instance()
+		terrain.Layers.add_child(layer)
+		terrain.layers.append(layer)
+	
+	###添加地平面所处层###
+	terrain.surface_layer = surface_layer

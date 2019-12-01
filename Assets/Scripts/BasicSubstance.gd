@@ -9,6 +9,7 @@ var addition_parasite = {}#寄生虫
 ###资源属性###
 var mass#质量
 var volume#体积
+var state#状态
 
 ###资源特性###
 var standard_para = [100, 100, 100, 100, 100, 100, 100, 1, 100, 100, 0, 100, 100, 100, 100]
@@ -27,7 +28,6 @@ var boiling_point = standard_para[11]#沸点
 var flammability = standard_para[12]#可燃性
 var transparency = standard_para[13]#透明度
 var magnetism = standard_para[14]#磁性
-
 
 func _para_init():
 	smell = standard_para[0]#越大越刺激

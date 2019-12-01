@@ -1,5 +1,11 @@
 extends Node
 
+var LAYER_AREA = 100
+var LAYER_HEIGHT = 100
+var LAYER = preload("res://Assets/Terrains/Layer/Layer.tscn")
+
+var LAYERS = preload("res://Assets/Terrains/Layers/Layers.tscn")
+
 var TERRAIN_DIRT := preload("res://Assets/Terrains/TerrainDirt/TerrainDirt.tscn")
 var MARGIN_DIRT := preload("res://Assets/Art/Hexagons-pack/BasicPack/PNG/Tiles/Terrain/Dirt/dirt_01.png")
 var TERRAIN_GRASS := preload("res://Assets/Terrains/TerrainGrass/TerrainGrass.tscn")
@@ -47,11 +53,11 @@ enum LAYERS_COUNT_SETTINGS_MODE{
 	RANDOM
 }
 
-enum SURFACE_SETTINGS_MODE{
+enum SURFACE_LAYER_SETTINGS_MODE{
 	RANDOM
 }
 
-enum RESOURCES_SETTINGS_MODE{
+enum LAYERS_RESOURCES_SETTINGS_MODE{
 	RANDOM
 }
 

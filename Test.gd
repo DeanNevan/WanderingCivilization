@@ -1,13 +1,23 @@
 extends Node2D
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
+signal a
+signal b
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	print($Area2D.get_overlapping_areas())
+	var a = [2,5,1,3,2,11,210,123]
+	print(a)
+	a.sort()
+	print(a)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	print($Area2D.get_overlapping_areas())
+	pass
+
+func a():
+	for i in 10:
+		print(i)
+	emit_signal("a")
+
+func b():
+	print("b")

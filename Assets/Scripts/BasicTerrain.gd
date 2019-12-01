@@ -9,6 +9,9 @@ var location = Vector2()
 var mass = 10000#质量
 var depth = 10
 
+var layers := []
+var surface_layer = 0
+
 var margin
 var invader = [null, null, null, null, null, null]
 var invader_display_array = [false, false, false, false, false, false]
@@ -20,11 +23,11 @@ var geologic_stability = {0:100, 1:100, 2:100, 3:100, 4:100, 5:100, 6:100, 7:100
 
 var neighbour_vector = Vector2()#相邻向量
 
-onready var detect_area = Area2D.new()
-onready var detect_shape = CollisionShape2D.new()
+onready var DetectArea = Area2D.new()
+onready var DetectShape = CollisionShape2D.new()
 var detected_area_temp = []
 
-onready var Layers = Node.new()
+onready var Layers = Global.LAYERS.instance()
 
 
 func _ready():
@@ -35,14 +38,14 @@ func _ready():
 		$Invader.get_child(i).texture = null
 	
 	###检测相邻地块###
-	self.add_child(detect_area)
-	#detect_area.connect("area_entered", self, "_on_detect_area_area_entered")
-	detect_shape.shape = CircleShape2D.new()
-	detect_shape.shape.radius = 80
-	detect_area.add_child(detect_shape)
-	detect_area.monitoring = true
-	detect_area.monitorable = true
-	#detect_shape.disabled = true
+	self.add_child(DetectArea)
+	#DetectArea.connect("area_entered", self, "_on_DetectArea_area_entered")
+	DetectShape.shape = CircleShape2D.new()
+	DetectShape.shape.radius = 80
+	DetectArea.add_child(DetectShape)
+	DetectArea.monitoring = true
+	DetectArea.monitorable = true
+	#DetectShape.disabled = true
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -55,9 +58,9 @@ func set_position_with_location(location):
 	self.position = Global.get_position_with_location(location)
 
 func activate_detect_area(active = true):
-	detect_area.monitoring = active
-	detect_area.monitorable = active
-	#detect_shape.disabled = active
+	DetectArea.monitoring = active
+	DetectArea.monitorable = active
+	#DetectShape.disabled = active
 
 func update_invader():
 	for i in neighbour_terrains.size():
@@ -94,9 +97,9 @@ func update_invader():
 
 func update_neighbour_terrains():
 	neighbour_terrains = []
-	var arr = detect_area.get_overlapping_areas()
+	var arr = DetectArea.get_overlapping_areas()
 	yield(get_tree(), "idle_frame")
-	#arr = detect_area.get_overlapping_areas()
+	#arr = DetectArea.get_overlapping_areas()
 	for i in arr.size():
 		if arr[i].has_method("update_neighbour_terrains"):
 			if neighbour_terrains.find(arr[i]) == -1 and arr[i] != self:
