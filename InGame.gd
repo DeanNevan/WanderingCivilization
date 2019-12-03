@@ -22,72 +22,17 @@ func _process(delta):
 
 ###游戏初始化###
 func _game_init():
-	_gamedata_init()
-	#yield(self, "_gamedata_init_done")
 	_player_init()
-
-###游戏信息初始化###
-func _gamedata_init(element_settings = [[30, 0.1, 1, Global.ELEMENT_INIT_SETTINGS_MODE.AVERAGE]], addition_settings = [[], [], [], []]):
-	_element_init(element_settings[0])
-	#yield(self, "_element_init_done")
-	emit_signal("_gamedata_init_done")
-
-###世界元素初始化###
-#element_init_settings中的第一个元素表示元素数量，第二个是随机范围，第三个是倍率，第四个是模式
-func _element_init(element_init_settings):
-	var _count = element_init_settings[0]
-	var _range = element_init_settings[1]
-	var _times = element_init_settings[2]
-	var _mode = element_init_settings[3]
 	
-	var element = []
-	var last_array = []
-	for x in _count:
-		var para = []
-		match _mode:
-			Global.ELEMENT_INIT_SETTINGS_MODE.AVERAGE:
-				var melting_point = 0
-				for y in 14:
-					var temp_para
-					if y == 7:#密度
-						temp_para = (x + 1) * (1 + rand_range(- _range, _range))
-					elif y == 10:#熔点
-						melting_point = (x + 1) * 10 * (1 + rand_range(- _range, _range))
-						temp_para = (x + 1) * 10 * (1 + rand_range(- _range, _range))
-					elif y == 11:#沸点
-						temp_para = melting_point * 2 * (1 + rand_range(- _range, _range))
-					else:
-						temp_para = (x + 1) * 10 * (1 + rand_range(- _range, _range))
-					para.append(temp_para)
-			Global.ELEMENT_INIT_SETTINGS_MODE.RANDOM:
-				var melting_point = 0
-				for y in 14:
-					var temp_para
-					if y == 7:
-						temp_para = randi() % (_count * 10) + 1
-					elif y == 10:
-						melting_point = randi() % (_count * 100) + 1
-						temp_para = randi() % (_count * 100) + 1
-					elif y == 11:
-						temp_para = floor(rand_range(melting_point, _count * 100))
-					else:
-						temp_para = randi() % (_count * 100) + 1
-					para.append(temp_para)
-		var new_element = Node.new()
-		$WorldData/Element.add_child(new_element)
-		new_element.script = preload("res://Assets/Scripts/BasicSubstance.gd")
-		new_element.standard_para = para
-		element.append(new_element)
-	$WorldData.rank_substances(element)
-	emit_signal("_element_init_done")
+
 
 ###玩家初始化###
-func _player_init(player_combination_draw_settings = [2, [], Global.COMBINATION_DRAW_SETTINGS_MODE.RANDOM]):
+func _player_init(player_combination_draw_settings = [100, [], Global.COMBINATION_DRAW_SETTINGS_MODE.RANDOM], player_terrain_layers_init_settings = [[15, 2, Global.LAYERS_COUNT_SETTINGS_MODE.RANDOM], [9, 2, Global.SURFACE_LAYER_SETTINGS_MODE.RANDOM]]):
 	combination_draw_init(player_combination, player_combination_draw_settings)
 	yield(get_tree(), "idle_frame")
-	for i in player_combination.get_child_count():
-		terrain_layers_init(player_combination.get_child(i), [12, 2, Global.LAYERS_COUNT_SETTINGS_MODE.RANDOM], [6, 2, Global.SURFACE_LAYER_SETTINGS_MODE.RANDOM], [clamp(1, 0, 10), 0.2, Global.LAYERS_RESOURCES_SETTINGS_MODE.RANDOM])
-		print()
+	terrain_layers_init(player_combination, player_terrain_layers_init_settings[0], player_terrain_layers_init_settings[1])
+	yield(get_tree(), "idle_frame")
+	resources_init(player_combination)
 	pass
 
 
@@ -163,7 +108,7 @@ func combination_draw_init(combination, combination_draw_settings):
 				if location_array.size() == _count:
 					break
 			for i in _count:
-				var new_terrain = Global.TERRAINS[randi() % (Global.TERRAINS.size() - 1)].instance()
+				var new_terrain = Global.TERRAINS[randi() % (Global.TERRAINS.size())].instance()
 				new_terrain.tag = combination.tag
 				new_terrain.location = location_array[i]
 				combination.add_child(new_terrain)
@@ -176,22 +121,31 @@ func combination_draw_init(combination, combination_draw_settings):
 
 ###地块的层级生成和初始化
 ###settings:[指定地块， [层数标准值，层数波动范围，层数生成模式]，[地平面层级标准值，地平面层级波动范围，地平面层级生成模式]，[资源标准值，资源波动范围，资源生成模式]]
-func terrain_layers_init(terrain, layers_count_settings = [12, 2, Global.LAYERS_COUNT_SETTINGS_MODE.RANDOM], surface_layer_settings = [6, 2, Global.SURFACE_LAYER_SETTINGS_MODE.RANDOM], layers_resources_setting = [clamp(1, 0, 10), 0.2, Global.LAYERS_RESOURCES_SETTINGS_MODE.RANDOM]):
+func terrain_layers_init(combination, layers_count_settings = [12, 2, Global.LAYERS_COUNT_SETTINGS_MODE.RANDOM], surface_layer_settings = [6, 2, Global.SURFACE_LAYER_SETTINGS_MODE.RANDOM], layers_resources_setting = [clamp(1, 0, 10), 0.2, Global.LAYERS_RESOURCES_SETTINGS_MODE.RANDOM]):
 	var layers_count
 	var surface_layer
-	match layers_count_settings[2]:
-		Global.LAYERS_COUNT_SETTINGS_MODE.RANDOM:
-			layers_count = layers_count_settings[0] + (randi() % (layers_count_settings[1] * 2) + 1) - layers_count_settings[1]
-	
-	match surface_layer_settings[2]:
-		Global.SURFACE_LAYER_SETTINGS_MODE.RANDOM:
-			surface_layer = surface_layer_settings[0] + (randi() % (surface_layer_settings[1] * 2) + 1) - surface_layer_settings[1]
-	
-	###添加层###
-	for i in layers_count:
-		var layer = Global.LAYER.instance()
-		terrain.Layers.add_child(layer)
-		terrain.layers.append(layer)
-	
-	###添加地平面所处层###
-	terrain.surface_layer = surface_layer
+	for terrain_count in combination.get_child_count():
+		match layers_count_settings[2]:
+			Global.LAYERS_COUNT_SETTINGS_MODE.RANDOM:
+				layers_count = layers_count_settings[0] + (randi() % (layers_count_settings[1] * 2) + 1) - layers_count_settings[1]
+		
+		match surface_layer_settings[2]:
+			Global.SURFACE_LAYER_SETTINGS_MODE.RANDOM:
+				surface_layer = surface_layer_settings[0] + (randi() % (surface_layer_settings[1] * 2) + 1) - surface_layer_settings[1]
+		
+		###添加层###
+		for i in layers_count:
+			var layer = Global.LAYER.instance()
+			#print(layers_count)
+			combination.get_child(terrain_count).Layers.add_child(layer)
+			combination.get_child(terrain_count).layers.append(layer)
+			layer.level = i
+		
+		###添加地平面所处层###
+		combination.get_child(terrain_count).surface_layer = surface_layer
+
+
+func resources_init(combination):
+	for i in $WorldData/Resources.get_child_count():
+		for terrain in combination.get_child_count():
+			$WorldData/Resources.get_child(i).init_generate(combination.get_child(terrain))

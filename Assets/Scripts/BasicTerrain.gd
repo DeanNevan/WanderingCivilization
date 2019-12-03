@@ -1,8 +1,9 @@
 extends Area2D
-#一个地块初始拥有10个单位的地下深度，10个单位的大气高度，地表单独计算
 
 var tag#player0,enemy1,other2
 var type#sand,dirt,stone,mars.grass等
+
+var global_index
 
 var location = Vector2()
 

@@ -34,12 +34,34 @@ enum TERRAIN{
 	STONE
 }
 
-enum ELEMENT_INIT_SETTINGS_MODE{
-	AVERAGE
-	RANDOM
-	LOW_TO_HIGH
-	HIGH_TO_LOW
-	REAL
+var SUBSTANCE_BRINE = preload("res://Assets/Substances/Brine/Brine.tscn")
+var SUBSTANCE_CLAY = preload("res://Assets/Substances/Clay/Clay.tscn")
+var SUBSTANCE_CONGLOMERATE = preload("res://Assets/Substances/Conglomerate/Conglomerate.tscn")
+var SUBSTANCE_DIRT = preload("res://Assets/Substances/Dirt/Dirt.tscn")
+var SUBSTANCE_ELM = preload("res://Assets/Substances/Elm/Elm.tscn")
+var SUBSTANCE_LIMESTONE = preload("res://Assets/Substances/Limestone/Limestone.tscn")
+var SUBSTANCE_MAPLE = preload("res://Assets/Substances/Maple/Maple.tscn")
+var SUBSTANCE_OAK = preload("res://Assets/Substances/Oak/Oak.tscn")
+var SUBSTANCE_PURE_WATER = preload("res://Assets/Substances/PureWater/PureWater.tscn")
+var SUBSTANCE_ROSEWOOD = preload("res://Assets/Substances/Rosewood/Rosewood.tscn")
+var SUBSTANCE_STONE = preload("res://Assets/Substances/Stone/Stone.tscn")
+
+enum SUBSTANCE{
+	BRINE
+	CLAY
+	CONGLOMERATE
+	DIRT
+	ELM
+	LIMESTONE
+	MAPLE
+	OAK
+	PURE_WATER
+	ROSEWOOD
+	STONE
+}
+
+enum RESOURCE{
+	FOREST_OAK
 }
 
 enum COMBINATION_DRAW_SETTINGS_MODE{
