@@ -1,7 +1,0 @@
-[gd_scene load_steps=2 format=2]
-
-[ext_resource path="res://Assets/Substances/Conglomerate/Conglomerate.gd" type="Script" id=1]
-
-
-[node name="Conglomerate" type="Node"]
-script = ExtResource( 1 )

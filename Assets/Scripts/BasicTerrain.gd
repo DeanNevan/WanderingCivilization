@@ -30,10 +30,26 @@ var detected_area_temp = []
 
 onready var Layers = Global.LAYERS.instance()
 
+var on_mouse = false
+var is_selected = false
+
+onready var ShortInformation = preload("res://Assets/Terrains/TerrainShortInformation.tscn").instance()
+
+onready var SelectTerrainEffect = preload("res://Assets/SpecialEffects/SelectTerrainEffect/SelectTerrainEffect.tscn").instance()
+
 
 func _ready():
+	get_node("/root/InGame/SmallUI").add_child(ShortInformation)
+	ShortInformation.get_node("Label").visible = false
+	#ShortInformation.get_node("ColorRect").visible = false
+	connect("mouse_entered", self, "_on_mouse_enter_terrain")
+	connect("mouse_exited", self, "_on_mouse_exit_terrain")
 	
 	add_child(Layers)
+	add_child(SelectTerrainEffect)
+	SelectTerrainEffect.visible = false
+	SelectTerrainEffect.z_index = 2
+	#SelectTerrainEffect.get_node("AnimationPlayer").playback_active = true
 	
 	for i in $Invader.get_child_count():
 		$Invader.get_child(i).texture = null
@@ -50,10 +66,53 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	#if location == Vector2():
-		#print(neighbour_terrains.size())
-	pass
-	#print(neighbour_terrains)
+	
+	if on_mouse:
+		if Input.is_action_just_pressed("left_mouse_button"):
+			is_selected = true
+			
+	else:
+		if Input.is_action_just_pressed("left_mouse_button") and !Input.is_key_pressed(KEY_SHIFT):
+			is_selected = false
+	if Input.is_action_pressed("left_mouse_button"):
+		detect_MouseRegion()
+	
+	if is_selected:
+		show_short_information()
+		
+	else:
+		shutdown_short_information()
+
+func _on_mouse_enter_terrain():
+	on_mouse = true
+	
+
+func _on_mouse_exit_terrain():
+	on_mouse = false
+
+func detect_MouseRegion():
+	if $CollisionShape2D.shape.collide(Transform2D(0, self.global_position), MOUSE.MouseRegionShape.shape, Transform2D(0, MOUSE.MouseRegion.global_position)):
+		self.is_selected = true
+	elif !Input.is_key_pressed(KEY_SHIFT):
+		is_selected = false
+
+func show_short_information():
+	ShortInformation.get_node("Label").visible = true
+	#ShortInformation.get_node("ColorRect").visible = true
+	ShortInformation.get_node("Label").text = "地块：" + str(name) + "\n" + "位置：" + str(location)
+	ShortInformation.get_node("Label").text += "\n" + "地平面是第" + str(surface_layer) + "层" + "\n"
+	ShortInformation.get_node("Label").text += str(on_mouse)
+	ShortInformation.global_position = global_position
+	SelectTerrainEffect.texture = margin
+	SelectTerrainEffect.get_node("AnimationPlayer").play("select")
+	yield(get_tree(), "idle_frame")
+	SelectTerrainEffect.visible = true
+
+func shutdown_short_information():
+	SelectTerrainEffect.get_node("AnimationPlayer").stop()
+	ShortInformation.get_node("Label").visible = false
+	#ShortInformation.get_node("ColorRect").visible = false
+	SelectTerrainEffect.visible = false
 
 func set_position_with_location(location):
 	self.position = Global.get_position_with_location(location)

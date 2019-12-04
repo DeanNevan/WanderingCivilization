@@ -21,6 +21,7 @@ config/icon="res://icon.png"
 [autoload]
 
 Global="*res://Assets/Scripts/Global.gd"
+MOUSE="*res://Assets/Scripts/MOUSE.gd"
 
 [display]
 

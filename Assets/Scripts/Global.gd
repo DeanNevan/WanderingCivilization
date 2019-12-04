@@ -34,17 +34,18 @@ enum TERRAIN{
 	STONE
 }
 
-var SUBSTANCE_BRINE = preload("res://Assets/Substances/Brine/Brine.tscn")
-var SUBSTANCE_CLAY = preload("res://Assets/Substances/Clay/Clay.tscn")
-var SUBSTANCE_CONGLOMERATE = preload("res://Assets/Substances/Conglomerate/Conglomerate.tscn")
-var SUBSTANCE_DIRT = preload("res://Assets/Substances/Dirt/Dirt.tscn")
-var SUBSTANCE_ELM = preload("res://Assets/Substances/Elm/Elm.tscn")
-var SUBSTANCE_LIMESTONE = preload("res://Assets/Substances/Limestone/Limestone.tscn")
-var SUBSTANCE_MAPLE = preload("res://Assets/Substances/Maple/Maple.tscn")
-var SUBSTANCE_OAK = preload("res://Assets/Substances/Oak/Oak.tscn")
-var SUBSTANCE_PURE_WATER = preload("res://Assets/Substances/PureWater/PureWater.tscn")
-var SUBSTANCE_ROSEWOOD = preload("res://Assets/Substances/Rosewood/Rosewood.tscn")
-var SUBSTANCE_STONE = preload("res://Assets/Substances/Stone/Stone.tscn")
+var SUBSTANCE_BRINE = preload("res://Assets/Substances/SubstanceBrine/SubstanceBrine.tscn")
+var SUBSTANCE_CLAY = preload("res://Assets/Substances/SubstanceClay/SubstanceClay.tscn")
+var SUBSTANCE_CONGLOMERATE = preload("res://Assets/Substances/SubstanceConglomerate/SubstanceConglomerate.tscn")
+var SUBSTANCE_DIRT = preload("res://Assets/Substances/SubstanceDirt/SubstanceDirt.tscn")
+var SUBSTANCE_ELM = preload("res://Assets/Substances/SubstanceElm/SubstanceElm.tscn")
+var SUBSTANCE_LIMESTONE = preload("res://Assets/Substances/SubstanceLimestone/SubstanceLimestone.tscn")
+var SUBSTANCE_MAPLE = preload("res://Assets/Substances/SubstanceMaple/SubstanceMaple.tscn")
+var SUBSTANCE_OAK = preload("res://Assets/Substances/SubstanceOak/SubstanceOak.tscn")
+var SUBSTANCE_PURE_WATER = preload("res://Assets/Substances/SubstancePureWater/SubstancePureWater.tscn")
+var SUBSTANCE_ROSEWOOD = preload("res://Assets/Substances/SubstanceRosewood/SubstanceRosewood.tscn")
+var SUBSTANCE_STONE = preload("res://Assets/Substances/SubstanceStone/SubstanceStone.tscn")
+var SUBSTANCE_CACTUS = preload("res://Assets/Substances/SubstanceCactus/SubstanceCactus.tscn")
 
 enum SUBSTANCE{
 	BRINE

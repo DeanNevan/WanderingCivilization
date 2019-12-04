@@ -1,16 +1,17 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://InGame.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Scripts/WorldData.gd" type="Script" id=2]
-[ext_resource path="res://Assets/Resources/ForestOak/ForestOak.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Assets/Fonts/三极准柔宋字体.ttf" type="DynamicFontData" id=4]
-[ext_resource path="res://Assets/Scripts/Player.gd" type="Script" id=5]
-[ext_resource path="res://Assets/Combinations/PlayerCombination/PlayerCombination.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Assets/Scripts/PlayerCamera.gd" type="Script" id=7]
+[ext_resource path="res://Assets/Resources/ResourceForestOak/ResourceForestOak.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Assets/Resources/ResourceCactus/ResourceCactus.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Assets/Fonts/三极准柔宋字体.ttf" type="DynamicFontData" id=5]
+[ext_resource path="res://Assets/Scripts/Player.gd" type="Script" id=6]
+[ext_resource path="res://Assets/Combinations/PlayerCombination/PlayerCombination.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Assets/Scripts/PlayerCamera.gd" type="Script" id=8]
 
 [sub_resource type="DynamicFont" id=1]
 size = 25
-font_data = ExtResource( 4 )
+font_data = ExtResource( 5 )
 
 [node name="InGame" type="Node"]
 script = ExtResource( 1 )
@@ -33,6 +34,8 @@ editor/display_folded = true
 
 [node name="ForestOak" parent="WorldData/Resources" instance=ExtResource( 3 )]
 
+[node name="ResourceCactus" parent="WorldData/Resources" instance=ExtResource( 4 )]
+
 [node name="PlayerData" type="Node" parent="."]
 
 [node name="World" type="Node2D" parent="."]
@@ -43,9 +46,9 @@ margin_bottom = 31.0
 custom_fonts/font = SubResource( 1 )
 
 [node name="Player" type="Node2D" parent="World"]
-script = ExtResource( 5 )
+script = ExtResource( 6 )
 
-[node name="PlayerCombination" parent="World/Player" instance=ExtResource( 6 )]
+[node name="PlayerCombination" parent="World/Player" instance=ExtResource( 7 )]
 
 [node name="PlayerCamera" type="Camera2D" parent="World"]
 current = true
@@ -55,4 +58,8 @@ drag_margin_left = 0.0
 drag_margin_top = 0.0
 drag_margin_right = 0.0
 drag_margin_bottom = 0.0
-script = ExtResource( 7 )
+script = ExtResource( 8 )
+
+[node name="SmallUI" type="Sprite" parent="."]
+z_index = 2
+z_as_relative = false

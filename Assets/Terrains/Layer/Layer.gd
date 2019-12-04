@@ -13,6 +13,7 @@ onready var terrain = get_parent().get_parent()
 var type#under = 0，sky = 1
 
 onready var Resources = Node.new()
+var layer_resource_content
 
 onready var ResourceSprites = Node.new()
 

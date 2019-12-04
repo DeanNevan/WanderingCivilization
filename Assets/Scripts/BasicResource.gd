@@ -22,6 +22,7 @@ func _ready():
 	pass # Replace with function body.
 
 func init_generate(terrain):
+	
 	if expected_settings.keys().find(terrain.global_index) == -1:
 		return false
 	surface_layer = terrain.surface_layer
