@@ -12,7 +12,7 @@ func _ready():
 	}
 	random_rate_reserve = 0.1#预期总储量的随机率
 	standard_reserve_for_sprite = 200
-	path = "res://Assets/Resources/ResourceCactus/ResourceCactus.tscn"
+	#path = "res://Assets/Resources/ResourceCactus/ResourceCactus.tscn"
 	sprite_texture = ["res://Assets/Art/Hexagons-pack/BasicPack/PNG/Objects/cactus1.png", 
 					"res://Assets/Art/Hexagons-pack/BasicPack/PNG/Objects/cactus2.png", 
 					"res://Assets/Art/Hexagons-pack/BasicPack/PNG/Objects/cactus3.png", 

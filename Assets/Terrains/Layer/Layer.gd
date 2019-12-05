@@ -21,8 +21,9 @@ func _ready():
 	add_child(Resources)
 	add_child(ResourceSprites)
 
-func add_resource(resource_path, resource_content):
-	var resource = load(resource_path).instance()
+func add_resource(_resource, resource_content):
+	#var resource = load(resource_path).instance()
+	var resource = _resource.duplicate()
 	resource.content = resource_content
 	Resources.add_child(resource)
 	resource.terrain = terrain

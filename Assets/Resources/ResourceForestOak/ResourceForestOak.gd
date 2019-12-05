@@ -9,7 +9,7 @@ func _ready():
 	}
 	random_rate_reserve = 0.1#预期总储量的随机率
 	standard_reserve_for_sprite = 600
-	path = "res://Assets/Resources/ResourceForestOak/ResourceForestOak.tscn"
+	#path = "res://Assets/Resources/ResourceForestOak/ResourceForestOak.tscn"
 	sprite_texture = ["res://Assets/Art/Hexagons-pack/BasicPack/PNG/Objects/treePine_large.png", 
 					"res://Assets/Art/Hexagons-pack/BasicPack/PNG/Objects/treePine_small.png", 
 					"res://Assets/Art/Hexagons-pack/BasicPack/PNG/Objects/treeRound_large.png", 

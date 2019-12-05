@@ -19,7 +19,7 @@ var sprite_texture = []
 
 
 func _ready():
-	pass # Replace with function body.
+	pass
 
 func init_generate(terrain):
 	
@@ -50,4 +50,4 @@ func init_generate(terrain):
 							content[substance] += expected_reserve * rand_range(1 - random_rate_reserve, 1 + random_rate_reserve)
 						else:
 							content[substance] = expected_reserve * rand_range(1 - random_rate_reserve, 1 + random_rate_reserve)
-			terrain.layers[real_layer].add_resource(path, content)
+			terrain.layers[real_layer].add_resource(self, content)
