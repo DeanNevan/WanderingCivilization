@@ -27,7 +27,7 @@ func _game_init():
 
 
 ###玩家初始化###
-func _player_init(player_combination_draw_settings = [120, [], Global.COMBINATION_DRAW_SETTINGS_MODE.RANDOM], player_terrain_layers_init_settings = [[15, 2, Global.LAYERS_COUNT_SETTINGS_MODE.RANDOM], [9, 2, Global.SURFACE_LAYER_SETTINGS_MODE.RANDOM]]):
+func _player_init(player_combination_draw_settings = [50, [], Global.COMBINATION_DRAW_SETTINGS_MODE.RANDOM], player_terrain_layers_init_settings = [[15, 2, Global.LAYERS_COUNT_SETTINGS_MODE.RANDOM], [9, 2, Global.SURFACE_LAYER_SETTINGS_MODE.RANDOM]]):
 	player_combination.combination_draw_init(player_combination_draw_settings, player_terrain_layers_init_settings)
 	pass
 

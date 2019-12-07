@@ -1,9 +1,11 @@
 extends Area2D
 
+var name_CN = "地块"
+
 var tag#player0,enemy1,other2
 var type#sand,dirt,stone,mars.grass等
 
-var global_index
+var global_index#地块在GLOBAL脚本中的对应枚举
 
 var location = Vector2()
 
@@ -34,7 +36,6 @@ var on_mouse = false
 var is_selected = false
 
 onready var ShortInformation = preload("res://Assets/Terrains/TerrainShortInformation.tscn").instance()
-
 onready var SelectTerrainEffect = preload("res://Assets/SpecialEffects/SelectTerrainEffect/SelectTerrainEffect.tscn").instance()
 
 
@@ -66,7 +67,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	
+	#print(monitorable)
 	if on_mouse:
 		if Input.is_action_just_pressed("left_mouse_button"):
 			is_selected = true
@@ -79,6 +80,8 @@ func _process(delta):
 	
 	if is_selected:
 		show_short_information()
+		if Input.is_action_just_pressed("right_mouse_button"):
+			layers[surface_layer].add_building(get_node("/root/InGame/WorldData/Buildings/BuildingPrimitiveCamp"))
 		
 	else:
 		shutdown_short_information()
@@ -99,13 +102,13 @@ func detect_MouseRegion():
 func show_short_information():
 	ShortInformation.get_node("Label").visible = true
 	#ShortInformation.get_node("ColorRect").visible = true
-	ShortInformation.get_node("Label").text = "地块：" + str(name) + "\n" + "位置：" + str(location)
+	ShortInformation.get_node("Label").text = "地块：" + name_CN + "\n" + "位置：" + str(location)
 	ShortInformation.get_node("Label").text += "\n" + "地平面是第" + str(surface_layer) + "层" + "\n"
-	ShortInformation.get_node("Label").text += str(on_mouse)
+	ShortInformation.get_node("Label").text += str(layers[surface_layer].free_space)
 	ShortInformation.global_position = global_position
 	SelectTerrainEffect.texture = margin
 	SelectTerrainEffect.get_node("AnimationPlayer").play("select")
-	yield(get_tree(), "idle_frame")
+	#yield(get_tree(), "idle_frame")
 	SelectTerrainEffect.visible = true
 
 func shutdown_short_information():
@@ -121,6 +124,27 @@ func activate_detect_area(active = true):
 	DetectArea.monitoring = active
 	DetectArea.monitorable = active
 	#DetectShape.disabled = active
+
+func activate_area(active = true):
+	self.monitorable = active
+	monitoring = active
+	$CollisionShape2D.disabled = active
+
+func update_neighbour_terrains():
+	activate_detect_area(true)
+	yield(get_tree(), "idle_frame")
+	neighbour_terrains = []
+	var arr = DetectArea.get_overlapping_areas()
+	#yield(get_tree(), "idle_frame")
+	#arr = DetectArea.get_overlapping_areas()
+	for i in arr.size():
+		if arr[i].has_method("update_neighbour_terrains"):
+			if neighbour_terrains.find(arr[i]) == -1 and arr[i] != self:
+				
+				neighbour_terrains.append(arr[i])
+	#print(neighbour_terrains)
+	neighbour_vector = Global.judge_neighbour_vector(location)
+	self.update_invader()
 
 func update_invader():
 	for i in neighbour_terrains.size():
@@ -155,16 +179,3 @@ func update_invader():
 			#print(i)
 			#print(neighbour_terrains[i].invader_display_array)
 
-func update_neighbour_terrains():
-	neighbour_terrains = []
-	var arr = DetectArea.get_overlapping_areas()
-	yield(get_tree(), "idle_frame")
-	#arr = DetectArea.get_overlapping_areas()
-	for i in arr.size():
-		if arr[i].has_method("update_neighbour_terrains"):
-			if neighbour_terrains.find(arr[i]) == -1 and arr[i] != self:
-				
-				neighbour_terrains.append(arr[i])
-	#print(neighbour_terrains)
-	neighbour_vector = Global.judge_neighbour_vector(location)
-	self.update_invader()

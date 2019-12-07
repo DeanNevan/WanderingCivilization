@@ -1,12 +1,11 @@
 extends "res://Assets/Scripts/BasicTechnology.gd"
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
+onready var TechPrimitiveCollect = get_parent().get_node("TechPrimitiveCollect")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	name_CN = "原始种植"
+	require_tech = {TechPrimitiveCollect : 1}
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):

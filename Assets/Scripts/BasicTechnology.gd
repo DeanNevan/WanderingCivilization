@@ -2,6 +2,8 @@ extends Node
 
 signal init_done
 
+var name_CN = "技术"
+
 enum {
 	PRIMITIVE#原始
 	GLOBAL#通用

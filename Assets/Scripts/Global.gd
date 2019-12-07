@@ -84,6 +84,7 @@ enum LAYERS_RESOURCES_SETTINGS_MODE{
 	RANDOM
 }
 
+
 func judge_neighbour_vector(location):
 	var neighbour_vector = Vector2()
 	if location.y == 0:

@@ -11,14 +11,17 @@ var arr = []
 onready var world = get_node("/root/InGame/World")
 
 func _ready():
-	world.get_parent().add_child(MouseRegionRect)
-	MouseRegionRect.rect_size = Vector2()
-	MouseRegionRect.color = Color(1, 1, 1, 0.2)
-	world.get_parent().add_child(MouseRegion)
-	MouseRegion.add_child(MouseRegionShape)
-	MouseRegionShape.shape = RectangleShape2D.new()
+	if world != null:
+		world.get_parent().add_child(MouseRegionRect)
+		MouseRegionRect.rect_size = Vector2()
+		MouseRegionRect.color = Color(1, 1, 1, 0.2)
+		world.get_parent().add_child(MouseRegion)
+		MouseRegion.add_child(MouseRegionShape)
+		MouseRegionShape.shape = RectangleShape2D.new()
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	if world == null:
+		return
 	if Input.is_action_just_pressed("left_mouse_button"):
 		mouse_region_start_position = world.get_global_mouse_position()
 	if Input.is_action_pressed("left_mouse_button"):

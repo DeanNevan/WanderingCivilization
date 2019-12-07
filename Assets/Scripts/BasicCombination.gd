@@ -36,12 +36,6 @@ func _ready():
 			pass
 
 func _process(delta):
-	if Input.is_action_pressed("right_mouse_button"):
-		var arr = []
-		for i in get_node("/root/InGame/WorldData"). substances_smell_rank.size():
-			arr.append(get_node("/root/InGame/WorldData").substances_smell_rank[i].standard_para[0])
-		#print(get_node("/root/InGame/WorldData").substances_smell_rank)
-		print(arr)
 	pass
 
 func get_terrain_with_location(location):
@@ -162,12 +156,17 @@ func combination_draw_init(combination_draw_settings, terrain_layers_init_settin
 				new_terrain.location = location_array[i]
 				self.add_child(new_terrain)
 				new_terrain.set_position_with_location(new_terrain.location)
-				new_terrain.activate_detect_area()
-				yield(get_tree(), "idle_frame")
+				#new_terrain.activate_detect_area()
+				#yield(get_tree(), "idle_frame")
 			for i in _count:
-				yield(get_tree(), "idle_frame")
+				#yield(get_tree(), "idle_frame")
 				self.get_child(i).update_neighbour_terrains()
+	yield(get_tree(), "idle_frame")
+	for i in get_child_count():
+		get_child(i).activate_area(false)
+		get_child(i).activate_detect_area(false)
 	emit_signal("draw_init_done", terrain_layers_init_settings[0], terrain_layers_init_settings[1])
+	
 
 
 ###地块的层级生成和初始化
@@ -200,4 +199,4 @@ func resources_init():
 	for i in get_node("/root/InGame/WorldData/Resources").get_child_count():
 		for terrain in self.get_child_count():
 			get_node("/root/InGame/WorldData/Resources").get_child(i).init_generate(self.get_child(terrain))
-			yield(get_tree(), "idle_frame")
+			#yield(get_tree(), "idle_frame")

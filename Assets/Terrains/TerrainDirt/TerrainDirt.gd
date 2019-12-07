@@ -6,6 +6,7 @@ extends "res://Assets/Scripts/BasicTerrain.gd"
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	name_CN = "泥土地块"
 	margin = Global.MARGIN_DIRT
 	global_index = Global.TERRAIN.DIRT
 
