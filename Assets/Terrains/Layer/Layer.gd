@@ -66,6 +66,7 @@ func update_resource_sprites():
 			var sprite = Sprite.new()
 			sprite.visible = true
 			sprite.z_index = 2
+			sprite.scale = Vector2(0.65, 0.65)
 			sprite.offset = Vector2(0, -10)
 			ResourceSprites.add_child(sprite)
 			sprite.texture = load(Resources.get_child(resource).sprite_texture[randi() % Resources.get_child(resource).sprite_texture.size()])
@@ -76,6 +77,7 @@ func add_building(_building):
 		return false
 	var building = _building.duplicate()
 	Buildings.add_child(building)
+	
 	update_space()
 	building.terrain = terrain
 	building.layer = self
@@ -84,7 +86,7 @@ func add_building(_building):
 	BuildingSprites.add_child(sprite)
 	sprite.texture = load(building.sprite_texture[randi() % building.sprite_texture.size()])
 	sprite.offset = building.sprite_offset
-	sprite.scale = Vector2(0.55, 0.55)
+	sprite.scale = Vector2(0.45, 0.45)
 	sprite.z_index = 1
 	sprite.visible = true
 	sprite.position = terrain.position + Vector2((randi() % 85) - 42, (randi() % 85) - 42)

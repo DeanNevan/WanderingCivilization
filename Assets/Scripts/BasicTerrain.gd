@@ -81,6 +81,7 @@ func _process(delta):
 	if is_selected:
 		show_short_information()
 		if Input.is_action_just_pressed("right_mouse_button"):
+			#print("!!!")
 			layers[surface_layer].add_building(get_node("/root/InGame/WorldData/Buildings/BuildingPrimitiveCamp"))
 		
 	else:
