@@ -2,7 +2,7 @@ extends Node
 
 var MAX_SPACE = 10000#最大空间
 
-var free_space = 0#剩余空间
+var free_space = MAX_SPACE#剩余空间
 
 var expected_proportion
 
@@ -10,8 +10,7 @@ var level
 
 onready var terrain = get_parent().get_parent()
 
-var origin_people_capacity = 50
-var people_capacity = origin_people_capacity#人口容纳能力
+
 
 onready var Resources = Node.new()
 var resources_total_reserve = 0
@@ -37,9 +36,9 @@ func update_space():
 
 ###更新建筑效果###
 func update_building_effect():
-	people_capacity = origin_people_capacity
+	terrain.people_capacity = terrain.origin_people_capacity
 	for b in Buildings.get_child_count():
-		people_capacity += Buildings.get_child(b).people_capacity
+		terrain.people_capacity += Buildings.get_child(b).people_capacity
 
 func add_resource(_resource, resource_content):
 	var total = 0

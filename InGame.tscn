@@ -149,6 +149,6 @@ script = ExtResource( 32 )
 
 [node name="PlayerCombination" parent="World/Player" instance=ExtResource( 33 )]
 
-[node name="SmallUI" type="Sprite" parent="."]
+[node name="SmallUI" type="Sprite" parent="World"]
 z_index = 2
 z_as_relative = false

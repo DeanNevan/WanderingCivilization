@@ -1,5 +1,7 @@
 extends Area2D
 
+signal the_last_terrain_draw_done
+
 var name_CN = "地块"
 
 var tag#player0,enemy1,other2
@@ -7,10 +9,9 @@ var type#sand,dirt,stone,mars.grass等
 
 var global_index#地块在GLOBAL脚本中的对应枚举
 
-var location = Vector2()
+var serial_number = 0#在地块组中的编号
 
-var mass = 10000#质量
-var depth = 10
+var location = Vector2()
 
 var layers := []
 var surface_layer = 0
@@ -38,14 +39,15 @@ var is_selected = false
 onready var ShortInformation = preload("res://Assets/Terrains/TerrainShortInformation.tscn").instance()
 onready var SelectTerrainEffect = preload("res://Assets/SpecialEffects/SelectTerrainEffect/SelectTerrainEffect.tscn").instance()
 
+onready var People = Node.new()
 
 func _ready():
-	get_node("/root/InGame/SmallUI").add_child(ShortInformation)
+	get_node("/root/InGame/World/SmallUI").add_child(ShortInformation)
 	ShortInformation.get_node("Label").visible = false
 	#ShortInformation.get_node("ColorRect").visible = false
 	connect("mouse_entered", self, "_on_mouse_enter_terrain")
 	connect("mouse_exited", self, "_on_mouse_exit_terrain")
-	
+	add_child(People)
 	add_child(Layers)
 	add_child(SelectTerrainEffect)
 	SelectTerrainEffect.visible = false
@@ -63,7 +65,7 @@ func _ready():
 	DetectArea.add_child(DetectShape)
 	DetectArea.monitoring = true
 	DetectArea.monitorable = true
-	#DetectShape.disabled = true
+	DetectShape.disabled = false
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

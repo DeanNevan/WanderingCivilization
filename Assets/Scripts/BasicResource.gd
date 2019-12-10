@@ -55,7 +55,7 @@ func init_generate(terrain):
 					var expected_reserve = substance_list.get(substance)[1]
 					if randf() <= substance_generate_probability:
 						if content.keys().has(substance):
-							content[substance] += expected_reserve * rand_range(1 - random_rate_reserve, 1 + random_rate_reserve)
+							content[substance] += floor(expected_reserve * rand_range(1 - random_rate_reserve, 1 + random_rate_reserve))
 						else:
-							content[substance] = expected_reserve * rand_range(1 - random_rate_reserve, 1 + random_rate_reserve)
+							content[substance] = floor(expected_reserve * rand_range(1 - random_rate_reserve, 1 + random_rate_reserve))
 			terrain.layers[real_layer].add_resource(self, content)

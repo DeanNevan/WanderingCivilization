@@ -1,11 +1,14 @@
 extends Node
 
+onready var Technologies = get_node("/root/InGame/WorldData/Technologies").duplicate()
+#onready var Races = Node.new()
+onready var GreatMan = Node.new()
+
 func _ready():
-	get_node("/root/InGame/WorldData/Technologies").connect("tech_init_done", self, "_on_tech_init_done")
+	self.add_child(Technologies)
+	#self.add_child(Races)
+	self.add_child(GreatMan)
+	
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	pass
-
-func _on_tech_init_done():
 	pass

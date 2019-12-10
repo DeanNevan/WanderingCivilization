@@ -6,6 +6,7 @@ extends "res://Assets/Scripts/BasicTechnology.gd"
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	is_learned = true
 	name_CN = "原始自我意识"
 	get_parent().get_parent().tech_done_count += 1
 

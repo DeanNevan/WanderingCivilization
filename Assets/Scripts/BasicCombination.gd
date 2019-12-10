@@ -161,13 +161,17 @@ func combination_draw_init(combination_draw_settings, terrain_layers_init_settin
 			for i in _count:
 				#yield(get_tree(), "idle_frame")
 				self.get_child(i).update_neighbour_terrains()
+				get_child(i).serial_number = i
 	yield(get_tree(), "idle_frame")
 	for i in get_child_count():
 		get_child(i).activate_area(false)
 		get_child(i).activate_detect_area(false)
+		get_child(clamp(i - 1, 0, i)).DetectShape.disabled = true
 	emit_signal("draw_init_done", terrain_layers_init_settings[0], terrain_layers_init_settings[1])
-	
 
+func update_terrains_serial_number():
+	for i in get_child_count():
+		get_child(i).serial_number = i
 
 ###地块的层级生成和初始化
 ###settings:[指定地块， [层数标准值，层数波动范围，层数生成模式]，[地平面层级标准值，地平面层级波动范围，地平面层级生成模式]，[资源标准值，资源波动范围，资源生成模式]]
