@@ -61,6 +61,10 @@ enum SUBSTANCE{
 	STONE
 }
 
+enum SUBSTANCE_TYPE{
+	
+}
+
 enum RESOURCE{
 	FOREST_OAK
 }
@@ -92,18 +96,14 @@ enum COMBINATION_DRAW_SETTINGS_MODE{
 	DESOLATE
 }
 
-enum LAYERS_COUNT_SETTINGS_MODE{
-	RANDOM
+enum GREAT_MAN{#伟人的种类
+	RULER#统治者
+	RESEARCHER#研究者
+	GENERAL#将军
+	ARTIST#艺术家
+	BUILDER#建造者
+	OFFICER#官员
 }
-
-enum SURFACE_LAYER_SETTINGS_MODE{
-	RANDOM
-}
-
-enum LAYERS_RESOURCES_SETTINGS_MODE{
-	RANDOM
-}
-
 
 func judge_neighbour_vector(location):
 	var neighbour_vector = Vector2()

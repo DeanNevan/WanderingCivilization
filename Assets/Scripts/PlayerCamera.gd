@@ -7,6 +7,7 @@ var player_combination
 
 func _ready():
 	player_combination = get_parent().get_node("Player/PlayerCombination")
+	get_node("/root/InGame").set_camera(self)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

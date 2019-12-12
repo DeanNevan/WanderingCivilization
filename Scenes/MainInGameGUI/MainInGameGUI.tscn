@@ -1,10 +1,98 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=31 format=2]
 
-[ext_resource path="res://icon.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Art/GUI/metalPanel.png" type="Texture" id=1]
+[ext_resource path="res://Scenes/MainInGameGUI/Civilization.gd" type="Script" id=2]
+[ext_resource path="res://Assets/Art/GUI/bluePanelTop.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Art/GUI/Icons/home.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Fonts/汉仪洛天依体简.ttf" type="DynamicFontData" id=5]
+[ext_resource path="res://Scenes/MainInGameGUI/People.gd" type="Script" id=6]
+[ext_resource path="res://Assets/Art/GUI/greenPanelTop.png" type="Texture" id=7]
+[ext_resource path="res://Assets/Art/GUI/Icons/massiveMultiplayer.png" type="Texture" id=8]
+[ext_resource path="res://Scenes/MainInGameGUI/GreatMan.gd" type="Script" id=9]
+[ext_resource path="res://Assets/Art/GUI/orangePanelTop.png" type="Texture" id=10]
+[ext_resource path="res://Assets/Art/GUI/Icons/medal1.png" type="Texture" id=11]
+[ext_resource path="res://Scenes/MainInGameGUI/Diplomacy.gd" type="Script" id=12]
+[ext_resource path="res://Assets/Art/GUI/yellowPanelTop.png" type="Texture" id=13]
+[ext_resource path="res://Assets/Art/GUI/Icons/share1.png" type="Texture" id=14]
+[ext_resource path="res://Scenes/MainInGameGUI/Policy.gd" type="Script" id=15]
+[ext_resource path="res://Assets/Art/GUI/Icons/star.png" type="Texture" id=16]
+[ext_resource path="res://Scenes/MainInGameGUI/TechTree.gd" type="Script" id=17]
+[ext_resource path="res://Assets/Art/GUI/Icons/trophy.png" type="Texture" id=18]
+[ext_resource path="res://Scenes/MainInGameGUI/Build.gd" type="Script" id=19]
+[ext_resource path="res://Assets/Art/GUI/Icons/wrench.png" type="Texture" id=20]
+[ext_resource path="res://Scenes/MainInGameGUI/Settings.gd" type="Script" id=21]
+[ext_resource path="res://Assets/Art/GUI/Icons/gear.png" type="Texture" id=22]
+[ext_resource path="res://Scenes/MainInGameGUI/TimeSpeed.gd" type="Script" id=23]
+[ext_resource path="res://Assets/Art/GUI/Icons/right.png" type="Texture" id=24]
+[ext_resource path="res://Scenes/MainInGameGUI/Map.gd" type="Script" id=25]
+[ext_resource path="res://Assets/Art/GUI/Icons/share2.png" type="Texture" id=26]
+
+[sub_resource type="DynamicFont" id=4]
+size = 24
+use_filter = true
+font_data = ExtResource( 5 )
+
+[sub_resource type="Animation" id=5]
+resource_name = "choose"
+tracks/0/type = "value"
+tracks/0/path = NodePath("TextureProgress:value")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 0.406126, 4 ),
+"update": 0,
+"values": [ 0.0, 100.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Label:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="StreamTexture" id=3]
+flags = 4
+load_path = "res://.import/metalPanel.png-39d738f9f80f518132de5076fa87e5e6.stex"
+
+[sub_resource type="Animation" id=6]
+tracks/0/type = "value"
+tracks/0/path = NodePath("TextureProgress:value")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 0.406126, 4 ),
+"update": 0,
+"values": [ 0.0, 100.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Label:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
 
 [node name="MainInGameGUI" type="MarginContainer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 1
 
 [node name="Whole" type="HBoxContainer" parent="."]
 margin_right = 1920.0
@@ -14,90 +102,317 @@ size_flags_vertical = 3
 custom_constants/separation = 0
 
 [node name="Left" type="HBoxContainer" parent="Whole"]
-margin_right = 1856.0
+margin_right = 1820.0
 margin_bottom = 1080.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="MostLeft" type="VBoxContainer" parent="Whole/Left"]
-margin_right = 64.0
+margin_right = 100.0
 margin_bottom = 1080.0
 
-[node name="Information" type="TextureRect" parent="Whole/Left/MostLeft"]
-margin_right = 64.0
-margin_bottom = 64.0
+[node name="Civilization" type="TextureRect" parent="Whole/Left/MostLeft"]
+margin_right = 100.0
+margin_bottom = 100.0
+mouse_filter = 0
 texture = ExtResource( 1 )
+script = ExtResource( 2 )
+
+[node name="TextureProgress" type="TextureProgress" parent="Whole/Left/MostLeft/Civilization"]
+margin_right = 100.0
+margin_bottom = 30.0
+value = 100.0
+texture_progress = ExtResource( 3 )
+fill_mode = 6
+
+[node name="TextureRect" type="TextureRect" parent="Whole/Left/MostLeft/Civilization"]
+margin_right = 100.0
+margin_bottom = 100.0
+texture = ExtResource( 4 )
+
+[node name="Label" type="Label" parent="Whole/Left/MostLeft/Civilization"]
+margin_right = 100.0
+margin_bottom = 31.0
+mouse_filter = 1
+custom_fonts/font = SubResource( 4 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = " 文    明"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Whole/Left/MostLeft/Civilization"]
+anims/choose = SubResource( 5 )
 
 [node name="People" type="TextureRect" parent="Whole/Left/MostLeft"]
-margin_top = 68.0
-margin_right = 64.0
-margin_bottom = 132.0
-texture = ExtResource( 1 )
+margin_top = 104.0
+margin_right = 100.0
+margin_bottom = 204.0
+texture = SubResource( 3 )
+script = ExtResource( 6 )
+
+[node name="TextureProgress" type="TextureProgress" parent="Whole/Left/MostLeft/People"]
+margin_right = 100.0
+margin_bottom = 30.0
+value = 100.0
+texture_progress = ExtResource( 7 )
+fill_mode = 4
+
+[node name="TextureRect" type="TextureRect" parent="Whole/Left/MostLeft/People"]
+margin_right = 100.0
+margin_bottom = 100.0
+texture = ExtResource( 8 )
+
+[node name="Label" type="Label" parent="Whole/Left/MostLeft/People"]
+margin_right = 100.0
+margin_bottom = 31.0
+custom_fonts/font = SubResource( 4 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = " 人    口"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Whole/Left/MostLeft/People"]
+anims/choose = SubResource( 5 )
 
 [node name="GreatMan" type="TextureRect" parent="Whole/Left/MostLeft"]
-margin_top = 136.0
-margin_right = 64.0
-margin_bottom = 200.0
+margin_top = 208.0
+margin_right = 100.0
+margin_bottom = 308.0
 texture = ExtResource( 1 )
+script = ExtResource( 9 )
+
+[node name="TextureProgress" type="TextureProgress" parent="Whole/Left/MostLeft/GreatMan"]
+margin_right = 100.0
+margin_bottom = 30.0
+value = 100.0
+texture_progress = ExtResource( 10 )
+fill_mode = 4
+
+[node name="TextureRect" type="TextureRect" parent="Whole/Left/MostLeft/GreatMan"]
+margin_right = 100.0
+margin_bottom = 100.0
+texture = ExtResource( 11 )
+
+[node name="Label" type="Label" parent="Whole/Left/MostLeft/GreatMan"]
+margin_right = 100.0
+margin_bottom = 31.0
+custom_fonts/font = SubResource( 4 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = " 伟    人"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Whole/Left/MostLeft/GreatMan"]
+anims/choose = SubResource( 5 )
 
 [node name="Diplomacy" type="TextureRect" parent="Whole/Left/MostLeft"]
-margin_top = 204.0
-margin_right = 64.0
-margin_bottom = 268.0
+margin_top = 312.0
+margin_right = 100.0
+margin_bottom = 412.0
 texture = ExtResource( 1 )
+script = ExtResource( 12 )
+
+[node name="TextureProgress" type="TextureProgress" parent="Whole/Left/MostLeft/Diplomacy"]
+margin_right = 100.0
+margin_bottom = 30.0
+value = 100.0
+texture_progress = ExtResource( 13 )
+fill_mode = 4
+
+[node name="TextureRect" type="TextureRect" parent="Whole/Left/MostLeft/Diplomacy"]
+margin_right = 100.0
+margin_bottom = 100.0
+texture = ExtResource( 14 )
+
+[node name="Label" type="Label" parent="Whole/Left/MostLeft/Diplomacy"]
+margin_right = 100.0
+margin_bottom = 31.0
+custom_fonts/font = SubResource( 4 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = " 外    交"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Whole/Left/MostLeft/Diplomacy"]
+anims/choose = SubResource( 5 )
 
 [node name="Policy" type="TextureRect" parent="Whole/Left"]
-margin_left = 68.0
-margin_right = 132.0
-margin_bottom = 1080.0
+margin_left = 104.0
+margin_right = 204.0
+margin_bottom = 100.0
+size_flags_vertical = 0
 texture = ExtResource( 1 )
+script = ExtResource( 15 )
+
+[node name="TextureProgress" type="TextureProgress" parent="Whole/Left/Policy"]
+margin_right = 100.0
+margin_bottom = 30.0
+value = 100.0
+texture_progress = ExtResource( 10 )
+fill_mode = 4
+
+[node name="TextureRect" type="TextureRect" parent="Whole/Left/Policy"]
+margin_right = 100.0
+margin_bottom = 100.0
+texture = ExtResource( 16 )
+
+[node name="Label" type="Label" parent="Whole/Left/Policy"]
+margin_right = 100.0
+margin_bottom = 33.0
+custom_fonts/font = SubResource( 4 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = " 政    策"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Whole/Left/Policy"]
+anims/choose = SubResource( 5 )
 
 [node name="TechTree" type="TextureRect" parent="Whole/Left"]
-margin_left = 136.0
-margin_right = 200.0
-margin_bottom = 1080.0
+margin_left = 208.0
+margin_right = 308.0
+margin_bottom = 100.0
+size_flags_vertical = 0
 texture = ExtResource( 1 )
+script = ExtResource( 17 )
+
+[node name="TextureProgress" type="TextureProgress" parent="Whole/Left/TechTree"]
+margin_right = 100.0
+margin_bottom = 30.0
+value = 100.0
+texture_progress = ExtResource( 7 )
+fill_mode = 4
+
+[node name="TextureRect" type="TextureRect" parent="Whole/Left/TechTree"]
+margin_right = 100.0
+margin_bottom = 100.0
+texture = ExtResource( 18 )
+
+[node name="Label" type="Label" parent="Whole/Left/TechTree"]
+margin_right = 100.0
+margin_bottom = 33.0
+custom_fonts/font = SubResource( 4 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = " 技    术"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Whole/Left/TechTree"]
+anims/choose = SubResource( 5 )
 
 [node name="Build" type="TextureRect" parent="Whole/Left"]
-margin_left = 204.0
-margin_right = 268.0
-margin_bottom = 1080.0
+margin_left = 312.0
+margin_right = 412.0
+margin_bottom = 100.0
+size_flags_vertical = 0
 texture = ExtResource( 1 )
+script = ExtResource( 19 )
+
+[node name="TextureProgress" type="TextureProgress" parent="Whole/Left/Build"]
+margin_right = 100.0
+margin_bottom = 30.0
+value = 100.0
+texture_progress = ExtResource( 13 )
+fill_mode = 4
+
+[node name="TextureRect" type="TextureRect" parent="Whole/Left/Build"]
+margin_right = 100.0
+margin_bottom = 100.0
+texture = ExtResource( 20 )
+
+[node name="Label" type="Label" parent="Whole/Left/Build"]
+margin_right = 100.0
+margin_bottom = 33.0
+custom_fonts/font = SubResource( 4 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = " 建    造"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Whole/Left/Build"]
+anims/choose = SubResource( 5 )
 
 [node name="Right" type="VBoxContainer" parent="Whole"]
-margin_left = 1856.0
+margin_left = 1820.0
 margin_right = 1920.0
 margin_bottom = 1080.0
 size_flags_vertical = 3
 custom_constants/separation = 0
 
 [node name="TopRight" type="VBoxContainer" parent="Whole/Right"]
-margin_right = 64.0
-margin_bottom = 948.0
+margin_right = 100.0
+margin_bottom = 880.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Settings" type="TextureRect" parent="Whole/Right/TopRight"]
-margin_right = 64.0
-margin_bottom = 64.0
+margin_right = 100.0
+margin_bottom = 100.0
 texture = ExtResource( 1 )
+script = ExtResource( 21 )
 
-[node name="BottomRight" type="VBoxContainer" parent="Whole/Right"]
-margin_top = 948.0
-margin_right = 64.0
+[node name="TextureProgress" type="TextureProgress" parent="Whole/Right/TopRight/Settings"]
+margin_right = 100.0
+margin_bottom = 30.0
+value = 100.0
+texture_progress = ExtResource( 10 )
+fill_mode = 4
+
+[node name="TextureRect" type="TextureRect" parent="Whole/Right/TopRight/Settings"]
+margin_right = 100.0
+margin_bottom = 100.0
+texture = ExtResource( 22 )
+
+[node name="Label" type="Label" parent="Whole/Right/TopRight/Settings"]
+margin_right = 100.0
+margin_bottom = 31.0
+custom_fonts/font = SubResource( 4 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = " 设    置"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Whole/Right/TopRight/Settings"]
+anims/choose = SubResource( 5 )
+
+[node name="TimeSpeed" type="TextureRect" parent="Whole/Right"]
+margin_top = 880.0
+margin_right = 100.0
+margin_bottom = 980.0
+texture = ExtResource( 1 )
+script = ExtResource( 23 )
+
+[node name="TextureProgress" type="TextureProgress" parent="Whole/Right/TimeSpeed"]
+margin_right = 100.0
+margin_bottom = 30.0
+value = 100.0
+texture_progress = ExtResource( 3 )
+fill_mode = 4
+
+[node name="TextureRect" type="TextureRect" parent="Whole/Right/TimeSpeed"]
+margin_right = 100.0
+margin_bottom = 100.0
+texture = ExtResource( 24 )
+
+[node name="Label" type="Label" parent="Whole/Right/TimeSpeed"]
+margin_right = 100.0
+margin_bottom = 31.0
+custom_fonts/font = SubResource( 4 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = " 时    间"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Whole/Right/TimeSpeed"]
+anims/choose = SubResource( 5 )
+
+[node name="Map" type="TextureRect" parent="Whole/Right"]
+margin_top = 980.0
+margin_right = 100.0
 margin_bottom = 1080.0
-
-[node name="TimeSpeed" type="TextureRect" parent="Whole/Right/BottomRight"]
-margin_right = 64.0
-margin_bottom = 64.0
 texture = ExtResource( 1 )
+script = ExtResource( 25 )
 
-[node name="Map" type="TextureRect" parent="Whole/Right/BottomRight"]
-margin_top = 68.0
-margin_right = 64.0
-margin_bottom = 132.0
-texture = ExtResource( 1 )
+[node name="TextureProgress" type="TextureProgress" parent="Whole/Right/Map"]
+margin_right = 100.0
+margin_bottom = 30.0
+value = 100.0
+texture_progress = ExtResource( 13 )
+fill_mode = 4
 
-[node name="TextureRect" type="TextureRect" parent="."]
-margin_right = 1920.0
-margin_bottom = 1080.0
+[node name="TextureRect" type="TextureRect" parent="Whole/Right/Map"]
+margin_right = 100.0
+margin_bottom = 100.0
+texture = ExtResource( 26 )
+
+[node name="Label" type="Label" parent="Whole/Right/Map"]
+margin_right = 100.0
+margin_bottom = 33.0
+custom_fonts/font = SubResource( 4 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = " 星    图"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Whole/Right/Map"]
+anims/choose = SubResource( 6 )

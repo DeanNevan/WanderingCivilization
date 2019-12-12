@@ -13,9 +13,6 @@ var serial_number = 0#在地块组中的编号
 
 var location = Vector2()
 
-var layers := []
-var surface_layer = 0
-
 var margin
 var invader = [null, null, null, null, null, null]
 var invader_display_array = [false, false, false, false, false, false]
@@ -31,14 +28,24 @@ onready var DetectArea = Area2D.new()
 onready var DetectShape = CollisionShape2D.new()
 var detected_area_temp = []
 
-onready var Layers = Global.LAYERS.instance()
-
 var on_mouse = false
 var is_selected = false
+
+var MAX_SPACE = 10000#最大空间
+
+var free_space = MAX_SPACE#剩余空间
+
+var expected_proportion
 
 onready var ShortInformation = preload("res://Assets/Terrains/TerrainShortInformation.tscn").instance()
 onready var SelectTerrainEffect = preload("res://Assets/SpecialEffects/SelectTerrainEffect/SelectTerrainEffect.tscn").instance()
 
+onready var Resources = Node.new()
+var resources_total_reserve = 0
+onready var ResourceSprites = Node.new()
+
+onready var Buildings = Node.new()
+onready var BuildingSprites = Node.new()
 onready var People = Node.new()
 
 func _ready():
@@ -48,10 +55,14 @@ func _ready():
 	connect("mouse_entered", self, "_on_mouse_enter_terrain")
 	connect("mouse_exited", self, "_on_mouse_exit_terrain")
 	add_child(People)
-	add_child(Layers)
 	add_child(SelectTerrainEffect)
 	SelectTerrainEffect.visible = false
 	SelectTerrainEffect.z_index = 2
+	
+	add_child(Resources)
+	#add_child(ResourceSprites)
+	add_child(Buildings)
+	add_child(BuildingSprites)
 	#SelectTerrainEffect.get_node("AnimationPlayer").playback_active = true
 	
 	for i in $Invader.get_child_count():
@@ -82,9 +93,6 @@ func _process(delta):
 	
 	if is_selected:
 		show_short_information()
-		if Input.is_action_just_pressed("right_mouse_button"):
-			#print("!!!")
-			layers[surface_layer].add_building(get_node("/root/InGame/WorldData/Buildings/BuildingPrimitiveCamp"))
 		
 	else:
 		shutdown_short_information()
@@ -106,8 +114,7 @@ func show_short_information():
 	ShortInformation.get_node("Label").visible = true
 	#ShortInformation.get_node("ColorRect").visible = true
 	ShortInformation.get_node("Label").text = "地块：" + name_CN + "\n" + "位置：" + str(location)
-	ShortInformation.get_node("Label").text += "\n" + "地平面是第" + str(surface_layer) + "层" + "\n"
-	ShortInformation.get_node("Label").text += str(layers[surface_layer].free_space)
+	ShortInformation.get_node("Label").text += str(free_space)
 	ShortInformation.global_position = global_position
 	SelectTerrainEffect.texture = margin
 	SelectTerrainEffect.get_node("AnimationPlayer").play("select")
@@ -182,3 +189,82 @@ func update_invader():
 			#print(i)
 			#print(neighbour_terrains[i].invader_display_array)
 
+func update_space():
+	var total = 0
+	for r in Resources.get_child_count():
+		Resources.get_child(r).update_total_reserve()
+		total += Resources.get_child(r).total_reserve
+	for b in Buildings.get_child_count():
+		total += Buildings.get_child(b).size
+	free_space = MAX_SPACE - total
+
+###更新建筑效果###
+func update_building_effect():
+	pass
+
+func add_resource(_resource, resource_content):
+	var total = 0
+	for i in resource_content:
+		total += resource_content[i]
+	if total > MAX_SPACE - resources_total_reserve:
+		return false
+	var resource = _resource.duplicate()
+	resource.total_reserve = total
+	resource.content = resource_content
+	Resources.add_child(resource)
+	update_space()
+	resource.terrain = self
+	update_resource_sprites(resource)
+	pass
+
+func update_resource_sprites(resource):
+	var sprite_count = ceil(resource.total_reserve / resource.standard_reserve_for_sprite)
+	if resource.is_init_draw_done:
+		var _del = sprite_count - resource.drawn_sprite_count
+		if _del == 0:
+			return
+		elif _del < 0:
+			for i in abs(_del):
+				resource.Sprites.get_child(randi() % resource.Sprites.get_child_count()).queue_free()
+		else:
+			for i in _del:
+				var sprite = Sprite.new()
+				resource.Sprites.add_child()
+				sprite.visible = true
+				sprite.z_index = 2
+				sprite.scale = Vector2(0.65, 0.65)
+				sprite.offset = Vector2(0, -10)
+				resource.Sprites.add_child(sprite)
+				sprite.texture = load(resource.sprite_texture[randi() % resource.sprite_texture.size()])
+				sprite.position = position + Vector2((randi() % 85) - 42, (randi() % 85) - 42)
+		return
+	
+	resource.is_init_draw_done = true
+	resource.drawn_sprite_count = sprite_count
+	for i in sprite_count:
+		var sprite = Sprite.new()
+		sprite.visible = true
+		sprite.z_index = 2
+		sprite.scale = Vector2(0.65, 0.65)
+		sprite.offset = Vector2(0, -10)
+		resource.Sprites.add_child(sprite)
+		sprite.texture = load(resource.sprite_texture[randi() % resource.sprite_texture.size()])
+		sprite.position = position + Vector2((randi() % 85) - 42, (randi() % 85) - 42)
+
+func add_building(_building):
+	if _building.size > free_space:
+		return false
+	var building = _building.duplicate()
+	Buildings.add_child(building)
+	
+	update_space()
+	building.terrain = self
+	update_building_effect()
+	var sprite = Sprite.new()
+	BuildingSprites.add_child(sprite)
+	sprite.texture = load(building.sprite_texture[randi() % building.sprite_texture.size()])
+	sprite.offset = building.sprite_offset
+	sprite.scale = Vector2(0.45, 0.45)
+	sprite.z_index = 1
+	sprite.visible = true
+	sprite.position = position + Vector2((randi() % 85) - 42, (randi() % 85) - 42)

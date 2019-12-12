@@ -1,13 +1,17 @@
 extends Node
 
-onready var Technologies = get_node("/root/InGame/WorldData/Technologies").duplicate()
-#onready var Races = Node.new()
-onready var GreatMan = Node.new()
+onready var Technologies = Node.new()
+onready var Races = Node.new()
+onready var GreatMen = Node.new()
+onready var Buildings = Node.new()
+onready var Policies = Node.new()
 
 func _ready():
-	self.add_child(Technologies)
-	#self.add_child(Races)
-	self.add_child(GreatMan)
+	add_child(Technologies)
+	add_child(Races)
+	add_child(GreatMen)
+	add_child(Buildings)
+	add_child(Policies)
 	
 
 func _process(delta):
