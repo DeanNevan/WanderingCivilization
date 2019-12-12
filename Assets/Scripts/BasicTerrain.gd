@@ -60,10 +60,7 @@ func _ready():
 	SelectTerrainEffect.z_index = 2
 	
 	add_child(Resources)
-	#add_child(ResourceSprites)
 	add_child(Buildings)
-	add_child(BuildingSprites)
-	#SelectTerrainEffect.get_node("AnimationPlayer").playback_active = true
 	
 	for i in $Invader.get_child_count():
 		$Invader.get_child(i).texture = null
@@ -261,7 +258,7 @@ func add_building(_building):
 	building.terrain = self
 	update_building_effect()
 	var sprite = Sprite.new()
-	BuildingSprites.add_child(sprite)
+	building.Sprites.add_child(sprite)
 	sprite.texture = load(building.sprite_texture[randi() % building.sprite_texture.size()])
 	sprite.offset = building.sprite_offset
 	sprite.scale = Vector2(0.45, 0.45)

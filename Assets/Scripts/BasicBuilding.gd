@@ -13,8 +13,10 @@ var sprite_offset = Vector2(0, -10)
 var build_basic_time = 100#建造基础用时
 var materials = {}#所需材料
 
-# Called when the node enters the scene tree for the first time.
+onready var Sprites = Node.new() 
+
 func _ready():
+	add_child(Sprites)
 	pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
