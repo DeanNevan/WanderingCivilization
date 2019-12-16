@@ -1,13 +1,21 @@
-extends "res://Scenes/MainInGameGUI/UIChoice.gd"
+extends TextureRect
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
+onready var pause_texture = preload("res://Assets/Art/GUI/Icons/pause.png")
+onready var normal_texture = preload("res://Assets/Art/GUI/Icons/right.png")
+onready var fast_texture = preload("res://Assets/Art/GUI/Icons/fastForward.png")
 
-# Called when the node enters the scene tree for the first time.
+enum {
+	PAUSE
+	NORMAL
+	FAST
+}
+
 func _ready():
-	pass # Replace with function body.
+	texture = normal_texture
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func _process(delta):
+	pass
+
+func change_time_speed():
+	pass

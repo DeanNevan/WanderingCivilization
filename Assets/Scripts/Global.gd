@@ -1,21 +1,10 @@
 extends Node
 
-var LAYER_AREA = 100
-var LAYER_HEIGHT = 100
-var LAYER = preload("res://Assets/Terrains/Layer/Layer.tscn")
-
-var LAYERS = preload("res://Assets/Terrains/Layers/Layers.tscn")
-
 var TERRAIN_DIRT := preload("res://Assets/Terrains/TerrainDirt/TerrainDirt.tscn")
-var MARGIN_DIRT := preload("res://Assets/Art/Hexagons-pack/BasicPack/PNG/Tiles/Terrain/Dirt/dirt_01.png")
 var TERRAIN_GRASS := preload("res://Assets/Terrains/TerrainGrass/TerrainGrass.tscn")
-var MARGIN_GRASS := preload("res://Assets/Art/Hexagons-pack/BasicPack/PNG/Tiles/Terrain/Grass/grass_18.png")
 var TERRAIN_MARS := preload("res://Assets/Terrains/TerrainMars/TerrainMars.tscn")
-var MARGIN_MARS := preload("res://Assets/Art/Hexagons-pack/BasicPack/PNG/Tiles/Terrain/Mars/mars_01.png")
 var TERRAIN_SAND := preload("res://Assets/Terrains/TerrainSand/TerrainSand.tscn")
-var MARGIN_SAND := preload("res://Assets/Art/Hexagons-pack/BasicPack/PNG/Tiles/Terrain/Sand/sand_01.png")
 var TERRAIN_STONE := preload("res://Assets/Terrains/TerrainStone/TerrainStone.tscn")
-var MARGIN_STONE := preload("res://Assets/Art/Hexagons-pack/BasicPack/PNG/Tiles/Terrain/Stone/stone_01.png")
 
 var TERRAINS = [TERRAIN_DIRT, TERRAIN_GRASS, TERRAIN_MARS, TERRAIN_SAND, TERRAIN_STONE]
 
@@ -46,24 +35,10 @@ var SUBSTANCE_PURE_WATER = preload("res://Assets/Substances/SubstancePureWater/S
 var SUBSTANCE_ROSEWOOD = preload("res://Assets/Substances/SubstanceRosewood/SubstanceRosewood.tscn")
 var SUBSTANCE_STONE = preload("res://Assets/Substances/SubstanceStone/SubstanceStone.tscn")
 var SUBSTANCE_CACTUS = preload("res://Assets/Substances/SubstanceCactus/SubstanceCactus.tscn")
-
-enum SUBSTANCE{
-	BRINE
-	CLAY
-	CONGLOMERATE
-	DIRT
-	ELM
-	LIMESTONE
-	MAPLE
-	OAK
-	PURE_WATER
-	ROSEWOOD
-	STONE
-}
-
-enum SUBSTANCE_TYPE{
-	
-}
+var SUBSTANCE_COPPER_ORE = preload("res://Assets/Substances/SubtanceCopperOre/SubstanceCopperOre.tscn")
+var SUBSTANCE_TIN_ORE = preload("res://Assets/Substances/SubstanceTinOre/SubstanceTinOre.tscn")
+var SUBSTANCE_LEAD_ORE = preload("res://Assets/Substances/SubstanceLeadOre/SubstanceLeadOre.tscn")
+var SUBSTANCE_CRYSTAL = preload("res://Assets/Substances/SubstanceCrystal/SubstanceCrystal.tscn")
 
 enum RESOURCE{
 	FOREST_OAK

@@ -7,8 +7,8 @@ extends "res://Assets/Scripts/BasicTerrain.gd"
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	name_CN = "石地块"
-	margin = Global.MARGIN_STONE
-	global_index = Global.TERRAIN.STONE
+	margin = preload("res://Assets/Art/Hexagons-pack/BasicPack/PNG/Tiles/Terrain/Stone/stone_01.png")
+	enum_index = Global.TERRAIN.STONE
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):

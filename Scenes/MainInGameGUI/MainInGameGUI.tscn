@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=38 format=2]
 
 [ext_resource path="res://Assets/Art/GUI/metalPanel.png" type="Texture" id=1]
 [ext_resource path="res://Scenes/MainInGameGUI/Civilization.gd" type="Script" id=2]
@@ -22,18 +22,17 @@
 [ext_resource path="res://Assets/Art/GUI/Icons/wrench.png" type="Texture" id=20]
 [ext_resource path="res://Scenes/MainInGameGUI/Settings.gd" type="Script" id=21]
 [ext_resource path="res://Assets/Art/GUI/Icons/gear.png" type="Texture" id=22]
-[ext_resource path="res://Scenes/MainInGameGUI/TimeSpeed.gd" type="Script" id=23]
-[ext_resource path="res://Assets/Art/GUI/Icons/right.png" type="Texture" id=24]
+[ext_resource path="res://Assets/Art/GUI/Icons/fastForward.png" type="Texture" id=23]
+[ext_resource path="res://Scenes/MainInGameGUI/TimeSpeed.gd" type="Script" id=24]
 [ext_resource path="res://Scenes/MainInGameGUI/Map.gd" type="Script" id=25]
 [ext_resource path="res://Assets/Art/GUI/Icons/share2.png" type="Texture" id=26]
 
-[sub_resource type="DynamicFont" id=4]
+[sub_resource type="DynamicFont" id=1]
 size = 24
 use_filter = true
 font_data = ExtResource( 5 )
 
-[sub_resource type="Animation" id=5]
-resource_name = "choose"
+[sub_resource type="Animation" id=2]
 tracks/0/type = "value"
 tracks/0/path = NodePath("TextureProgress:value")
 tracks/0/interp = 1
@@ -63,7 +62,189 @@ tracks/1/keys = {
 flags = 4
 load_path = "res://.import/metalPanel.png-39d738f9f80f518132de5076fa87e5e6.stex"
 
+[sub_resource type="Animation" id=4]
+tracks/0/type = "value"
+tracks/0/path = NodePath("TextureProgress:value")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 0.406126, 4 ),
+"update": 0,
+"values": [ 0.0, 100.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Label:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=5]
+tracks/0/type = "value"
+tracks/0/path = NodePath("TextureProgress:value")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 0.406126, 4 ),
+"update": 0,
+"values": [ 0.0, 100.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Label:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
 [sub_resource type="Animation" id=6]
+tracks/0/type = "value"
+tracks/0/path = NodePath("TextureProgress:value")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 0.406126, 4 ),
+"update": 0,
+"values": [ 0.0, 100.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Label:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=7]
+tracks/0/type = "value"
+tracks/0/path = NodePath("TextureProgress:value")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 0.406126, 4 ),
+"update": 0,
+"values": [ 0.0, 100.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Label:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=8]
+tracks/0/type = "value"
+tracks/0/path = NodePath("TextureProgress:value")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 0.406126, 4 ),
+"update": 0,
+"values": [ 0.0, 100.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Label:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=9]
+tracks/0/type = "value"
+tracks/0/path = NodePath("TextureProgress:value")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 0.406126, 4 ),
+"update": 0,
+"values": [ 0.0, 100.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Label:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=10]
+tracks/0/type = "value"
+tracks/0/path = NodePath("TextureProgress:value")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 0.406126, 4 ),
+"update": 0,
+"values": [ 0.0, 100.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Label:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=11]
 tracks/0/type = "value"
 tracks/0/path = NodePath("TextureProgress:value")
 tracks/0/interp = 1
@@ -132,14 +313,14 @@ texture = ExtResource( 4 )
 
 [node name="Label" type="Label" parent="Whole/Left/MostLeft/Civilization"]
 margin_right = 100.0
-margin_bottom = 31.0
+margin_bottom = 33.0
 mouse_filter = 1
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 text = " 文    明"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Whole/Left/MostLeft/Civilization"]
-anims/choose = SubResource( 5 )
+anims/choose = SubResource( 2 )
 
 [node name="People" type="TextureRect" parent="Whole/Left/MostLeft"]
 margin_top = 104.0
@@ -162,13 +343,13 @@ texture = ExtResource( 8 )
 
 [node name="Label" type="Label" parent="Whole/Left/MostLeft/People"]
 margin_right = 100.0
-margin_bottom = 31.0
-custom_fonts/font = SubResource( 4 )
+margin_bottom = 33.0
+custom_fonts/font = SubResource( 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 text = " 人    口"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Whole/Left/MostLeft/People"]
-anims/choose = SubResource( 5 )
+anims/choose = SubResource( 4 )
 
 [node name="GreatMan" type="TextureRect" parent="Whole/Left/MostLeft"]
 margin_top = 208.0
@@ -192,7 +373,7 @@ texture = ExtResource( 11 )
 [node name="Label" type="Label" parent="Whole/Left/MostLeft/GreatMan"]
 margin_right = 100.0
 margin_bottom = 31.0
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 text = " 伟    人"
 
@@ -221,12 +402,12 @@ texture = ExtResource( 14 )
 [node name="Label" type="Label" parent="Whole/Left/MostLeft/Diplomacy"]
 margin_right = 100.0
 margin_bottom = 31.0
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 text = " 外    交"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Whole/Left/MostLeft/Diplomacy"]
-anims/choose = SubResource( 5 )
+anims/choose = SubResource( 6 )
 
 [node name="Policy" type="TextureRect" parent="Whole/Left"]
 margin_left = 104.0
@@ -251,12 +432,12 @@ texture = ExtResource( 16 )
 [node name="Label" type="Label" parent="Whole/Left/Policy"]
 margin_right = 100.0
 margin_bottom = 33.0
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 text = " 政    策"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Whole/Left/Policy"]
-anims/choose = SubResource( 5 )
+anims/choose = SubResource( 7 )
 
 [node name="TechTree" type="TextureRect" parent="Whole/Left"]
 margin_left = 208.0
@@ -281,14 +462,15 @@ texture = ExtResource( 18 )
 [node name="Label" type="Label" parent="Whole/Left/TechTree"]
 margin_right = 100.0
 margin_bottom = 33.0
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 text = " 技    术"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Whole/Left/TechTree"]
-anims/choose = SubResource( 5 )
+anims/choose = SubResource( 8 )
 
-[node name="Build" type="TextureRect" parent="Whole/Left"]
+[node name="Building" type="TextureRect" parent="Whole/Left"]
+editor/display_folded = true
 margin_left = 312.0
 margin_right = 412.0
 margin_bottom = 100.0
@@ -296,27 +478,27 @@ size_flags_vertical = 0
 texture = ExtResource( 1 )
 script = ExtResource( 19 )
 
-[node name="TextureProgress" type="TextureProgress" parent="Whole/Left/Build"]
+[node name="TextureProgress" type="TextureProgress" parent="Whole/Left/Building"]
 margin_right = 100.0
 margin_bottom = 30.0
 value = 100.0
 texture_progress = ExtResource( 13 )
 fill_mode = 4
 
-[node name="TextureRect" type="TextureRect" parent="Whole/Left/Build"]
+[node name="TextureRect" type="TextureRect" parent="Whole/Left/Building"]
 margin_right = 100.0
 margin_bottom = 100.0
 texture = ExtResource( 20 )
 
-[node name="Label" type="Label" parent="Whole/Left/Build"]
+[node name="Label" type="Label" parent="Whole/Left/Building"]
 margin_right = 100.0
 margin_bottom = 33.0
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 text = " 建    造"
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Whole/Left/Build"]
-anims/choose = SubResource( 5 )
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Whole/Left/Building"]
+anims/choose = SubResource( 9 )
 
 [node name="Right" type="VBoxContainer" parent="Whole"]
 margin_left = 1820.0
@@ -352,41 +534,19 @@ texture = ExtResource( 22 )
 [node name="Label" type="Label" parent="Whole/Right/TopRight/Settings"]
 margin_right = 100.0
 margin_bottom = 31.0
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 text = " 设    置"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Whole/Right/TopRight/Settings"]
-anims/choose = SubResource( 5 )
+anims/choose = SubResource( 10 )
 
 [node name="TimeSpeed" type="TextureRect" parent="Whole/Right"]
 margin_top = 880.0
 margin_right = 100.0
 margin_bottom = 980.0
-texture = ExtResource( 1 )
-script = ExtResource( 23 )
-
-[node name="TextureProgress" type="TextureProgress" parent="Whole/Right/TimeSpeed"]
-margin_right = 100.0
-margin_bottom = 30.0
-value = 100.0
-texture_progress = ExtResource( 3 )
-fill_mode = 4
-
-[node name="TextureRect" type="TextureRect" parent="Whole/Right/TimeSpeed"]
-margin_right = 100.0
-margin_bottom = 100.0
-texture = ExtResource( 24 )
-
-[node name="Label" type="Label" parent="Whole/Right/TimeSpeed"]
-margin_right = 100.0
-margin_bottom = 31.0
-custom_fonts/font = SubResource( 4 )
-custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-text = " 时    间"
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Whole/Right/TimeSpeed"]
-anims/choose = SubResource( 5 )
+texture = ExtResource( 23 )
+script = ExtResource( 24 )
 
 [node name="Map" type="TextureRect" parent="Whole/Right"]
 margin_top = 980.0
@@ -398,6 +558,7 @@ script = ExtResource( 25 )
 [node name="TextureProgress" type="TextureProgress" parent="Whole/Right/Map"]
 margin_right = 100.0
 margin_bottom = 30.0
+rect_clip_content = true
 value = 100.0
 texture_progress = ExtResource( 13 )
 fill_mode = 4
@@ -410,9 +571,9 @@ texture = ExtResource( 26 )
 [node name="Label" type="Label" parent="Whole/Right/Map"]
 margin_right = 100.0
 margin_bottom = 33.0
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 text = " 星    图"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Whole/Right/Map"]
-anims/choose = SubResource( 6 )
+anims/choose = SubResource( 11 )

@@ -13,7 +13,6 @@ func _ready():
 		Global.TERRAIN.MARS : 0.8,
 		Global.TERRAIN.SAND : 0.65
 	}
-	size = 40
 	sprite_texture = [
 		"res://Assets/Art/Hexagons-pack/BasicPack/PNG/Objects/indianTent_back.png",
 		"res://Assets/Art/Hexagons-pack/BasicPack/PNG/Objects/indianTent_front.png"

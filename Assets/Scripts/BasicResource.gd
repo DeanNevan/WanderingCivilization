@@ -11,6 +11,8 @@ var standard_reserve_for_sprite = 500#用于展示Sprite
 
 var terrain
 
+var on_surface#是否在地块表层
+
 var is_init_draw_done = false#是否初始化绘制完成
 var drawn_sprite_count = 0#已经绘制的精灵个数，用于更新资源图片
 
@@ -33,9 +35,9 @@ func update_total_reserve():
 
 func init_generate(terrain):
 	
-	if expected_settings.keys().find(terrain.global_index) == -1:
+	if expected_settings.keys().find(terrain.enum_index) == -1:
 		return false
-	var settings = expected_settings[terrain.global_index]
+	var settings = expected_settings[terrain.enum_index]
 	#print(settings)
 	#print(settings.size())
 	#for layer_range_count in settings.size():
