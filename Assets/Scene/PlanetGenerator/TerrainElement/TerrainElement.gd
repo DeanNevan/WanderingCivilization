@@ -13,5 +13,8 @@ var env_factors_id_modification_neighbour := {}
 func init():
 	pass
 
+func delete():
+	queue_free()
+
 #func terrain_modify():
 	#pass

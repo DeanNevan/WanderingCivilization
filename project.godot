@@ -13,7 +13,7 @@ config_version=5
 config/name="WanderingCivilization"
 run/main_scene="res://Test/Test.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="res://icon.png"
 
 [autoload]
 

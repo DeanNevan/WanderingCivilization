@@ -1,6 +1,15 @@
 extends Node3D
 func _ready():
 	R.load_mod("main")
+	
+	#for i in 
+	var multi_mesh : MultiMesh = $MultiMeshInstance3D.multimesh
+	for i in 10000:
+		multi_mesh.set_instance_transform(i, Transform3D(Basis(Vector3.RIGHT, Vector3.UP, Vector3.BACK), $Lotus.position))
+		#var m = $Lotus.duplicate()
+		#m.visible = true
+		#add_child(m)
+	
 	pass
 	#var wo_shi_sha_bi := "我是傻逼"
 	#var new_marker := MarkerManager.new_marker_label_3d()

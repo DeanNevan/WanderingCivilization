@@ -3,4 +3,4 @@
 [resource]
 resource_name = "dirt.005"
 cull_mode = 2
-albedo_color = Color(0.989585, 0.861693, 0.702097, 1)
+albedo_color = Color(0.709804, 0.486275, 0.145098, 1)

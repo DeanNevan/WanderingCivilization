@@ -3,5 +3,4 @@
 [resource]
 roughness = 0.6
 emission_enabled = true
-emission = Color(1, 1, 1, 1)
-emission_energy_multiplier = 0.2
+emission = Color(0.486275, 0.486275, 0.486275, 1)

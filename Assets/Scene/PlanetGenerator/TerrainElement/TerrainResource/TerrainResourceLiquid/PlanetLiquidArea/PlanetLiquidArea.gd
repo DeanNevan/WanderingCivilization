@@ -21,6 +21,7 @@ func _init(_height_level):
 
 func _ready():
 	mesh_instance = MeshInstance3D.new()
+	mesh_instance.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 	#mesh_instance.gi_mode = GeometryInstance3D.GI_MODE_DYNAMIC
 	add_child(mesh_instance)
 

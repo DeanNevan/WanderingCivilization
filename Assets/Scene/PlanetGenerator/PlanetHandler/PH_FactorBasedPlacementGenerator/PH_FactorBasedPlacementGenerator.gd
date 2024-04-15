@@ -77,7 +77,8 @@ func handle_terrain(t : PlanetTerrain):
 				break
 		if !flag:
 			continue
-		planet.edit_placement_priority(t, placement_id, placement_data[placement_id]["priority"])
+		var element_instance : TerrainElement = R.get_element_instance(placement_id)
+		planet.edit_placement_priority(t, placement_id, element_instance.layer, placement_data[placement_id]["priority"])
 
 func handle_async():
 	await super.handle_async()
@@ -89,7 +90,7 @@ func handle_async():
 		handle_terrain(t)
 	
 	for t in planet.terrains:
-		planet.random_pick_placement(t)
+		planet.random_pick_placements(t)
 	
 	var time_end : int = Time.get_ticks_msec()
 	logger.debug("耗时:%dms" % (time_end - time_start))

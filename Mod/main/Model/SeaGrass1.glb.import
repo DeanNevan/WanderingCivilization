@@ -33,7 +33,7 @@ _subresources={
 "materials": {
 "Green.039": {
 "use_external/enabled": true,
-"use_external/path": "res://Mod/main/Material/FromModel/dark_foliage.tres"
+"use_external/path": "res://Mod/main/Material/FromModel/foliage.tres"
 }
 },
 "meshes": {

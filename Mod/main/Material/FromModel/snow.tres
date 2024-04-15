@@ -5,3 +5,4 @@ resource_name = "snow"
 cull_mode = 2
 albedo_color = Color(0.951502, 0.984295, 0.99166, 1)
 emission_enabled = true
+emission = Color(0.488054, 0.488054, 0.488054, 1)

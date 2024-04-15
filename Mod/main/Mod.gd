@@ -14,11 +14,11 @@ func _init():
 		"@liquid_area:main:lava" : "res://Mod/main/Element/Resource/Liquid/LiquidAreaLava.gd",
 	}
 	self.materials = {
-		"@material:main:grass_plain" : "res://Mod/main/Material/Material_TerrainGrassPlain.tres",
-		"@material:main:rock" : "res://Mod/main/Material/FromModel/Rock.tres",
-		"@material:main:desert" : "res://Mod/main/Material/Material_TerrainDesert.tres",
-		"@material:main:snow_field" : "res://Mod/main/Material/FromModel/snow.tres",
-		"@material:main:loess_land" : "res://Mod/main/Material/Material_TerrainLoessLand.tres",
+		"@material:main:terrain_grass_plain" : "res://Mod/main/Material/FromModel/foliage.tres",
+		"@material:main:terrain_rock" : "res://Mod/main/Material/FromModel/Rock.tres",
+		"@material:main:terrain_desert" : "res://Mod/main/Material/Material_TerrainDesert.tres",
+		"@material:main:terrain_snow_field" : "res://Mod/main/Material/FromModel/snow.tres",
+		"@material:main:terrain_loess_land" : "res://Mod/main/Material/FromModel/dirt.tres",
 		"@material:main:liquid_water" : "res://Mod/main/Material/Material_LiquidWater.tres",
 		"@material:main:liquid_lava" : "res://Mod/main/Material/Material_LiquidLava.tres",
 	}

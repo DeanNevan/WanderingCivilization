@@ -19,6 +19,7 @@ var Scene_Instance : PackedScene
 @export var on_liquid_surface := false
 @export var only_with_liquid := false
 @export var can_with_liquid := false
+@export var layer := 0
 
 var instance_count := 0
 var instances := []
@@ -31,7 +32,7 @@ func _init():
 func init_display():
 	var range := Vector2i()
 	range.x = terrain.get_faces_range_via_round(1).x
-	range.y = terrain.get_faces_range_via_round(2).y
+	range.y = terrain.get_faces_range_via_round(1).y
 	for i in range(range.x, range.y + 1, 1):
 		faces.append(i)
 	faces.shuffle()

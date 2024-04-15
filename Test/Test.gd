@@ -28,14 +28,13 @@ func _ready():
 	await planet.generate_async()
 	planet.queue_free()
 	
-	#for i in 2:
+	#for i in 5:
 		#var _planet = Scene_planet.instantiate()
 		#_planet.set_script(R.get_planet("@planet:main:earthlike"))
 		#add_child(_planet)
-		#_planet.scale_level = 1
+		#_planet.scale_level = 3
 		#await _planet.generate_async()
-		#$TextureRect.texture = _handler.noise_texture
-		#_planet.position = Vector3(i * 3, 0, 0)
+		#_planet.position = Vector3(i * 12, 0, 0)
 	
 	#var mul : MultiMesh = $MultiMeshInstance3D.multimesh
 	#mul.set_instance_transform(0, Transform3D(Basis(Vector3.RIGHT, Vector3.UP, Vector3.BACK), Vector3(0, 0, 0)))

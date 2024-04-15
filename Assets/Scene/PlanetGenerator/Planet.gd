@@ -196,61 +196,69 @@ func update_mesh_data():
 			var height_level = _vertex.height_level + terrain.height_level
 			_vertex.pos += _vertex.pos.normalized() * HEIGHT_EACH_LEVEL * height_level
 		
-		if terrain.height_level != 0:
-		
-			var marker : MarkerLabel3D = MarkerManager.new_marker_label_3d()
-			add_child(marker)
-			marker.font_size = 32 * radius_rate
-			#marker.scale = Vector3(1, 1, 1)
-			marker.outline_size = 2 * radius_rate
-			marker.position = terrain.vertexes[terrain.vertexes.size() - 1].pos
-			marker.text = str(terrain.height_level)
-			marker.modulate.a = 0.1
+		#if terrain.height_level != 0:
+		#
+			#var marker : MarkerLabel3D = MarkerManager.new_marker_label_3d()
+			#add_child(marker)
+			#marker.font_size = 32 * radius_rate
+			##marker.scale = Vector3(1, 1, 1)
+			#marker.outline_size = 2 * radius_rate
+			#marker.position = terrain.vertexes[terrain.vertexes.size() - 1].pos
+			#marker.text = str(terrain.height_level)
+			#marker.modulate.a = 0.1
 
-func edit_placement_priority(_terrain : PlanetTerrain, _id : String, _priority : int):
+func edit_placement_priority(_terrain : PlanetTerrain, _id : String, _layer : int, _priority : int):
 	if !placements_priorities.has(_terrain):
 		placements_priorities[_terrain] = {
+			_layer : {
+				"total" : 0,
+				"placements" : {}
+			}
+		}
+	elif !placements_priorities[_terrain].has(_layer):
+		placements_priorities[_terrain][_layer] = {
 			"total" : 0,
 			"placements" : {}
 		}
-	if placements_priorities[_terrain]["placements"].has(_id):
-		var v : int = placements_priorities[_terrain]["placements"][_id]
+	if placements_priorities[_terrain][_layer]["placements"].has(_id):
+		var v : int = placements_priorities[_terrain][_layer]["placements"][_id]
 		if _priority >= 0:
-			placements_priorities[_terrain]["placements"][_id] += _priority
-			placements_priorities[_terrain]["total"] += _priority
+			placements_priorities[_terrain][_layer]["placements"][_id] += _priority
+			placements_priorities[_terrain][_layer]["total"] += _priority
 		elif v >= abs(_priority):
-			placements_priorities[_terrain]["placements"][_id] += _priority
-			placements_priorities[_terrain]["total"] += _priority
+			placements_priorities[_terrain][_layer]["placements"][_id] += _priority
+			placements_priorities[_terrain][_layer]["total"] += _priority
 		else:
-			placements_priorities[_terrain]["placements"].erase(_id)
-			placements_priorities[_terrain]["total"] -= v
+			placements_priorities[_terrain][_layer]["placements"].erase(_id)
+			placements_priorities[_terrain][_layer]["total"] -= v
 	else:
 		if _priority > 0:
-			placements_priorities[_terrain]["placements"][_id] = _priority
-			placements_priorities[_terrain]["total"] += _priority
+			placements_priorities[_terrain][_layer]["placements"][_id] = _priority
+			placements_priorities[_terrain][_layer]["total"] += _priority
 
-func random_pick_placement(_terrain : PlanetTerrain):
+func random_pick_placements(_terrain : PlanetTerrain):
 	if !placements_priorities.has(_terrain):
 		return
 	if rander_for_generation.randf() > resource_richness:
 		return
-	var total : int = placements_priorities[_terrain]["total"]
-	if total <= 0:
-		return
-	var p : int = rander_for_generation.randi() % total
-	var placement_id : String
-	for p_id in placements_priorities[_terrain]["placements"]:
-		var pp : int = placements_priorities[_terrain]["placements"][p_id]
-		if p < pp:
-			placement_id = p_id
-			break
-		p -= pp
-	set_placement(_terrain, placement_id)
+	for layer in placements_priorities[_terrain]:
+		var total : int = placements_priorities[_terrain][layer]["total"]
+		if total <= 0:
+			return
+		var p : int = rander_for_generation.randi() % total
+		var placement_id : String
+		for p_id in placements_priorities[_terrain][layer]["placements"]:
+			var pp : int = placements_priorities[_terrain][layer]["placements"][p_id]
+			if p < pp:
+				placement_id = p_id
+				break
+			p -= pp
+		add_placement(_terrain, placement_id, layer)
 
-func set_placement(_terrain : PlanetTerrain, _placement_id : String):
+func add_placement(_terrain : PlanetTerrain, _placement_id : String, _layer : int):
 	var script : GDScript = R.get_element(_placement_id)
 	var new_placement : TerrainResourcePlacement = script.new()
-	_terrain.set_placement(new_placement)
+	_terrain.add_placement(new_placement)
 
 func edit_terrain_priority(_terrain : PlanetTerrain, _id : String, _priority : int):
 	if !terrains_priorities.has(_terrain):

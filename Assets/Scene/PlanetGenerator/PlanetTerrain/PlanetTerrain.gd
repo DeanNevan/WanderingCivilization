@@ -22,7 +22,7 @@ var env_factors_id_provide_neighbour := {}
 var current_env_factors := {}
 
 var liquid : TerrainResourceLiquid
-var placement : TerrainResourcePlacement
+var placements := {}
 var other_elements := []
 var all_elements := []
 
@@ -193,7 +193,7 @@ func copy_to(target : PlanetTerrain, do_duplicate := false):
 		target.vertexes = vertexes
 		
 		target.set_liquid(liquid)
-		target.set_placement(placement)
+		target.set_placements(placements.values())
 		for e in other_elements:
 			target.add_other_element(e)
 		
@@ -453,22 +453,29 @@ func init_display(array_mesh : ArrayMesh, material_to_st : Dictionary):
 			#st.set_normal(polygon.normal)
 			st.add_vertex(p3)
 	
-	if is_instance_valid(placement):
-		placement.init_display()
+	for placement in placements.values():
+		if is_instance_valid(placement):
+			placement.init_display()
 	
 	#for i in faces_idx.size():
 		#array_mesh.surface_set_material(i, R.default_material_for_terrain)
 
-func set_placement(_placement : TerrainResourcePlacement):
+func add_placement(_placement : TerrainResourcePlacement):
 	if !is_instance_valid(_placement):
 		return
 	if _placement.is_inside_tree():
 		_placement.get_parent().remove_child(_placement)
-	placement = _placement
-	placement.terrain = self
-	_Elements.add_child(placement)
-	all_elements.append(placement)
+	if is_instance_valid(placements.get(_placement.layer)):
+		placements.get(_placement.layer).delete()
+	placements[_placement.layer] = _placement
+	_placement.terrain = self
+	_Elements.add_child(_placement)
+	all_elements.append(_placement)
 	update_current_env_factors()
+
+func set_placements(arr : Array):
+	for i in arr:
+		add_placement(i)
 
 func set_liquid(_liquid : TerrainResourceLiquid):
 	if !is_instance_valid(_liquid):
@@ -488,13 +495,13 @@ func has_other_element(id : String) -> bool:
 	return false
 
 func has_placement() -> bool:
-	return is_instance_valid(placement)
+	return placements.size() > 0
 
 func has_liquid() -> bool:
 	return is_instance_valid(liquid)
 
-func get_placement() -> TerrainResourcePlacement:
-	return placement
+func get_placements() -> Dictionary:
+	return placements
 
 func get_liquid() -> TerrainResourceLiquid:
 	return liquid
