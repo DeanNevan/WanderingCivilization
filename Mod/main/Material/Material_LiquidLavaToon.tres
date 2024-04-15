@@ -1,0 +1,52 @@
+[gd_resource type="ShaderMaterial" load_steps=8 format=3 uid="uid://cr6w6cmctcbf6"]
+
+[ext_resource type="Shader" path="res://Mod/main/Material/Material_LiquidToon.gdshader" id="1_rjbci"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_nuaay"]
+noise_type = 5
+fractal_octaves = 2
+fractal_lacunarity = 4.0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_khfx4"]
+seamless = true
+noise = SubResource("FastNoiseLite_nuaay")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_iuj0l"]
+noise_type = 5
+fractal_octaves = 2
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_y24i6"]
+seamless = true
+noise = SubResource("FastNoiseLite_iuj0l")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_5w0kx"]
+seed = 2
+fractal_octaves = 4
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_5mhwk"]
+width = 32
+height = 32
+seamless = true
+seamless_blend_skirt = 1.0
+as_normal_map = true
+bump_strength = 4.0
+noise = SubResource("FastNoiseLite_5w0kx")
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_rjbci")
+shader_parameter/speed = 0.043
+shader_parameter/color = Color(0.972549, 0.627451, 0.466667, 1)
+shader_parameter/deep_water = Color(1, 0.380392, 0.141176, 1)
+shader_parameter/beer_law_factor = 0.018
+shader_parameter/_distance = 0.067
+shader_parameter/edge_color = Color(0.85098, 0.85098, 0.85098, 1)
+shader_parameter/edge_scale = 1.2
+shader_parameter/near = 2.5
+shader_parameter/far = 300.0
+shader_parameter/wave_strength = Vector2(0.015, 0.015)
+shader_parameter/wave_frequ = Vector2(14, 14)
+shader_parameter/time_factor = Vector2(1.1, 2)
+shader_parameter/noise1 = SubResource("NoiseTexture2D_khfx4")
+shader_parameter/noise2 = SubResource("NoiseTexture2D_y24i6")
+shader_parameter/normalmap = SubResource("NoiseTexture2D_5mhwk")

@@ -1,0 +1,46 @@
+[gd_resource type="ShaderMaterial" load_steps=6 format=3 uid="uid://c4to35ej2xq1b"]
+
+[ext_resource type="Shader" path="res://Mod/main/Material/river.gdshader" id="1_sk6f4"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_3g301"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_o5h57"]
+as_normal_map = true
+noise = SubResource("FastNoiseLite_3g301")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_pkea7"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_q47qo"]
+seamless = true
+as_normal_map = true
+noise = SubResource("FastNoiseLite_pkea7")
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_sk6f4")
+shader_parameter/normal_scale = 1.0
+shader_parameter/uv_scale = Vector3(1, 1, 1)
+shader_parameter/roughness = 0.2
+shader_parameter/specular = 0.2
+shader_parameter/edge_fade = 0.0
+shader_parameter/albedo_color = Projection(13, 3.25, 0, 0, 6.5, 1.625, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/albedo_depth = 20.0
+shader_parameter/albedo_depth_curve = 0.25
+shader_parameter/transparency_clarity = 1.0
+shader_parameter/transparency_depth_curve = 0.25
+shader_parameter/transparency_refraction = 0.05
+shader_parameter/flow_speed = 0.1
+shader_parameter/flow_base = 0.0
+shader_parameter/flow_steepness = 0.5
+shader_parameter/flow_distance = 0.5
+shader_parameter/flow_pressure = 0.5
+shader_parameter/flow_max = 0.5
+shader_parameter/foam_color = Color(0.9, 0.9, 0.9, 1)
+shader_parameter/foam_amount = 2.0
+shader_parameter/foam_steepness = 2.0
+shader_parameter/foam_smoothness = 0.3
+shader_parameter/i_lod0_distance = 50.0
+shader_parameter/i_valid_flowmap = false
+shader_parameter/i_uv2_sides = 2
+shader_parameter/normal_bump_texture = SubResource("NoiseTexture2D_q47qo")
+shader_parameter/i_texture_foam_noise = SubResource("NoiseTexture2D_o5h57")

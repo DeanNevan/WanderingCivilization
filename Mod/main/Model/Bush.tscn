@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://cwhsucib7djwn"]
+
+[ext_resource type="PackedScene" uid="uid://dj5ij3q3bvipq" path="res://Mod/main/Model/Bush.glb" id="1_d1psw"]
+
+[sub_resource type="GDScript" id="GDScript_dyn0n"]
+script/source = "extends BatchObject
+func _init():
+	id = \"@batch:main:bush\"
+"
+
+[node name="Bush" instance=ExtResource("1_d1psw")]
+script = SubResource("GDScript_dyn0n")

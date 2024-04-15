@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://do2qdwge4br7p"]
+
+[ext_resource type="PackedScene" uid="uid://3pcff48susx2" path="res://Mod/main/Model/Tree.glb" id="1_m620k"]
+
+[sub_resource type="GDScript" id="GDScript_nyjmr"]
+script/source = "extends BatchObject
+
+func _init():
+	id = \"@batch:main:tree\"
+"
+
+[node name="Tree" instance=ExtResource("1_m620k")]
+script = SubResource("GDScript_nyjmr")

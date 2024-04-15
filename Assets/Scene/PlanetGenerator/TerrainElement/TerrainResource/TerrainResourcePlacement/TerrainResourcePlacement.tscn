@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://dweg3etymug05"]
+
+[ext_resource type="PackedScene" uid="uid://b2i6gtuk7wodv" path="res://Assets/Scene/PlanetGenerator/TerrainElement/TerrainResource/TerrainResource.tscn" id="1_ay171"]
+[ext_resource type="Script" path="res://Assets/Scene/PlanetGenerator/TerrainElement/TerrainResource/TerrainResourcePlacement/TerrainResourcePlacement.gd" id="2_oo56u"]
+
+[node name="TerrainResourcePlacement" instance=ExtResource("1_ay171")]
+script = ExtResource("2_oo56u")
+remain_percent_to_instance_count = {
+Vector2(0, 20): 1,
+Vector2(20, 40): 2,
+Vector2(40, 60): 3,
+Vector2(60, 80): 4,
+Vector2(80, 100): 5
+}
+scale_range = Vector2(0.5, 1)
+yaw_range = Vector2(0, 360)
+pitch_range = Vector2(0, 0)
+roll_range = Vector2(0, 0)
+height_offset_range = Vector2(-0.1, 0.1)
+on_liquid_surface = false
+only_with_liquid = false
+can_with_liquid = false

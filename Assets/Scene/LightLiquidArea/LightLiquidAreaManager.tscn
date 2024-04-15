@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3 uid="uid://gjdq514wys1l"]
+
+[ext_resource type="Script" path="res://Assets/Scene/LightLiquidArea/LightLiquidAreaManager.gd" id="1_jwx73"]
+[ext_resource type="PackedScene" uid="uid://7steswdyfgpn" path="res://Assets/Scene/LightLiquidArea/LightLiquidArea.tscn" id="2_ue011"]
+
+[node name="LightLiquidAreaManager" type="Node3D"]
+visible = false
+script = ExtResource("1_jwx73")
+
+[node name="LightLiquidArea" parent="." instance=ExtResource("2_ue011")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 2, 0, 0)
+
+[node name="LightLiquidArea2" parent="." instance=ExtResource("2_ue011")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -2, 0, 0)
+
+[node name="LightLiquidArea3" parent="." instance=ExtResource("2_ue011")]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 2, 0)
+
+[node name="LightLiquidArea4" parent="." instance=ExtResource("2_ue011")]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -2, 0)
+
+[node name="LightLiquidArea5" parent="." instance=ExtResource("2_ue011")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
+
+[node name="LightLiquidArea6" parent="." instance=ExtResource("2_ue011")]
+transform = Transform3D(1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, -2)

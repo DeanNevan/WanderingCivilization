@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dqq6vhqfe8pr6"]
+
+[ext_resource type="Script" path="res://Autoload/MarkerManager/MarkerManager.gd" id="1_7ahf4"]
+
+[node name="MarkerManager" type="Node"]
+script = ExtResource("1_7ahf4")

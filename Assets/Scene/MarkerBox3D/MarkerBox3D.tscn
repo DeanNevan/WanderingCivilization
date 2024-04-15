@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://cleh05hytg2vo"]
+
+[ext_resource type="Script" path="res://Assets/Scene/MarkerBox3D/MarkerBox3D.gd" id="1_udhvo"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3dx0j"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_qxkib"]
+
+[node name="MarkerBox3D" type="Node3D"]
+script = ExtResource("1_udhvo")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+material_override = SubResource("StandardMaterial3D_3dx0j")
+mesh = SubResource("BoxMesh_qxkib")

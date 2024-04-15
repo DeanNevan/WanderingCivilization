@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://xuu1h38lkx56"]
+
+[ext_resource type="Script" path="res://Assets/Scene/MouseDetectArea/MouseDetectArea.gd" id="1_hw2kx"]
+
+[node name="MouseDetectArea" type="Area3D"]
+monitoring = false
+monitorable = false
+script = ExtResource("1_hw2kx")

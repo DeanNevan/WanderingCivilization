@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://b2i6gtuk7wodv"]
+
+[ext_resource type="PackedScene" uid="uid://crhabgu0orglh" path="res://Assets/Scene/PlanetGenerator/TerrainElement/TerrainElement.tscn" id="1_o5yph"]
+[ext_resource type="Script" path="res://Assets/Scene/PlanetGenerator/TerrainElement/TerrainResource/TerrainResource.gd" id="2_tpmjr"]
+
+[node name="TerrainResource" instance=ExtResource("1_o5yph")]
+script = ExtResource("2_tpmjr")

@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://d2divfsysrrn0"]
+
+[ext_resource type="PackedScene" uid="uid://b7gsngx47u73q" path="res://Mod/main/Model/Cactus3.glb" id="1_i67op"]
+
+[sub_resource type="GDScript" id="GDScript_rkl8w"]
+script/source = "extends BatchObject
+func _init():
+	id = \"@batch:main:cactus_3\"
+"
+
+[node name="Cactus3" instance=ExtResource("1_i67op")]
+script = SubResource("GDScript_rkl8w")

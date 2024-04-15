@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://cxtsrv3n0pkwa"]
+
+[ext_resource type="PackedScene" uid="uid://cwc8sm2hr4lt" path="res://Mod/main/Model/Wheat.glb" id="1_qmfsb"]
+
+[sub_resource type="GDScript" id="GDScript_o12eg"]
+script/source = "extends BatchObject
+
+func _init():
+	id = \"@batch:main:wheat\"
+"
+
+[node name="Wheat" instance=ExtResource("1_qmfsb")]
+script = SubResource("GDScript_o12eg")

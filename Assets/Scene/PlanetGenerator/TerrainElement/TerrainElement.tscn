@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://crhabgu0orglh"]
+
+[ext_resource type="Script" path="res://Assets/Scene/PlanetGenerator/TerrainElement/TerrainElement.gd" id="1_hk457"]
+
+[node name="TerrainElement" type="Node3D"]
+script = ExtResource("1_hk457")

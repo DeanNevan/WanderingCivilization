@@ -1,0 +1,73 @@
+[gd_scene load_steps=12 format=3 uid="uid://h480p3wxg7ul"]
+
+[ext_resource type="Script" path="res://Test/Test.gd" id="1_5ye0a"]
+[ext_resource type="Script" path="res://addons/orbit_camera/orbit_camera.gd" id="1_goux6"]
+[ext_resource type="PackedScene" uid="uid://bqeorlf85jq36" path="res://Assets/Model/TriangulatedPlane/TriangulatedHexagon.glb" id="3_jwel6"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_8iy50"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_qjlm4"]
+
+[sub_resource type="Sky" id="Sky_gg6ec"]
+sky_material = SubResource("ProceduralSkyMaterial_qjlm4")
+
+[sub_resource type="Environment" id="Environment_cw50v"]
+background_mode = 2
+sky = SubResource("Sky_gg6ec")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_m3c7v"]
+
+[sub_resource type="Gradient" id="Gradient_ufa3u"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_jv5ai"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_2w8cx"]
+color_ramp = SubResource("Gradient_ufa3u")
+noise = SubResource("FastNoiseLite_jv5ai")
+
+[node name="Test" type="Node3D"]
+script = ExtResource("1_5ye0a")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+visible = false
+mesh = SubResource("BoxMesh_8iy50")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_cw50v")
+
+[node name="Node3D" type="Node3D" parent="."]
+
+[node name="OrbitCamera" type="Camera3D" parent="Node3D"]
+script = ExtResource("1_goux6")
+DEFAULT_DISTANCE = 3.0
+ROTATE_SPEED = 0.47
+ANCHOR_NODE_PATH = NodePath("..")
+MOUSE_ZOOM_SPEED = 100.0
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("BoxShape3D_m3c7v")
+
+[node name="Area3D2" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.66215)
+monitoring = false
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D2"]
+shape = SubResource("BoxShape3D_m3c7v")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+visible = false
+offset_right = 40.0
+offset_bottom = 40.0
+texture = SubResource("NoiseTexture2D_2w8cx")
+
+[node name="TriangulatedHexagon" parent="." instance=ExtResource("3_jwel6")]
+
+[connection signal="mouse_entered" from="Area3D" to="." method="_on_area_3d_mouse_entered"]
+[connection signal="mouse_exited" from="Area3D" to="." method="_on_area_3d_mouse_exited"]
+[connection signal="mouse_entered" from="Area3D2" to="." method="_on_area_3d_2_mouse_entered"]
+[connection signal="mouse_exited" from="Area3D2" to="." method="_on_area_3d_2_mouse_exited"]
+
+[editable path="TriangulatedHexagon"]

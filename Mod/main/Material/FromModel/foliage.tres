@@ -1,0 +1,7 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://cdo7003vrgnkc"]
+
+[resource]
+resource_name = "foliage"
+cull_mode = 2
+albedo_color = Color(0.329412, 0.780392, 0.137255, 1)
+roughness = 0.5

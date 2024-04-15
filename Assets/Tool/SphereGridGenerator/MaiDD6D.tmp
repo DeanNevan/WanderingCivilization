@@ -1,0 +1,46 @@
+[gd_scene load_steps=8 format=3 uid="uid://b7avipl7yagt1"]
+
+[ext_resource type="Script" path="res://Main/Main.gd" id="1_033sw"]
+[ext_resource type="PackedScene" uid="uid://ty1pnx5c6rth" path="res://Main/Icosahedron.glb" id="2_2vn00"]
+[ext_resource type="PackedScene" uid="uid://blshqlb3lxsnn" path="res://Main/GoldbergPolyhedronFrequency2.glb" id="2_u86f0"]
+[ext_resource type="Script" path="res://addons/orbit_camera/orbit_camera.gd" id="3_viotx"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_bginn"]
+
+[sub_resource type="Sky" id="Sky_36ch7"]
+sky_material = SubResource("ProceduralSkyMaterial_bginn")
+
+[sub_resource type="Environment" id="Environment_r3dfh"]
+background_mode = 2
+sky = SubResource("Sky_36ch7")
+
+[node name="Main" type="Node3D"]
+script = ExtResource("1_033sw")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_r3dfh")
+
+[node name="Node3D" type="Node3D" parent="."]
+
+[node name="Icosahedron" parent="Node3D" instance=ExtResource("2_2vn00")]
+transform = Transform3D(0.454229, -0.272929, -0.848048, 0.515038, 0.857167, 0, 0.726919, -0.436777, 0.529919, 0, 0, 0)
+
+[node name="CameraOrigin" type="Node3D" parent="."]
+
+[node name="OrbitCamera" type="Camera3D" parent="CameraOrigin"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10)
+current = true
+script = ExtResource("3_viotx")
+DEFAULT_DISTANCE = 3.0
+ROTATE_SPEED = 2.0
+ANCHOR_NODE_PATH = NodePath("..")
+MOUSE_ZOOM_SPEED = 20.0
+
+[node name="CornersMarkers" type="Node3D" parent="."]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.758771, -0.479447, 0.440905, 0, 0.676902, 0.736073, -0.651357, -0.558511, 0.513614, 0, 0, 0)
+light_energy = 0.4
+
+[node name="GoldbergPolyhedronFrequency2" parent="." instance=ExtResource("2_u86f0")]
+visible = false
