@@ -83,12 +83,9 @@ func init_display():
 		var min_dis := 100000.0
 		var min_i := 0
 		for i in range(0, f_idx_range.y, 5):
-			var center := Vector3()
-			var vec : Vector3i = t2.faces_idx[i]
-			center += t2.vertexes[vec.x].pos
-			center += t2.vertexes[vec.y].pos
-			center += t2.vertexes[vec.z].pos
-			center /= 3
+			var center1 := t2.get_face_center(i)
+			var center2 := t2.get_face_center(i + 4)
+			var center := (center1 + center2) / 2
 			if (center - t1.polygon.center).length() < min_dis:
 				min_dis = (center - t1.polygon.center).length()
 				min_i = i
