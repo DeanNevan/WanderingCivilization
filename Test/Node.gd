@@ -4,8 +4,9 @@ var value := 123
 var values := []
 
 func _ready():
-	for i in 100000:
-		values.append(i)
+	pass
+	#for i in 100000:
+		#values.append(i)
 
 func change_script(target : GDScript):
 	var _value = value
