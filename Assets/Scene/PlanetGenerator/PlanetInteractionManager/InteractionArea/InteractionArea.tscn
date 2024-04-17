@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://l0ureq68u068"]
+
+[ext_resource type="Script" path="res://Assets/Scene/PlanetGenerator/PlanetInteractionManager/InteractionArea/InteractionArea.gd" id="1_usomo"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_flkb7"]
+resource_local_to_scene = true
+points = PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+
+[node name="InteractionArea" type="Area3D"]
+collision_layer = 2147483648
+collision_mask = 0
+monitoring = false
+monitorable = false
+script = ExtResource("1_usomo")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("ConvexPolygonShape3D_flkb7")
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

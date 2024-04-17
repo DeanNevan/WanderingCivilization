@@ -1,0 +1,60 @@
+[gd_scene load_steps=2 format=3 uid="uid://dne00istfsc8p"]
+
+[ext_resource type="Script" path="res://Assets/Scene/PlanetGenerator/GUITerrainInfo/GUITerrainInfo.gd" id="1_85lob"]
+
+[node name="GuiTerrainInfo" type="MarginContainer"]
+offset_right = 223.0
+offset_bottom = 307.0
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+script = ExtResource("1_85lob")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+layout_mode = 2
+horizontal_scroll_mode = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="ScrollContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="NameTerrain" type="Label" parent="ScrollContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer"]
+layout_mode = 2
+text = "@str::default_terrain_name"
+
+[node name="HSeparator" type="HSeparator" parent="ScrollContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="ScrollContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="InfoTerrain" type="RichTextLabel" parent="ScrollContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer2"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+bbcode_enabled = true
+text = "@str::default_terrain_info"
+
+[node name="VSeparator" type="VSeparator" parent="ScrollContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="ScrollContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="ScrollContainer/VBoxContainer/HBoxContainer/MarginContainer"]
+layout_mode = 2
+horizontal_scroll_mode = 0
+
+[node name="ListEnvFactors" type="VBoxContainer" parent="ScrollContainer/VBoxContainer/HBoxContainer/MarginContainer/ScrollContainer"]
+layout_mode = 2
+
+[node name="HSeparator" type="HSeparator" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2

@@ -71,7 +71,7 @@ func _init():
 		"@env_factor:main:magic" : "res://Mod/main/EnvFactor/Magic.gd",
 		"@env_factor:main:metal" : "res://Mod/main/EnvFactor/Metal.gd",
 		"@env_factor:main:organic" : "res://Mod/main/EnvFactor/Organic.gd",
-		"@env_factor:main:rock" : "res://Mod/main/EnvFactor/Rock.gd",
+		"@env_factor:main:rock_si" : "res://Mod/main/EnvFactor/Rock.gd",
 		"@env_factor:main:void" : "res://Mod/main/EnvFactor/Void.gd",
 		"@env_factor:main:wet" : "res://Mod/main/EnvFactor/Wet.gd",
 	}

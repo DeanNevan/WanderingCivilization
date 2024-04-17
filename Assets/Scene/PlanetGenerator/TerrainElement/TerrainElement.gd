@@ -2,8 +2,8 @@ extends Node3D
 class_name TerrainElement
 
 var id := "@element::default"
-var info := "@str::info_default_element"
-var element_name := "@str::name_default_element"
+var info := "@str::default_element_info"
+var element_name := "@str::default_element_name"
 
 var terrain : PlanetTerrain
 

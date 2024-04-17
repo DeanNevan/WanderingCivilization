@@ -113,6 +113,64 @@ func get_round_via_face_idx(idx : int):
 		else:
 			return 2
 
+func get_corner_vertexes_via_round(_round : int):
+	if polygon.SIZE == 5:
+		if _round == 0:
+			return [
+				vertexes[0],
+				vertexes[3],
+				vertexes[6],
+				vertexes[9],
+				vertexes[12],
+			]
+		elif _round == 1:
+			return [
+				vertexes[15],
+				vertexes[17],
+				vertexes[19],
+				vertexes[21],
+				vertexes[23],
+			]
+		else:
+			return [
+				vertexes[25],
+				vertexes[26],
+				vertexes[27],
+				vertexes[28],
+				vertexes[29],
+			]
+	else:
+		if _round == 0:
+			return [
+				vertexes[0],
+				vertexes[3],
+				vertexes[6],
+				vertexes[9],
+				vertexes[12],
+				vertexes[15],
+			]
+		elif _round == 1:
+			return [
+				vertexes[18],
+				vertexes[20],
+				vertexes[22],
+				vertexes[24],
+				vertexes[26],
+				vertexes[28],
+			]
+		else:
+			return [
+				vertexes[30],
+				vertexes[31],
+				vertexes[32],
+				vertexes[33],
+				vertexes[34],
+				vertexes[35],
+			]
+
+func get_plane() -> Plane:
+	return Plane(polygon.normal, get_center())
+
 func get_axis_x() -> Vector3:
 	var pos := Vector3()
 	if polygon.SIZE == 5:
@@ -538,3 +596,9 @@ func update_current_env_factors():
 		for _element in t.all_elements:
 			for p in _element.env_factors_id_modification_neighbour:
 				edit_env_factor(p, _element.env_factors_id_modification_neighbour[p])
+
+func focus():
+	pass
+
+func unfocus():
+	pass

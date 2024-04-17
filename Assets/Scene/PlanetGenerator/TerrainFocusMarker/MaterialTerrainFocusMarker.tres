@@ -1,0 +1,30 @@
+[gd_resource type="ShaderMaterial" load_steps=6 format=3 uid="uid://dlobs8nur6um1"]
+
+[ext_resource type="Shader" path="res://Assets/Material/Shader/HeightGradient.gdshader" id="1_na5hd"]
+
+[sub_resource type="Gradient" id="Gradient_65wca"]
+resource_local_to_scene = true
+offsets = PackedFloat32Array(0, 0.336538)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_hxu22"]
+resource_local_to_scene = true
+gradient = SubResource("Gradient_65wca")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_c0mbk"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_n4dpa"]
+resource_local_to_scene = true
+noise = SubResource("FastNoiseLite_c0mbk")
+
+[resource]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("1_na5hd")
+shader_parameter/transform = null
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/emission_color = Color(1, 1, 1, 1)
+shader_parameter/emission_strength = 2.0
+shader_parameter/height_scale = 2.0
+shader_parameter/rotate_speed = 0.05
+shader_parameter/height_gradient = SubResource("GradientTexture1D_hxu22")
+shader_parameter/vertical_noise = SubResource("NoiseTexture2D_n4dpa")

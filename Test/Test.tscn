@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://h480p3wxg7ul"]
+[gd_scene load_steps=20 format=3 uid="uid://h480p3wxg7ul"]
 
 [ext_resource type="Script" path="res://Test/Test.gd" id="1_5ye0a"]
 [ext_resource type="Script" path="res://addons/orbit_camera/orbit_camera.gd" id="1_goux6"]
@@ -148,14 +148,35 @@ instance_count = 4
 mesh = SubResource("ArrayMesh_nnlu5")
 buffer = PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 
+[sub_resource type="Shader" id="Shader_yvthb"]
+code = "shader_type spatial;
+render_mode depth_test_disabled;
+
+void vertex() {
+	// Called for every vertex the material is visible on.
+}
+
+void fragment() {
+	// Called for every pixel the material is visible on.
+}
+
+//void light() {
+	// Called for every pixel for every light affecting the material.
+	// Uncomment to replace the default light processing function with this one.
+//}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cgtad"]
+render_priority = 0
+shader = SubResource("Shader_yvthb")
+
+[sub_resource type="BoxMesh" id="BoxMesh_pycmv"]
+
 [node name="Test" type="Node3D"]
 script = ExtResource("1_5ye0a")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_cw50v")
-
-[node name="LightmapProbe" type="LightmapProbe" parent="."]
-visible = false
 
 [node name="Sun" type="MeshInstance3D" parent="."]
 transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, -100, 100, 100)
@@ -166,6 +187,9 @@ mesh = SubResource("SphereMesh_d2rll")
 [node name="VoxelGI" type="VoxelGI" parent="."]
 size = Vector3(25, 25, 25)
 data = SubResource("VoxelGIData_gi58i")
+
+[node name="LightmapProbe" type="LightmapProbe" parent="VoxelGI"]
+visible = false
 
 [node name="CameraOrigin" type="Node3D" parent="."]
 
@@ -187,12 +211,8 @@ light_energy = 0.1
 light_cull_mask = 4293918721
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -40.0
-offset_bottom = 40.0
-grow_horizontal = 0
+offset_right = 206.0
+offset_bottom = 346.0
 mouse_filter = 0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
@@ -325,6 +345,7 @@ text = "生成"
 [node name="TextureRect" type="TextureRect" parent="."]
 offset_right = 276.0
 offset_bottom = 276.0
+mouse_filter = 2
 expand_mode = 1
 stretch_mode = 5
 
@@ -334,5 +355,10 @@ script = ExtResource("3_pfm5i")
 [node name="MultiMeshInstance3D" type="MultiMeshInstance3D" parent="."]
 visible = false
 multimesh = SubResource("MultiMesh_odpdt")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+visible = false
+material_override = SubResource("ShaderMaterial_cgtad")
+mesh = SubResource("BoxMesh_pycmv")
 
 [connection signal="pressed" from="VBoxContainer/ButtonGenerate" to="." method="_on_button_generate_pressed"]

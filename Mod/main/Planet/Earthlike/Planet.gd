@@ -13,7 +13,7 @@ func _ready():
 			"percent_range" : Vector2i(0, 10),
 		},
 		"@liquid_area:main:lava" : {
-			"priority" : 5,
+			"priority" : 2,
 			"percent_range" : Vector2i(0, 2),
 		},
 	}

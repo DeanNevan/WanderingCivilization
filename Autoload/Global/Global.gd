@@ -14,6 +14,7 @@ var logger := LoggerManager.register_logger(self, "Global", Logger.Level.DEBUG)
 var rander_for_decoration := RandomNumberGenerator.new()
 
 func _ready():
+	TranslationServer.set_locale("zh_CN")
 	logger.debug("global random seed=%d" % random_seed)
 	rander.randomize()
 	rander_for_decoration.randomize()

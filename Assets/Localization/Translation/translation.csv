@@ -1,4 +1,9 @@
 keys,en,zh
-@str::default_terrain_name,,
-@str::default_mod_name,,
+@str::default_terrain_name,Default Terrain,默认地块
+@str::default_mod_name,,默认模组名
+@str::default_element_info,,默认地块元素信息
+@str::default_element_name,,默认地块元素名称
+@str::default_factor_info,,默认环境要素信息
+@str::default_factor_name,,默认环境要素名称
+@str::default_mod_info,,默认模组信息
 ,,

@@ -1,6 +1,11 @@
 extends Node3D
 class_name Planet
 
+signal terrain_focused(terrain)
+signal terrain_unfocused(terrain)
+signal terrain_selected(terrain)
+signal terrain_unselected(terrain)
+
 var id := "@planet::default"
 
 @export_range(1, 4)
@@ -21,6 +26,9 @@ var _Terrains : Node3D = $Terrains
 @onready
 var _TerrainsMeshInstance : MeshInstance3D = $TerrainsMeshInstance
 @onready var _LiquidAreas = $LiquidAreas
+
+@onready var _PlanetInteractionManager = $PlanetInteractionManager
+
 
 
 
@@ -301,6 +309,34 @@ func set_terrain(_terrain : PlanetTerrain, _terrain_id : String):
 	var new_terrain : PlanetTerrain = R.Scene_PlanetTerrain.instantiate()
 	new_terrain.set_script(script)
 	change_terrain(_terrain.idx, new_terrain)
+
+func terrain_focus(_terrain : PlanetTerrain):
+	_terrain.focus()
+	terrain_focused.emit(_terrain)
+	
+	#print("focus:%s" % _terrain)
+	pass
+
+func terrain_unfocus(_terrain : PlanetTerrain):
+	_terrain.unfocus()
+	terrain_unfocused.emit(_terrain)
+	
+	#print("unfocus:%s" % _terrain)
+	pass
+
+func terrain_select(_terrain : PlanetTerrain):
+	terrain_selected.emit(_terrain)
+
+func terrain_unselect(_terrain : PlanetTerrain):
+	terrain_unselected.emit(_terrain)
+
+func get_focusing_terrain():
+	return _PlanetInteractionManager.get_focusing_terrain()
+
+func init_interaction():
+	_PlanetInteractionManager.init_terrains()
+
+
 
 #func update_mesh(_terrains := []):
 	#var mesh = ArrayMesh.new()

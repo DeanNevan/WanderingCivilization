@@ -23,6 +23,7 @@ R="*res://Autoload/R/R.tscn"
 Global="*res://Autoload/Global/Global.tscn"
 LocalizationManager="*res://addons/localization_editor/LocalizationManager.gd"
 Math="*res://Autoload/Math/Math.gd"
+InputManager="*res://Autoload/InputManager/InputManager.gd"
 
 [editor_plugins]
 
@@ -45,6 +46,15 @@ key_3={
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":51,"key_label":0,"unicode":51,"echo":false,"script":null)
 ]
 }
+view_detail={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194325,"key_label":0,"unicode":0,"echo":false,"script":null)
+]
+}
+
+[input_devices]
+
+pointing/emulate_touch_from_mouse=true
 
 [internationalization]
 
@@ -54,6 +64,7 @@ locale/translations=PackedStringArray("res://Assets/Localization/Translation/tra
 
 3d_render/layer_20="emission_liquid_area"
 3d_physics/layer_1="Default"
+3d_physics/layer_32="Interaction"
 
 [localization_editor]
 

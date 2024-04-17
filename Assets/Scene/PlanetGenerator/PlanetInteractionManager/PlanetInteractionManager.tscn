@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://q4b3oogu65d4"]
+
+[ext_resource type="Script" path="res://Assets/Scene/PlanetGenerator/PlanetInteractionManager/PlanetInteractionManager.gd" id="1_0d780"]
+[ext_resource type="PackedScene" uid="uid://qo25g4u3bc7n" path="res://Assets/Scene/PlanetGenerator/TerrainFocusMarker/TerrainFocusMarker.tscn" id="2_ttmbq"]
+
+[node name="PlanetInteractionManager" type="Node3D"]
+script = ExtResource("1_0d780")
+
+[node name="AreasForTerrain" type="Node3D" parent="."]
+
+[node name="TerrainFocusMarker_Focus" parent="." instance=ExtResource("2_ttmbq")]
+visible = false
+
+[node name="TerrainFocusMarker_Select" parent="." instance=ExtResource("2_ttmbq")]
+visible = false

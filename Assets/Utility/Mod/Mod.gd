@@ -2,8 +2,8 @@ extends Object
 class_name Mod
 
 var id := "default"
-var info := "@str::info_default_mod"
-var mod_name := "@str::name_default_mod"
+var info := "@str::default_mod_info"
+var mod_name := "@str::default_mod_name"
 var terrains := {}
 var materials := {}
 var planets := {}

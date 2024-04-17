@@ -1,0 +1,37 @@
+[gd_scene load_steps=4 format=3 uid="uid://gr6rhtccssp4"]
+
+[ext_resource type="Script" path="res://Assets/Scene/GUI/PanelEnvFactor/PanelEnvFactor.gd" id="1_jht0h"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bo6nv"]
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.74902, 0.74902, 0.74902, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="LabelSettings" id="LabelSettings_vgkve"]
+font_color = Color(0.368627, 0.368627, 0.368627, 1)
+
+[node name="PanelEnvFactor" type="Panel"]
+custom_minimum_size = Vector2(60, 30)
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_bo6nv")
+script = ExtResource("1_jht0h")
+
+[node name="LabelValue" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "99"
+label_settings = SubResource("LabelSettings_vgkve")
+horizontal_alignment = 1
+vertical_alignment = 1
+clip_text = true

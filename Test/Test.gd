@@ -16,7 +16,7 @@ var logger : Logger = LoggerManager.register_logger(self, "Test")
 var planet : Planet
 
 func _ready():
-	
+	InputManager.connect("any_gesture", _on_input)
 	#$Node.change_script(load("res://Test/Node.gd"))
 	
 	R.load_mod("main")
@@ -82,8 +82,14 @@ func _on_button_generate_pressed():
 	handler.height_level = _SpinBoxHeightLevel.value
 	handler.modification_strength = _SpinBoxModificationStrength.value
 	await planet.generate_async()
+	planet.init_interaction()
 	
 	#$WorldEnvironment.environment.volumetric_fog_enabled = false
 	
 	#$WorldEnvironment.environment.volumetric_fog_enabled = true
 	pass # Replace with function body.
+
+func _on_input(_sig : String, e : InputEventAction):
+	if e is InputEventSingleScreenTap:
+		pass
+	pass

@@ -85,7 +85,7 @@ func _init():
 		"@element:main:resource_stone" : {
 			"priority" : 10,
 			"require" : {
-				"@env_factor:main:rock" : 4,
+				"@env_factor:main:rock_si" : 4,
 			},
 			"black_list_factors" : [],
 			"white_list_terrains" : [],

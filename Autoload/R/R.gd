@@ -45,11 +45,11 @@ var planet_handlers := {
 	"@planet_handler::factor_based_placement_generator" : preload("res://Assets/Scene/PlanetGenerator/PlanetHandler/PH_FactorBasedPlacementGenerator/PH_FactorBasedPlacementGenerator.gd"),
 }
 
-var env_factors_scripts := {
+var env_factors := {
 	"@env_factor::default" : preload("res://Assets/Scene/PlanetGenerator/TerrainEnvironmentFactor/TerrainEnvironmentFactor.gd")
 }
 
-var env_factors := {
+var env_factor_instances := {
 	
 }
 
@@ -82,56 +82,63 @@ func new_batch_object(id : String):
 			var copied : BatchObject = new_object.copy()
 			return copied
 
-func get_terrain(id : String):
+func get_terrain(id : String) -> GDScript:
 	if terrains.get(id) != null:
 		return terrains.get(id)
 	else:
 		logger.error("Unable to find terrain(%s)" % id)
 		return terrains.get("@terrain::default")
 
-func get_material(id : String):
+func get_material(id : String) -> Material:
 	if materials.get(id) != null:
 		return materials.get(id)
 	else:
 		logger.error("Unable to find material(%s)" % id)
 		return materials.get("@material::default")
 
-func get_liquid_area(id : String):
+func get_liquid_area(id : String) -> GDScript:
 	if liquid_areas.get(id) != null:
 		return liquid_areas.get(id)
 	else:
 		logger.error("Unable to find liquid_area(%s)" % id)
 		return liquid_areas.get("@liquid_area::default")
 
-func get_planet(id : String):
+func get_planet(id : String) -> GDScript:
 	if planets.get(id) != null:
 		return planets.get(id)
 	else:
 		logger.error("Unable to find planet(%s)" % id)
 		return planets.get("@planet::default")
 
-func get_env_factor(id : String):
+func get_env_factor(id : String) -> GDScript:
 	if env_factors.get(id) != null:
 		return env_factors.get(id)
 	else:
 		logger.error("Unable to find env_factor(%s)" % id)
 		return env_factors.get("@env_factor::default")
 
-func get_planet_handler(id : String):
+func get_env_factor_instance(id : String) -> TerrainEnvironmentFactor:
+	if env_factor_instances.get(id) != null:
+		return env_factor_instances.get(id)
+	else:
+		logger.error("Unable to find env_factor_instance(%s)" % id)
+		return env_factor_instances.get("@env_factor::default")
+
+func get_planet_handler(id : String) -> GDScript:
 	if planet_handlers.get(id) != null:
 		return planet_handlers.get(id)
 	else:
 		logger.error("Unable to find planet_handler(%s)" % id)
 		return null
 
-func get_element(id : String):
+func get_element(id : String) -> GDScript:
 	if elements.get(id) != null:
 		return elements.get(id)
 	else:
 		logger.error("Unable to find element(%s)" % id)
 		return elements.get("@element::default")
 
-func get_element_instance(id : String):
+func get_element_instance(id : String) -> TerrainElement:
 	if elements_instances.get(id) != null:
 		return elements_instances.get(id)
 	else:
@@ -145,7 +152,7 @@ func get_mesh(id : String):
 		logger.error("Unable to find mesh(%s)" % id)
 		return meshes.get("@mesh::default")
 
-func get_scene(id : String):
+func get_scene(id : String) -> PackedScene:
 	if scenes.get(id) != null:
 		return scenes.get(id)
 	else:
@@ -292,7 +299,7 @@ func load_mod(mod_id : String):
 		elements[e_id] = load(mod_gd.elements[e_id])
 		elements_instances[e_id] = elements[e_id].new()
 	for e_id in mod_gd.env_factors:
-		env_factors_scripts[e_id] = load(mod_gd.env_factors[e_id])
+		env_factors[e_id] = load(mod_gd.env_factors[e_id])
 	for m_id in mod_gd.meshes:
 		meshes[m_id] = load(mod_gd.meshes[m_id])
 	for s_id in mod_gd.scenes:
@@ -300,8 +307,8 @@ func load_mod(mod_id : String):
 	for b_id in mod_gd.batch_objects:
 		batch_objects[b_id] = load(mod_gd.batch_objects[b_id])
 	
-	for i in env_factors_scripts:
-		env_factors[i] = env_factors_scripts[i].new()
+	for i in env_factors:
+		env_factor_instances[i] = env_factors[i].new()
 	
 	loaded_mods[mod_id] = mod_gd
 	pass

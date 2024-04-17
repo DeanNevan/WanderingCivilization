@@ -1,10 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://c7f3coadqxukw"]
+[gd_scene load_steps=4 format=3 uid="uid://c7f3coadqxukw"]
 
 [ext_resource type="Script" path="res://Assets/Scene/PlanetGenerator/Planet.gd" id="1_mhjvh"]
 [ext_resource type="PackedScene" uid="uid://gjdq514wys1l" path="res://Assets/Scene/LightLiquidArea/LightLiquidAreaManager.tscn" id="2_akkhe"]
+[ext_resource type="PackedScene" uid="uid://q4b3oogu65d4" path="res://Assets/Scene/PlanetGenerator/PlanetInteractionManager/PlanetInteractionManager.tscn" id="2_chdwr"]
 
 [node name="Planet" type="Node3D"]
 script = ExtResource("1_mhjvh")
+
+[node name="PlanetInteractionManager" parent="." instance=ExtResource("2_chdwr")]
+planet_node_path = NodePath("..")
 
 [node name="Terrains" type="Node3D" parent="."]
 
