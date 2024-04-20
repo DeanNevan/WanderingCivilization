@@ -10,6 +10,7 @@ signal multi_drag
 signal pinch
 signal twist
 signal any_gesture
+signal focus_group_id_changed
 
 # Enum.
 enum Gestures {PINCH, MULTI_DRAG, TWIST}
@@ -33,6 +34,8 @@ var drag_startup_timer = Timer.new()
 var drag_enabled = false 
 
 var disabled_event := []
+
+
 
 class InputManagerEvent:
 	var sig : String
@@ -156,14 +159,17 @@ func parse_event(event) -> InputManagerEvent:
 					)
 	return input_manager_event
 
-## Handles all unhandled inputs emiting the corresponding signals.
-func _unhandled_input(event):
+func feed_event(event):
 	var input_manager_event = parse_event(event)
 	if !is_instance_valid(input_manager_event):
 		return
 	if disabled_event.has(input_manager_event.sig):
 		return
 	emit(input_manager_event.sig, input_manager_event.val, true)
+
+## Handles all unhandled inputs emiting the corresponding signals.
+func _unhandled_input(event):
+	feed_event(event)
 	# Mouse to gesture.
 	pass
 
@@ -217,3 +223,9 @@ func _add_timer(timer, callable):
 	if callable:
 		timer.connect("timeout", callable)
 	self.add_child(timer)
+
+var focus_group_id := ""
+
+func change_focus_group_id(id : String):
+	focus_group_id = id
+	focus_group_id_changed.emit()

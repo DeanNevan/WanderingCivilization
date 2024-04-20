@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://b7vv654j4qo5u"]
 
 [ext_resource type="PackedScene" uid="uid://crhabgu0orglh" path="res://Assets/Scene/PlanetGenerator/TerrainElement/TerrainElement.tscn" id="1_8ppgi"]
-[ext_resource type="Script" path="res://Assets/Scene/PlanetGenerator/TerrainElement/TerrainUnit/TerrainUnit.gd" id="2_iweu1"]
+[ext_resource type="Script" path="res://Assets/Scene/PlanetGenerator/TerrainElement/TerrainArtificial/TerrainUnit/TerrainUnit.gd" id="2_iweu1"]
 
 [node name="TerrainUnit" instance=ExtResource("1_8ppgi")]
 script = ExtResource("2_iweu1")

@@ -17,6 +17,3 @@ yaw_range = Vector2(0, 360)
 pitch_range = Vector2(0, 0)
 roll_range = Vector2(0, 0)
 height_offset_range = Vector2(-0.1, 0.1)
-on_liquid_surface = false
-only_with_liquid = false
-can_with_liquid = false

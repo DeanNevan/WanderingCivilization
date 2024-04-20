@@ -1,0 +1,226 @@
+[gd_scene load_steps=10 format=3 uid="uid://dtxbvoa8f17j7"]
+
+[ext_resource type="Script" path="res://Assets/Scene/GUI/Card/CardUI.gd" id="1_hns7f"]
+[ext_resource type="Texture2D" uid="uid://2oi8hh5bstwx" path="res://icon.svg" id="2_ihe5i"]
+[ext_resource type="Script" path="res://Assets/Scene/GUI/Card/ListCardCostMark.gd" id="3_ow5wy"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kp66r"]
+bg_color = Color(0.223529, 0.223529, 0.223529, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.101961, 0.101961, 0.101961, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6rawu"]
+bg_color = Color(0.356863, 0.356863, 0.356863, 0)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u4mah"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.517647, 0.517647, 0.517647, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ukhsd"]
+bg_color = Color(0.396078, 0.396078, 0.396078, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.519558, 0.519558, 0.519557, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tu05l"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kkuon"]
+bg_color = Color(0.192157, 0.192157, 0.192157, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+expand_margin_left = 8.0
+expand_margin_right = 8.0
+
+[node name="CardUI" type="MarginContainer"]
+custom_minimum_size = Vector2(155, 250)
+size_flags_horizontal = 4
+script = ExtResource("1_hns7f")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="HeaderPanel" type="Panel" parent="VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(0, 128)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(155, 250)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="PanelBG" type="Panel" parent="VBoxContainer/MarginContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_kp66r")
+
+[node name="PanelBG2" type="Panel" parent="VBoxContainer/MarginContainer"]
+visible = false
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_6rawu")
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/MarginContainer"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 3
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/MarginContainer/MarginContainer"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/MarginContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="Icon" type="TextureRect" parent="VBoxContainer/MarginContainer/MarginContainer/VBoxContainer/MarginContainer"]
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("2_ihe5i")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Panel" type="Panel" parent="VBoxContainer/MarginContainer/MarginContainer/VBoxContainer/MarginContainer/Icon"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_u4mah")
+
+[node name="LabelName" type="Label" parent="VBoxContainer/MarginContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_type_variation = &"HeaderMedium"
+text = "@str::default_card_name"
+horizontal_alignment = 1
+clip_text = true
+
+[node name="Panel" type="Panel" parent="VBoxContainer/MarginContainer/MarginContainer/VBoxContainer/LabelName"]
+visible = false
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ukhsd")
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer/MarginContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="MarginContainer3" type="MarginContainer" parent="VBoxContainer/MarginContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 1.62
+mouse_filter = 2
+
+[node name="Panel" type="Panel" parent="VBoxContainer/MarginContainer/MarginContainer/VBoxContainer/MarginContainer3"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_tu05l")
+
+[node name="LabelInfo" type="RichTextLabel" parent="VBoxContainer/MarginContainer/MarginContainer/VBoxContainer/MarginContainer3"]
+layout_mode = 2
+mouse_filter = 2
+bbcode_enabled = true
+text = "@str::default_card_info"
+
+[node name="Control" type="Control" parent="VBoxContainer/MarginContainer"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Control" type="Control" parent="VBoxContainer/MarginContainer/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -16.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/MarginContainer/Control/Control"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -12.0
+offset_right = 12.0
+offset_bottom = 32.0
+grow_horizontal = 2
+mouse_filter = 2
+
+[node name="ListCardCostMark" type="MarginContainer" parent="VBoxContainer/MarginContainer/Control/Control/MarginContainer"]
+layout_mode = 2
+mouse_filter = 2
+script = ExtResource("3_ow5wy")
+
+[node name="Panel" type="Panel" parent="VBoxContainer/MarginContainer/Control/Control/MarginContainer/ListCardCostMark"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_kkuon")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/MarginContainer/Control/Control/MarginContainer/ListCardCostMark"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 8
+
+[connection signal="gui_input" from="VBoxContainer/MarginContainer/PanelBG" to="." method="_on_panel_bg_gui_input"]
+[connection signal="mouse_entered" from="VBoxContainer/MarginContainer/PanelBG" to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="VBoxContainer/MarginContainer/PanelBG" to="." method="_on_mouse_exited"]

@@ -1,6 +1,8 @@
 extends TerrainResourceLiquid
 
 func _init():
+	super._init()
+	
 	id = "@element:main:resource_liquid_lava"
 	info = "@str:main:info_resource_liquid_lava"
 	element_name = "@str:main:name_resource_liquid_lava"

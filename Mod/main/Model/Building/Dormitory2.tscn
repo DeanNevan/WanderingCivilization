@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://b3ahej22qaq5k"]
+
+[ext_resource type="PackedScene" uid="uid://byyh7kt6glrk7" path="res://Mod/main/Model/Building/Dormitory2.glb" id="1_1c07t"]
+
+[sub_resource type="GDScript" id="GDScript_umg0f"]
+script/source = "extends ModelScene
+"
+
+[node name="Dormitory2" instance=ExtResource("1_1c07t")]
+script = SubResource("GDScript_umg0f")

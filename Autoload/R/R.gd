@@ -72,6 +72,34 @@ var scenes := {
 	"@scene::default" : preload("res://Assets/Model/Test/Cube.glb")
 }
 
+var assets := {
+	"@asset::building_material" : preload("res://Assets/Scene/Civilization/CivilizationAsset/CivilizationAssetBuildingMaterial.gd"),
+	"@asset::food" : preload("res://Assets/Scene/Civilization/CivilizationAsset/CivilizationAssetFood.gd"),
+	"@asset::labor_force" : preload("res://Assets/Scene/Civilization/CivilizationAsset/CivilizationAssetLaborForce.gd"),
+	"@asset::research_point" : preload("res://Assets/Scene/Civilization/CivilizationAsset/CivilizationAssetResearchPoint.gd"),
+}
+
+var assets_instances := {
+}
+
+var cards := {
+	"@card::default" : preload("res://Assets/Scene/Card/Card.gd")
+}
+
+func get_card(id : String) -> GDScript:
+	if cards.get(id) != null:
+		return cards.get(id)
+	else:
+		logger.error("Unable to find card(%s)" % id)
+		return cards.get("@card::default")
+
+func get_asset(id : String) -> GDScript:
+	if assets.get(id) != null:
+		return assets.get(id)
+	else:
+		logger.error("Unable to find asset(%s)" % id)
+		return assets.get("@asset::default")
+
 func new_batch_object(id : String):
 	if loaded_batch_objects.has(id):
 		return loaded_batch_objects[id].copy()
@@ -144,6 +172,13 @@ func get_element_instance(id : String) -> TerrainElement:
 	else:
 		logger.error("Unable to find element_instance(%s)" % id)
 		return elements_instances.get("@element::default")
+
+func get_asset_instance(id : String) -> CivilizationAsset:
+	if assets_instances.get(id) != null:
+		return assets_instances.get(id)
+	else:
+		logger.error("Unable to find asset_instance(%s)" % id)
+		return assets_instances.get("@asset::default")
 
 func get_mesh(id : String):
 	if meshes.get(id) != null:
@@ -306,9 +341,19 @@ func load_mod(mod_id : String):
 		scenes[s_id] = load(mod_gd.scenes[s_id])
 	for b_id in mod_gd.batch_objects:
 		batch_objects[b_id] = load(mod_gd.batch_objects[b_id])
+	for a_id in mod_gd.assets:
+		assets[a_id] = load(mod_gd.assets[a_id])
+	for c_id in mod_gd.cards:
+		cards[c_id] = load(mod_gd.cards[c_id])
+	
+	for i in mod_gd.translations:
+		TranslationServer.add_translation(load(i))
 	
 	for i in env_factors:
 		env_factor_instances[i] = env_factors[i].new()
+	
+	for i in assets:
+		assets_instances[i] = assets[i].new()
 	
 	loaded_mods[mod_id] = mod_gd
 	pass

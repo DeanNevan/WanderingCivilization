@@ -1,6 +1,8 @@
 extends TerrainResourcePlacement
 
 func _init():
+	super._init()
+	
 	id = "@element:main:resource_berry_bush"
 	info = "@str:main:info_resource_berry_bush"
 	element_name = "@str:main:name_resource_berry_bush"
@@ -17,6 +19,26 @@ func _init():
 	only_with_liquid = false
 	on_liquid_surface = false
 	can_with_liquid = false
+	
+	add_requirement(RequirementLayer.new(self))
+	add_requirement(RequirementLiquid.new(self))
+	
+	add_requirement(RequirementTerrain.new(
+		self,
+		[],
+		[
+			"@terrain:main:desert",
+			"@terrain:main:rock",
+		]
+	))
+	add_requirement(RequirementEnvFactor.new(
+		self,
+		{
+			"@env_factor:main:organic" : 6,
+			"@env_factor:main:wet" : 5,
+		},
+		[]
+	))
 
 func new_instance(scene):
-	super.new_instance(R.new_batch_object("@batch:main:bush"))
+	super.new_instance(preload("res://Mod/main/Model/Bush.tscn").instantiate())

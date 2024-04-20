@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://cskivw3thx2xf"]
+
+[ext_resource type="PackedScene" uid="uid://cywyjd7dsdlrv" path="res://Mod/main/Model/Building/ResearchLab.glb" id="1_jseuw"]
+
+[sub_resource type="GDScript" id="GDScript_7kl05"]
+script/source = "extends ModelScene
+"
+
+[node name="ResearchLab" instance=ExtResource("1_jseuw")]
+script = SubResource("GDScript_7kl05")

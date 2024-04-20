@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://2xsfwi181mfm"]
+
+[ext_resource type="PackedScene" uid="uid://fkqnuot3f2xw" path="res://Mod/main/Model/Building/CoreStation.glb" id="1_ls72b"]
+
+[sub_resource type="GDScript" id="GDScript_ktgl5"]
+script/source = "extends ModelScene
+"
+
+[node name="CoreStation" instance=ExtResource("1_ls72b")]
+script = SubResource("GDScript_ktgl5")

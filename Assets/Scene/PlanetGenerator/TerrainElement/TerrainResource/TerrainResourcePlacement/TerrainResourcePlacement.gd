@@ -16,10 +16,6 @@ var Scene_Instance : PackedScene
 @export var pitch_range := Vector2(0, 0)
 @export var roll_range := Vector2(0, 0)
 @export var height_offset_range := Vector2(-0.1, 0.1) # 该数值将乘以星球的HEIGHT_EACH_LEVEL作为最终的高度偏移量范围
-@export var on_liquid_surface := false
-@export var only_with_liquid := false
-@export var can_with_liquid := false
-@export var layer := 0
 
 var instance_count := 0
 var instances := []
@@ -30,9 +26,10 @@ func _init():
 	super._init()
 
 func init_display():
+	super.init_display()
 	var range := Vector2i()
 	range.x = terrain.get_faces_range_via_round(1).x
-	range.y = terrain.get_faces_range_via_round(1).y
+	range.y = terrain.get_faces_range_via_round(2).y
 	for i in range(range.x, range.y + 1, 1):
 		faces.append(i)
 	faces.shuffle()
@@ -95,14 +92,14 @@ func update_instances():
 			remove_instance()
 
 func update_instance_count():
-	var percent : float = float(remain) / capacity * 100.0
+	var percent : float = float(health) / max_health * 100.0
 	for r in remain_percent_to_instance_count:
 		if r.x <= percent and r.y >= percent:
 			instance_count = remain_percent_to_instance_count[r]
 			break
 	update_instances()
 
-func _on_self_remain_changed(_resource):
-	super._on_self_remain_changed(_resource)
+func _on_self_health_changed(_resource):
+	super._on_self_health_changed(_resource)
 	update_instance_count()
 	pass

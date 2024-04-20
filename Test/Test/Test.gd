@@ -81,6 +81,7 @@ func _ready():
 	#add_child(new_marker)
 
 func _process(delta):
+	#print(get_viewport().get_camera_3d().unproject_position(Vector3(1, 0, 0)))
 	if Input.is_action_just_pressed("key_1"):
 		#var a = R.batch_objects.get("@batch:main:lotus").instantiate()
 		#add_child(a)

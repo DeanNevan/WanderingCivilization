@@ -22,9 +22,7 @@ var env_factors_id_provide_neighbour := {}
 var current_env_factors := {}
 
 var liquid : TerrainResourceLiquid
-var placements := {}
-var other_elements := []
-var all_elements := []
+var elements := {}
 
 var planet : Planet
 var polygon : SphereGrid.Polygon
@@ -222,15 +220,16 @@ func get_center() -> Vector3:
 	return vertexes[vertexes.size() - 1].pos
 	pass
 
-func add_other_element(_element : TerrainElement):
-	if _element.is_inside_tree():
-		_element.get_parent().remove_child(_element)
-	other_elements.append(_element)
-	all_elements.append(_element)
-	_element.terrain = self
-	_Elements.add_child(_element)
-	update_current_env_factors()
-	
+func get_center_of_liquid() -> Vector3:
+	if !has_liquid():
+		return get_center()
+	else:
+		var pos = get_center()
+		return liquid.liquid_area.cal_pos_via_height_level(pos)
+	pass
+
+func get_elements():
+	return elements
 
 func copy_to(target : PlanetTerrain, do_duplicate := false):
 	if do_duplicate:
@@ -251,9 +250,10 @@ func copy_to(target : PlanetTerrain, do_duplicate := false):
 		target.vertexes = vertexes
 		
 		target.set_liquid(liquid)
-		target.set_placements(placements.values())
-		for e in other_elements:
-			target.add_other_element(e)
+		for i in elements.values():
+			for e in i:
+				if !(e is TerrainResourceLiquid):
+					target.add_element(e)
 		
 		target.faces_idx = faces_idx
 		target.idx = idx
@@ -511,29 +511,32 @@ func init_display(array_mesh : ArrayMesh, material_to_st : Dictionary):
 			#st.set_normal(polygon.normal)
 			st.add_vertex(p3)
 	
-	for placement in placements.values():
-		if is_instance_valid(placement):
-			placement.init_display()
+	for i in elements.values():
+		for element in i:
+			if is_instance_valid(element):
+				element.init_display()
 	
 	#for i in faces_idx.size():
 		#array_mesh.surface_set_material(i, R.default_material_for_terrain)
 
-func add_placement(_placement : TerrainResourcePlacement):
-	if !is_instance_valid(_placement):
+func add_element(_element : TerrainElement):
+	if !is_instance_valid(_element):
 		return
-	if _placement.is_inside_tree():
-		_placement.get_parent().remove_child(_placement)
-	if is_instance_valid(placements.get(_placement.layer)):
-		placements.get(_placement.layer).delete()
-	placements[_placement.layer] = _placement
-	_placement.terrain = self
-	_Elements.add_child(_placement)
-	all_elements.append(_placement)
+	if _element.is_inside_tree():
+		_element.get_parent().remove_child(_element)
+	if is_instance_valid(elements.get(_element.layer)):
+		elements.get(_element.layer).delete()
+	if !elements.has(_element.layer):
+		elements[_element.layer] = []
+	elements[_element.layer].append(_element)
+	_element.terrain = self
+	_Elements.add_child(_element)
 	update_current_env_factors()
+	_element.init_display()
 
-func set_placements(arr : Array):
+func set_elements(arr : Array):
 	for i in arr:
-		add_placement(i)
+		add_element(i)
 
 func set_liquid(_liquid : TerrainResourceLiquid):
 	if !is_instance_valid(_liquid):
@@ -543,23 +546,31 @@ func set_liquid(_liquid : TerrainResourceLiquid):
 	liquid = _liquid
 	liquid.terrain = self
 	_Elements.add_child(liquid)
-	all_elements.append(liquid)
+	if !elements.has(liquid.layer):
+		elements[liquid.layer] = []
+	elements[liquid.layer].append(liquid)
 	update_current_env_factors()
 
-func has_other_element(id : String) -> bool:
-	for e in other_elements:
-		if e.id == id:
-			return true
-	return false
-
-func has_placement() -> bool:
-	return placements.size() > 0
+func get_placement_count() -> int:
+	var count := 0
+	for i in elements:
+		for j in elements[i]:
+			if j is TerrainResourcePlacement:
+				count += 1
+	return count
 
 func has_liquid() -> bool:
 	return is_instance_valid(liquid)
 
 func get_placements() -> Dictionary:
-	return placements
+	var count := {}
+	for i in elements:
+		for j in elements[i]:
+			if j is TerrainResourcePlacement:
+				if !count.has(j.layer):
+					count[i] = []
+				count[i].append(j)
+	return count
 
 func get_liquid() -> TerrainResourceLiquid:
 	return liquid
@@ -581,21 +592,32 @@ func edit_env_factor(id : String, value : int):
 	else:
 		current_env_factors[id] += value
 
-
 func update_current_env_factors():
 	current_env_factors = {}
 	for id in env_factors_id_provide:
 		current_env_factors[id] = env_factors_id_provide[id]
-	for _element in all_elements:
-		for p in _element.env_factors_id_modification:
-			edit_env_factor(p, _element.env_factors_id_modification[p])
+	for i in elements.values():
+		for _element in i:
+			for p in _element.env_factors_id_modification:
+				edit_env_factor(p, _element.env_factors_id_modification[p])
 	for n in polygon.neighbours:
 		var t : PlanetTerrain = n.terrain
 		for p in t.env_factors_id_provide_neighbour:
 			edit_env_factor(p, t.env_factors_id_provide_neighbour[p])
-		for _element in t.all_elements:
-			for p in _element.env_factors_id_modification_neighbour:
-				edit_env_factor(p, _element.env_factors_id_modification_neighbour[p])
+		for i in t.elements.values():
+			for _element in i:
+				for p in _element.env_factors_id_modification_neighbour:
+					edit_env_factor(p, _element.env_factors_id_modification_neighbour[p])
+
+func place_model_scene(scene, on_liquid := false):
+	var pos : Vector3
+	if on_liquid:
+		pos = get_center_of_liquid()
+	else:
+		pos = get_center()
+	scene.look_at_from_position(pos, pos + polygon.normal.rotated(Vector3.RIGHT, 0.0001))
+	scene.rotate_object_local(Vector3.RIGHT, - PI / 2)
+	scene.scale *= get_edge_len() / 2.0
 
 func focus():
 	pass

@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://bhj8l0rtdvl1x"]
+
+[ext_resource type="PackedScene" uid="uid://dq0kn0mdpbkh2" path="res://Mod/main/Model/Building/MedievalTower.glb" id="1_hlhbx"]
+
+[sub_resource type="GDScript" id="GDScript_5gnw1"]
+script/source = "extends ModelScene
+"
+
+[node name="MedievalTower" instance=ExtResource("1_hlhbx")]
+script = SubResource("GDScript_5gnw1")

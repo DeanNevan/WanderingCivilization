@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://da4fkfd31gk4y"]
+
+[ext_resource type="PackedScene" uid="uid://btpal3iwtc21s" path="res://Mod/main/Model/Building/RockDrillStation.glb" id="1_c7igq"]
+
+[sub_resource type="GDScript" id="GDScript_1in1m"]
+script/source = "extends ModelScene
+"
+
+[node name="RockDrillStation" instance=ExtResource("1_c7igq")]
+script = SubResource("GDScript_1in1m")

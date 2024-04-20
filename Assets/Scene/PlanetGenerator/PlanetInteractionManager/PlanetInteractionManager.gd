@@ -11,12 +11,13 @@ var Scene_InteractionAreaForTerrain := preload("res://Assets/Scene/PlanetGenerat
 
 var logger := LoggerManager.register_logger(self, "PH_NoiseBasedHeightLevelModifier")
 
-var _focusing_terrain : PlanetTerrain
-var _unfocused_terrain : PlanetTerrain
-var selected_terrain : PlanetTerrain
+var _focusing_area : InteractionAreaForTerrain
+var _unfocused_area : InteractionAreaForTerrain
+var selected_area : InteractionAreaForTerrain
 
 func _ready():
 	InputManager.connect("any_gesture", _on_input)
+	InputManager.connect("focus_group_id_changed", _on_focus_group_id_changed)
 
 func init_terrains():
 	logger.debug("初始化地形检测")
@@ -32,43 +33,67 @@ func init_terrains():
 	var time_end : int = Time.get_ticks_msec()
 	logger.debug("耗时:%dms" % (time_end - time_start))
 
+func get_selected_terrain():
+	if is_instance_valid(selected_area):
+		return selected_area.target
+	else:
+		return null 
+
 func _on_area_for_terrain_mouse_in(area : InteractionAreaForTerrain):
 	planet.terrain_focus(area.target)
 	_TerrainFocusMarker_Focus.set_and_enable(area.target)
-	_focusing_terrain = area.target
+	_focusing_area = area
+	_unfocused_area = null
+	InputManager.change_focus_group_id("terrains")
 	
 
 func _on_area_for_terrain_mouse_out(area : InteractionAreaForTerrain):
 	planet.terrain_unfocus(area.target)
 	_TerrainFocusMarker_Focus.disable()
-	_unfocused_terrain = area.target
+	_unfocused_area = area
+	if InputManager.focus_group_id == "terrains":
+		InputManager.change_focus_group_id("")
 
 func get_focusing_terrain():
-	if is_instance_valid(_focusing_terrain):
-		if _focusing_terrain == _unfocused_terrain:
+	if is_instance_valid(_focusing_area):
+		if _focusing_area == _unfocused_area:
 			return null
 		else:
-			return _focusing_terrain
+			return _focusing_area.target
 	return null
 
-func terrain_select(_terrain : PlanetTerrain):
-	planet.terrain_select(_terrain)
-	selected_terrain = _terrain
-	_TerrainFocusMarker_Select.set_and_enable(selected_terrain)
-	_TerrainFocusMarker_Select.change_status_surge()
+func get_focusing_area():
+	if is_instance_valid(_focusing_area):
+		if _focusing_area == _unfocused_area:
+			return null
+		else:
+			return _focusing_area
+	return null
 
-func terrain_unselect(_terrain : PlanetTerrain):
-	planet.terrain_unselect(_terrain)
-	selected_terrain = null
+func terrain_area_select(_area : InteractionAreaForTerrain):
+	selected_area = _area
+	_TerrainFocusMarker_Select.set_and_enable(selected_area.target)
+	_TerrainFocusMarker_Select.change_status_surge()
+	planet.terrain_select(_area.target)
+
+func terrain_area_unselect(_area : InteractionAreaForTerrain):
+	selected_area = null
 	_TerrainFocusMarker_Select.disable()
+	planet.terrain_unselect(_area.target)
 
 func _on_input(_sig : String, e : InputEventAction):
 	if e is InputEventSingleScreenTap:
-		var focusing_terrain : PlanetTerrain = get_focusing_terrain()
-		if is_instance_valid(focusing_terrain):
-			terrain_select(focusing_terrain)
+		var focusing_area : InteractionAreaForTerrain = get_focusing_area()
+		if is_instance_valid(focusing_area):
+			terrain_area_select(focusing_area)
 			
 		else:
-			if is_instance_valid(selected_terrain):
-				terrain_unselect(selected_terrain)
+			if is_instance_valid(selected_area) && InputManager.focus_group_id == "":
+				terrain_area_unselect(selected_area)
+	pass
+
+func _on_focus_group_id_changed():
+	if InputManager.focus_group_id != "terrains":
+		if is_instance_valid(_focusing_area):
+			_on_area_for_terrain_mouse_out(_focusing_area)
 	pass

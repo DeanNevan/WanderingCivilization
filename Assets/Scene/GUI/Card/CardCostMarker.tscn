@@ -1,0 +1,31 @@
+[gd_scene load_steps=3 format=3 uid="uid://c87qgbg7vqki8"]
+
+[ext_resource type="Script" path="res://Assets/Scene/GUI/Card/CardCostMarker.gd" id="1_8btsn"]
+[ext_resource type="Texture2D" uid="uid://cl8cvvv0sqjue" path="res://Assets/Icon/brick.png" id="2_1qcy5"]
+
+[node name="CardCostMarker" type="MarginContainer"]
+mouse_filter = 2
+theme_override_constants/margin_top = -8
+theme_override_constants/margin_bottom = -8
+script = ExtResource("1_8btsn")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="Icon" type="TextureRect" parent="VBoxContainer"]
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+size_flags_vertical = 2
+mouse_filter = 2
+texture = ExtResource("2_1qcy5")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="LabelCount" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 10
+text = "9"
+horizontal_alignment = 1
+vertical_alignment = 1

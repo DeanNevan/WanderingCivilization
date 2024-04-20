@@ -1,16 +1,18 @@
 extends TerrainResourcePlacement
 
 var models := [
-	"@batch:main:stone_1",
-	"@batch:main:stone_2",
+	"res://Mod/main/Model/Stone1.tscn",
+	"res://Mod/main/Model/Stone2.tscn",
 ]
 
 var models_snow := [
-	"@batch:main:stone_snow_1",
-	"@batch:main:stone_snow_2",
+	"res://Mod/main/Model/StoneSnow1.tscn",
+	"res://Mod/main/Model/StoneSnow2.tscn",
 ]
 
 func _init():
+	super._init()
+	
 	id = "@element:main:resource_stone"
 	info = "@str:main:info_resource_stone"
 	element_name = "@str:main:name_resource_stone"
@@ -29,12 +31,23 @@ func _init():
 	only_with_liquid = false
 	on_liquid_surface = false
 	can_with_liquid = true
+	
+	add_requirement(RequirementLayer.new(self))
+	add_requirement(RequirementLiquid.new(self))
+	
+	add_requirement(RequirementEnvFactor.new(
+		self,
+		{
+			"@env_factor:main:rock_si" : 4,
+		},
+		[]
+	))
 
 func new_instance(scene):
 	if terrain.id == "@terrain:main:snow_field":
-		super.new_instance(R.new_batch_object(models_snow[Global.rander_for_decoration.randi() % models_snow.size()]))
+		super.new_instance(load(models_snow[Global.rander_for_decoration.randi() % models_snow.size()]).instantiate())
 	elif terrain.id == "@terrain:main:loess_land":
-		super.new_instance(R.new_batch_object("@batch:main:stone_dirt"))
+		super.new_instance(preload("res://Mod/main/Model/StoneDirt.tscn").instantiate())
 	else:
-		super.new_instance(R.new_batch_object(models[Global.rander_for_decoration.randi() % models.size()]))
+		super.new_instance(load(models[Global.rander_for_decoration.randi() % models.size()]).instantiate())
 	

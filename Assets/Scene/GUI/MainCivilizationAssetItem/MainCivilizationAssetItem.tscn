@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://b031aswkctq01"]
+
+[ext_resource type="Script" path="res://Assets/Scene/GUI/MainCivilizationAssetItem/MainCivilizationAssetItem.gd" id="1_x2xwv"]
+[ext_resource type="Texture2D" uid="uid://2oi8hh5bstwx" path="res://icon.svg" id="2_o3dsp"]
+
+[node name="MainCivilizationAssetItem" type="MarginContainer"]
+script = ExtResource("1_x2xwv")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="HBoxContainer"]
+custom_minimum_size = Vector2(58, 58)
+layout_mode = 2
+texture = ExtResource("2_o3dsp")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="HBoxContainer"]
+custom_minimum_size = Vector2(64, 0)
+layout_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+clip_text = true

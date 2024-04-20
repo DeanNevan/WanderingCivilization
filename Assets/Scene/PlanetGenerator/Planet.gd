@@ -29,9 +29,6 @@ var _TerrainsMeshInstance : MeshInstance3D = $TerrainsMeshInstance
 
 @onready var _PlanetInteractionManager = $PlanetInteractionManager
 
-
-
-
 var terrains := []
 var liquid_areas := []
 
@@ -261,12 +258,12 @@ func random_pick_placements(_terrain : PlanetTerrain):
 				placement_id = p_id
 				break
 			p -= pp
-		add_placement(_terrain, placement_id, layer)
+		add_element(_terrain, placement_id, layer)
 
-func add_placement(_terrain : PlanetTerrain, _placement_id : String, _layer : int):
-	var script : GDScript = R.get_element(_placement_id)
-	var new_placement : TerrainResourcePlacement = script.new()
-	_terrain.add_placement(new_placement)
+func add_element(_terrain : PlanetTerrain, _element_id : String, _layer : int):
+	var script : GDScript = R.get_element(_element_id)
+	var new_element : TerrainElement = script.new()
+	_terrain.add_element(new_element)
 
 func edit_terrain_priority(_terrain : PlanetTerrain, _id : String, _priority : int):
 	if !terrains_priorities.has(_terrain):
@@ -336,7 +333,8 @@ func get_focusing_terrain():
 func init_interaction():
 	_PlanetInteractionManager.init_terrains()
 
-
+func get_selected_terrain():
+	return _PlanetInteractionManager.get_selected_terrain()
 
 #func update_mesh(_terrains := []):
 	#var mesh = ArrayMesh.new()

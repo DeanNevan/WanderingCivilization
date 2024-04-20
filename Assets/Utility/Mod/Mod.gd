@@ -13,4 +13,7 @@ var meshes := {}
 var batch_objects := {}
 var env_factors := {}
 var liquid_areas := {}
+var assets := {}
 var scenes := {}
+var cards := {}
+var translations := []

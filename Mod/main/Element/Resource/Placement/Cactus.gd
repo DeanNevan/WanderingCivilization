@@ -1,14 +1,16 @@
 extends TerrainResourcePlacement
 
 var models := [
-	"@batch:main:cactus_1",
-	"@batch:main:cactus_2",
+	"res://Mod/main/Model/Cactus1.tscn",
+	"res://Mod/main/Model/Cactus2.tscn",
 ]
 
 
 var rander := RandomNumberGenerator.new()
 
 func _init():
+	super._init()
+	
 	id = "@element:main:resource_cactus"
 	info = "@str:main:info_resource_cactus"
 	element_name = "@str:main:name_resource_cactus"
@@ -25,7 +27,29 @@ func _init():
 	only_with_liquid = false
 	on_liquid_surface = false
 	can_with_liquid = false
+	
+	add_requirement(RequirementLayer.new(self))
+	add_requirement(RequirementLiquid.new(self))
+	
+	add_requirement(RequirementTerrain.new(
+		self,
+		[],
+		[
+			"@terrain:main:rock",
+			"@terrain:main:grass_plain",
+			"@terrain:main:snow_field",
+			"@terrain:main:loess_land",
+		]
+	))
+	add_requirement(RequirementEnvFactor.new(
+		self,
+		{
+			"@env_factor:main:dry" : 5,
+			"@env_factor:main:hot" : 4,
+		},
+		[]
+	))
 
 func new_instance(scene):
-	super.new_instance(R.new_batch_object(models[Global.rander_for_decoration.randi() % models.size()]))
+	super.new_instance(load(models[Global.rander_for_decoration.randi() % models.size()]).instantiate())
 	

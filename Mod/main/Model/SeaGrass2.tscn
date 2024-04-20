@@ -3,9 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://cry4pn2onrid4" path="res://Mod/main/Model/SeaGrass2.glb" id="1_mfxmb"]
 
 [sub_resource type="GDScript" id="GDScript_ikci4"]
-script/source = "extends BatchObject
-func _init():
-	id = \"@batch:main:sea_grass_2\"
+script/source = "extends ModelScene
 "
 
 [node name="SeaGrass2" instance=ExtResource("1_mfxmb")]

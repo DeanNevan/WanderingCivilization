@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://b6l8g2mb2ceuj"]
+
+[ext_resource type="PackedScene" uid="uid://crhabgu0orglh" path="res://Assets/Scene/PlanetGenerator/TerrainElement/TerrainElement.tscn" id="1_brubv"]
+[ext_resource type="Script" path="res://Assets/Scene/PlanetGenerator/TerrainElement/TerrainArtificial/TerrainArtificial.gd" id="2_rip5d"]
+
+[node name="TerrainArtificial" instance=ExtResource("1_brubv")]
+script = ExtResource("2_rip5d")
+maintain_cost = {}
+create_cost = {}

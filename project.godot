@@ -25,6 +25,11 @@ LocalizationManager="*res://addons/localization_editor/LocalizationManager.gd"
 Math="*res://Autoload/Math/Math.gd"
 InputManager="*res://Autoload/InputManager/InputManager.gd"
 
+[display]
+
+window/size/viewport_width=1920
+window/size/viewport_height=1080
+
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/localization_editor/plugin.cfg", "res://addons/orbit_camera/plugin.cfg")

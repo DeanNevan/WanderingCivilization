@@ -1,6 +1,8 @@
 extends TerrainResourcePlacement
 
 func _init():
+	super._init()
+	
 	id = "@element:main:resource_lotus"
 	info = "@str:main:info_resource_lotus"
 	element_name = "@str:main:name_resource_lotus"
@@ -17,7 +19,19 @@ func _init():
 	only_with_liquid = true
 	on_liquid_surface = true
 	can_with_liquid = true
+	
+	add_requirement(RequirementLayer.new(self))
+	add_requirement(RequirementLiquid.new(self))
+	
+	add_requirement(RequirementEnvFactor.new(
+		self,
+		{
+			"@env_factor:main:organic" : 6,
+			"@env_factor:main:wet" : 6,
+		},
+		[]
+	))
 
 func new_instance(scene):
-	super.new_instance(R.new_batch_object("@batch:main:lotus"))
+	super.new_instance(preload("res://Mod/main/Model/Lotus.tscn").instantiate())
 	

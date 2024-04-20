@@ -27,27 +27,27 @@ func _init():
 	}
 	self.planet_handlers = {
 	}
-	self.batch_objects = {
-		"@batch:main:bush" : "res://Mod/main/Model/Bush.tscn",
-		"@batch:main:cactus_1" : "res://Mod/main/Model/Cactus1.tscn",
-		"@batch:main:cactus_2" : "res://Mod/main/Model/Cactus2.tscn",
-		"@batch:main:cactus_3" : "res://Mod/main/Model/Cactus3.tscn",
-		"@batch:main:leafy_plant" : "res://Mod/main/Model/LeafyPlant.tscn",
-		"@batch:main:lotus" : "res://Mod/main/Model/Lotus.tscn",
-		"@batch:main:sea_grass_1" : "res://Mod/main/Model/SeaGrass1.tscn",
-		"@batch:main:sea_grass_2" : "res://Mod/main/Model/SeaGrass2.tscn",
-		"@batch:main:stone_1" : "res://Mod/main/Model/Stone1.tscn",
-		"@batch:main:stone_2" : "res://Mod/main/Model/Stone2.tscn",
-		"@batch:main:stone_3" : "res://Mod/main/Model/Stone3.tscn",
-		"@batch:main:stone_4" : "res://Mod/main/Model/Stone4.tscn",
-		"@batch:main:stone_dirt" : "res://Mod/main/Model/StoneDirt.tscn",
-		"@batch:main:stone_snow_1" : "res://Mod/main/Model/StoneSnow1.tscn",
-		"@batch:main:stone_snow_2" : "res://Mod/main/Model/StoneSnow2.tscn",
-		"@batch:main:stone_snow_3" : "res://Mod/main/Model/StoneSnow3.tscn",
-		"@batch:main:tree" : "res://Mod/main/Model/Tree.tscn",
-		"@batch:main:tree_snow" : "res://Mod/main/Model/TreeSnow.tscn",
-		"@batch:main:wheat" : "res://Mod/main/Model/Wheat.tscn",
-	}
+	#self.batch_objects = {
+		#"@batch:main:bush" : "res://Mod/main/Model/Bush.tscn",
+		#"@batch:main:cactus_1" : "res://Mod/main/Model/Cactus1.tscn",
+		#"@batch:main:cactus_2" : "res://Mod/main/Model/Cactus2.tscn",
+		#"@batch:main:cactus_3" : "res://Mod/main/Model/Cactus3.tscn",
+		#"@batch:main:leafy_plant" : "res://Mod/main/Model/LeafyPlant.tscn",
+		#"@batch:main:lotus" : "res://Mod/main/Model/Lotus.tscn",
+		#"@batch:main:sea_grass_1" : "res://Mod/main/Model/SeaGrass1.tscn",
+		#"@batch:main:sea_grass_2" : "res://Mod/main/Model/SeaGrass2.tscn",
+		#"@batch:main:stone_1" : "res://Mod/main/Model/Stone1.tscn",
+		#"@batch:main:stone_2" : "res://Mod/main/Model/Stone2.tscn",
+		#"@batch:main:stone_3" : "res://Mod/main/Model/Stone3.tscn",
+		#"@batch:main:stone_4" : "res://Mod/main/Model/Stone4.tscn",
+		#"@batch:main:stone_dirt" : "res://Mod/main/Model/StoneDirt.tscn",
+		#"@batch:main:stone_snow_1" : "res://Mod/main/Model/StoneSnow1.tscn",
+		#"@batch:main:stone_snow_2" : "res://Mod/main/Model/StoneSnow2.tscn",
+		#"@batch:main:stone_snow_3" : "res://Mod/main/Model/StoneSnow3.tscn",
+		#"@batch:main:tree" : "res://Mod/main/Model/Tree.tscn",
+		#"@batch:main:tree_snow" : "res://Mod/main/Model/TreeSnow.tscn",
+		#"@batch:main:wheat" : "res://Mod/main/Model/Wheat.tscn",
+	#}
 	self.elements = {
 		"@element:main:resource_liquid_water" : "res://Mod/main/Element/Resource/Liquid/Water.gd",
 		"@element:main:resource_liquid_lava" : "res://Mod/main/Element/Resource/Liquid/Lava.gd",
@@ -65,13 +65,19 @@ func _init():
 		"@env_factor:main:cold" : "res://Mod/main/EnvFactor/Cold.gd",
 		"@env_factor:main:dry" : "res://Mod/main/EnvFactor/Dry.gd",
 		"@env_factor:main:electric" : "res://Mod/main/EnvFactor/Electric.gd",
-		"@env_factor:main:forest" : "res://Mod/main/EnvFactor/Forest.gd",
 		"@env_factor:main:holy" : "res://Mod/main/EnvFactor/Holy.gd",
 		"@env_factor:main:hot" : "res://Mod/main/EnvFactor/Hot.gd",
 		"@env_factor:main:magic" : "res://Mod/main/EnvFactor/Magic.gd",
 		"@env_factor:main:metal" : "res://Mod/main/EnvFactor/Metal.gd",
 		"@env_factor:main:organic" : "res://Mod/main/EnvFactor/Organic.gd",
-		"@env_factor:main:rock_si" : "res://Mod/main/EnvFactor/Rock.gd",
+		"@env_factor:main:rock_si" : "res://Mod/main/EnvFactor/RockSi.gd",
 		"@env_factor:main:void" : "res://Mod/main/EnvFactor/Void.gd",
 		"@env_factor:main:wet" : "res://Mod/main/EnvFactor/Wet.gd",
 	}
+	self.cards = {
+		"@card:main:building_lumbering" : "res://Mod/main/Card/Building/CardLumbering.gd",
+	}
+	self.translations = [
+		"res://Mod/main/Localization/Translation/translation.en.translation",
+		"res://Mod/main/Localization/Translation/translation.zh.translation",
+	]

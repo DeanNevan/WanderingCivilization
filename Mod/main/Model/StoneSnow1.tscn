@@ -3,9 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://bryxgdjb1uruj" path="res://Mod/main/Model/StoneSnow1.glb" id="1_vtiqv"]
 
 [sub_resource type="GDScript" id="GDScript_nd0cu"]
-script/source = "extends BatchObject
-func _init():
-	id = \"@batch:main:stone_snow_1\"
+script/source = "extends ModelScene
 "
 
 [node name="StoneSnow1" instance=ExtResource("1_vtiqv")]
