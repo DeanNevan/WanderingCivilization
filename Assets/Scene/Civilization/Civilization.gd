@@ -6,7 +6,8 @@ class_name Civilization
 @export var info := ""
 
 var planet : Planet
-var asset_manager := CivilizationAssetManager.new()
+var asset_manager := CivilizationAssetManager.new(self)
+var territory_manager := CivilizationTerritoryManager.new(self)
 
 var card_deck := CardDeck.new(self)
 var card_hand := CardHand.new(self)

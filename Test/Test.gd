@@ -11,7 +11,14 @@ extends Node3D
 @onready var _PlanetGame = $PlanetGame
 @onready var _CardHandUI = $CardHandUI
 @onready var _CardElementConfirmation = $CardElementConfirmation
-@onready var _ListCivilizationAssetItem = $MarginContainer/MarginContainer/ListCivilizationAssetItem
+@onready var _TerritoryDisplayer = $TerritoryDisplayer
+
+@onready var _civilization_asset_items := [
+	$MarginContainer/VBoxContainer/MarginContainer/ListCivilizationAssetItem/VBoxContainer/MainCivilizationAssetItem,
+	$MarginContainer/VBoxContainer/MarginContainer/ListCivilizationAssetItem/VBoxContainer2/MainCivilizationAssetItem2,
+	$MarginContainer/VBoxContainer/MarginContainer/ListCivilizationAssetItem/VBoxContainer3/MainCivilizationAssetItem3,
+	$MarginContainer/VBoxContainer/MarginContainer/ListCivilizationAssetItem/VBoxContainer4/MainCivilizationAssetItem4,
+]
 
 var Scene_planet := preload("res://Assets/Scene/PlanetGenerator/Planet.tscn")
 
@@ -104,12 +111,14 @@ func _on_button_generate_pressed():
 	civilization = Civilization.new()
 	civilization.set_planet(planet)
 	civilization.init()
+	
+	_TerritoryDisplayer.set_territory_manager(civilization.territory_manager)
 	#civilization.asset_manager.add_asset("@asset::building_material", 10)
 	#civilization.asset_manager.add_asset("@asset::labor_force", 2)
 	
 	_CardHandUI.set_civilization(civilization)
 	
-	for i in _ListCivilizationAssetItem.get_children():
+	for i in _civilization_asset_items:
 		i.set_civilization(civilization)
 		i.init()
 	
@@ -117,7 +126,7 @@ func _on_button_generate_pressed():
 	new_card.add_to_hand(civilization)
 	new_card.init()
 	
-	var new_card2 : Card = R.get_card("@card:main:building_lumbering").new()
+	var new_card2 : Card = R.get_card("@card:main:building_ship_lander").new()
 	new_card2.add_to_hand(civilization)
 	new_card2.init()
 	
@@ -190,3 +199,8 @@ func _on_card_hand_confirmed(card : CardElement, terrain : PlanetTerrain):
 		civilization.card_hand.remove_card(card)
 		terrain.add_element(card.element_instance)
 	pass
+
+
+func _on_check_button_civilization_territory_toggled(toggled_on):
+	_TerritoryDisplayer.enable() if toggled_on else _TerritoryDisplayer.disable()
+	pass # Replace with function body.

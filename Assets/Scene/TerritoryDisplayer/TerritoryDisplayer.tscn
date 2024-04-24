@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://e2c8b7ihtlw1"]
+
+[ext_resource type="Script" path="res://Assets/Scene/TerritoryDisplayer/TerritoryDisplayer.gd" id="1_mio7o"]
+
+[node name="TerritoryDisplayer" type="Node3D"]
+script = ExtResource("1_mio7o")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+
+[node name="MeshInstanceEdge3D" type="MeshInstance3D" parent="."]

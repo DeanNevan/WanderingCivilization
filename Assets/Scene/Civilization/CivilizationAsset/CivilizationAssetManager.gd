@@ -10,6 +10,13 @@ var assets := {
 	
 }
 
+var civilization : Civilization
+func set_civilization(_civilization):
+	civilization = _civilization
+
+func _init(_civilization = civilization):
+	civilization = _civilization
+
 func init_assets():
 	assets.clear()
 	assets["@asset::building_material"] = R.get_asset("@asset::building_material").new()

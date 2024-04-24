@@ -11,6 +11,7 @@ func init():
 	assert(is_instance_valid(element_script))
 	element_instance = element_script.new()
 	requirements = element_instance.requirements
+	element_instance.civilization = civilization
 	init_cost()
 
 func init_cost():

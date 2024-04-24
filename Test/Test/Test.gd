@@ -1,24 +1,43 @@
 extends Node3D
 func _ready():
-	var mdt : MeshDataTool = $TerrainFocusMarker.mdt
-	var points := {}
-	for i in mdt.get_vertex_count():
-		var point_pos : Vector3 = mdt.get_vertex(i) * 5
-		var flag := false
-		for p in points:
-			if (p - point_pos).length() < 0.0001 :
-				points[p].append(i)
-				flag = true
-				break
-		if !flag:
-			points[point_pos] = [i]
-		
-		var marker := MarkerManager.new_marker_label_3d()
-		add_child(marker)
-		marker.text = str(i)
-		marker.position = point_pos
-		marker.font_size = 32
-	print(points)
+	var a := []
+	var b := {}
+	print(b[1])
+	#for i in 10000:
+		#var t := PlanetTerrain.new()
+		#a.append(t)
+		#b[t] = i
+		#
+	#
+	#var time_start : int = Time.get_ticks_msec()
+	#
+	#for i in 10000:
+		#if b.has(i):
+			#pass
+		#
+	#var time_end : int =  Time.get_ticks_msec()
+	#var time : int = time_end - time_start
+	#print("time:%d" % time)
+	
+	#var mdt : MeshDataTool = $TerrainFocusMarker.mdt
+	#var points := {}
+	#for i in mdt.get_vertex_count():
+		#var point_pos : Vector3 = mdt.get_vertex(i) * 5
+		#var flag := false
+		#for p in points:
+			#if (p - point_pos).length() < 0.0001 :
+				#points[p].append(i)
+				#flag = true
+				#break
+		#if !flag:
+			#points[point_pos] = [i]
+		#
+		#var marker := MarkerManager.new_marker_label_3d()
+		#add_child(marker)
+		#marker.text = str(i)
+		#marker.position = point_pos
+		#marker.font_size = 32
+	#print(points)
 	#var shape : ConvexPolygonShape3D = $Area3D/CollisionShape3D.shape
 	#shape.points[0] = Vector3(0, 0, 0)
 	#shape.points[1] = Vector3(0, 1, 0)

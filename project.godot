@@ -74,3 +74,4 @@ locale/translations=PackedStringArray("res://Assets/Localization/Translation/tra
 [localization_editor]
 
 locales_path_to_file="res://Assets/Localization/Translation/translation.csv"
+translations_split_offset=474

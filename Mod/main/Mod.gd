@@ -76,6 +76,7 @@ func _init():
 	}
 	self.cards = {
 		"@card:main:building_lumbering" : "res://Mod/main/Card/Building/CardLumbering.gd",
+		"@card:main:building_ship_lander" : "res://Mod/main/Card/Building/CardShipLander.gd",
 	}
 	self.translations = [
 		"res://Mod/main/Localization/Translation/translation.en.translation",

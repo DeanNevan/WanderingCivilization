@@ -11,6 +11,8 @@ func _init():
 	can_with_liquid = false
 	layer = 0
 	
+	building_type = BuildingType.PRODUCTION
+	
 	create_cost = {
 		"@asset::building_material" : 2,
 		"@asset::labor_force" : 4,
@@ -19,10 +21,13 @@ func _init():
 		
 	}
 	
-	building_type = BuildingType.PRODUCTION
-	
 	add_requirement(RequirementLayer.new(self))
 	add_requirement(RequirementLiquid.new(self))
+	
+	outpost = false
+	core = false
+	expand_borderland = 1
+	add_requirement(RequirementCivilizationTerritory.new(self))
 
 func init_display():
 	super.init_display()

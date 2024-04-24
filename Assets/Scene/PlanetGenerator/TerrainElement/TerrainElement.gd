@@ -119,6 +119,9 @@ class RequirementEnvFactor:
 		
 		return true
 
+func added_to_terrain():
+	pass
+
 #class RequirementResource:
 	#var require := {}
 	#

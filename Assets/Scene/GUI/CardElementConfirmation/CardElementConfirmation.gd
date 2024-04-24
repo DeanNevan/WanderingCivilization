@@ -49,8 +49,6 @@ func init():
 	_LabelName.text = card.card_name
 	for i in _ListRequirements.get_children():
 		i.queue_free()
-	await get_tree().process_frame
-	await get_tree().process_frame
 	var flag := true
 	for r in card.requirements:
 		var s : String = str(r)
@@ -65,13 +63,15 @@ func init():
 		new_requirement_item.init()
 	_ButtonConfirm.disabled = !flag
 	_HSeparator2.visible = card.requirements.size() > 0
-	update_minimum_size()
-	await get_tree().create_timer(0.1)
-	update_minimum_size()
+	
 	demo_model_scene = card.element_instance.get_demo_model_scene()
 	add_child(demo_model_scene)
 	demo_model_scene.demo_display(flag)
 	terrain.place_model_scene(demo_model_scene, card.element_instance.on_liquid_surface and card.element_instance.can_with_liquid)
+	
+	await get_tree().process_frame
+	await get_tree().process_frame
+	size.y = 1
 
 
 func _on_button_confirm_pressed():

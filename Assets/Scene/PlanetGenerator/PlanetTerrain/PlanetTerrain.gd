@@ -27,6 +27,8 @@ var elements := {}
 var planet : Planet
 var polygon : SphereGrid.Polygon
 
+var territories := {}
+
 var height_level := 0
 var idx := -1
 
@@ -166,6 +168,35 @@ func get_corner_vertexes_via_round(_round : int):
 				vertexes[35],
 			]
 
+func get_neighbour_terrains_via_level(_level : int) -> Array:
+	if _level == 0:
+		return [self]
+	var result := [self]
+	var visited := {self : true}
+	var queue := [self]
+	for i in _level:
+		var next_queue := []
+		for j in queue:
+			for n in j.polygon.neighbours:
+				if visited.has(n.terrain):
+					continue
+				visited[n.terrain] = true
+				result.append(n.terrain)
+				next_queue.append(n.terrain)
+		queue = next_queue
+	return result
+
+func get_territory(id : String) -> TerritoryManager.Territory:
+	if territories.has(id):
+		return territories[id]
+	return null
+
+func set_territory(id : String, territory : TerritoryManager.Territory):
+	territories[id] = territory
+
+func remove_territory(id : String):
+	territories.erase(id)
+
 func get_plane() -> Plane:
 	return Plane(polygon.normal, get_center())
 
@@ -227,6 +258,24 @@ func get_center_of_liquid() -> Vector3:
 		var pos = get_center()
 		return liquid.liquid_area.cal_pos_via_height_level(pos)
 	pass
+
+func get_vertex_pos_of_liquid(vertex_idx : int) -> Vector3:
+	if !has_liquid():
+		return vertexes[vertex_idx].pos
+	else:
+		
+		if !has_liquid() and vertex_idx <= get_vertexes_range_via_round(0).y and vertex_idx >= get_vertexes_range_via_round(0).x:
+			for n in polygon.neighbours:
+				if n.terrain.has_liquid():
+					return n.terrain.get_vertex_pos_of_liquid(vertexes[vertex_idx].overlap_vertexes[0])
+		var pos : Vector3 = vertexes[vertex_idx].pos
+		var liquid_pos : Vector3 = liquid.liquid_area.cal_pos_via_height_level(pos)
+		if pos.length() > liquid_pos.length():
+			return pos
+		else:
+			return liquid_pos
+	pass
+	
 
 func get_elements():
 	return elements
@@ -519,7 +568,7 @@ func init_display(array_mesh : ArrayMesh, material_to_st : Dictionary):
 	#for i in faces_idx.size():
 		#array_mesh.surface_set_material(i, R.default_material_for_terrain)
 
-func add_element(_element : TerrainElement):
+func add_element(_element : TerrainElement, do_display := true):
 	if !is_instance_valid(_element):
 		return
 	if _element.is_inside_tree():
@@ -532,7 +581,10 @@ func add_element(_element : TerrainElement):
 	_element.terrain = self
 	_Elements.add_child(_element)
 	update_current_env_factors()
-	_element.init_display()
+	if do_display:
+		_element.init_display()
+	
+	_element.added_to_terrain()
 
 func set_elements(arr : Array):
 	for i in arr:

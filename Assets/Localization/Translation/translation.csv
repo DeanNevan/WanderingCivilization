@@ -22,3 +22,5 @@ keys,en,zh
 @str::requirement_cannot_with_liquid,,该%s不能与流体共存
 @str::requirement_terrain,,该%s需求地块类型
 @str::requirement_env_factor,,该%s需求地块的环境要素
+@str::requirement_civilization_territory_outpost,,该%s仅可建造于紧邻文明边疆或文明内部
+@str::requirement_civilization_territory,,该%s仅可建造于文明内部

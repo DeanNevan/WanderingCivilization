@@ -258,12 +258,12 @@ func random_pick_placements(_terrain : PlanetTerrain):
 				placement_id = p_id
 				break
 			p -= pp
-		add_element(_terrain, placement_id, layer)
+		add_element(_terrain, placement_id, layer, false)
 
-func add_element(_terrain : PlanetTerrain, _element_id : String, _layer : int):
+func add_element(_terrain : PlanetTerrain, _element_id : String, _layer : int, do_display := true):
 	var script : GDScript = R.get_element(_element_id)
 	var new_element : TerrainElement = script.new()
-	_terrain.add_element(new_element)
+	_terrain.add_element(new_element, do_display)
 
 func edit_terrain_priority(_terrain : PlanetTerrain, _id : String, _priority : int):
 	if !terrains_priorities.has(_terrain):

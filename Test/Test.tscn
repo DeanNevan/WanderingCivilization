@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://h480p3wxg7ul"]
+[gd_scene load_steps=15 format=3 uid="uid://h480p3wxg7ul"]
 
 [ext_resource type="Script" path="res://Test/Test.gd" id="1_5ye0a"]
 [ext_resource type="PackedScene" uid="uid://bcc3egfuhhsp4" path="res://Assets/Scene/PlanetGame/PlanetGame.tscn" id="2_rxjwq"]
@@ -9,6 +9,19 @@
 [ext_resource type="Texture2D" uid="uid://euoqa6hmc6as" path="res://Assets/Icon/hammer2.png" id="7_quuhd"]
 [ext_resource type="Texture2D" uid="uid://b3rw4bgwrbnvx" path="res://Assets/Icon/apple.png" id="8_2tst2"]
 [ext_resource type="Texture2D" uid="uid://bhjy6ew5af725" path="res://Assets/Icon/science.png" id="9_3bpfx"]
+[ext_resource type="PackedScene" uid="uid://e2c8b7ihtlw1" path="res://Assets/Scene/TerritoryDisplayer/TerritoryDisplayer.tscn" id="10_32e0s"]
+[ext_resource type="Shader" path="res://Assets/Material/Shader/PixelPerfectOutline.gdshader" id="11_xkp4f"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_e56wt"]
+render_priority = 0
+shader = ExtResource("11_xkp4f")
+shader_parameter/outline_color = Color(1, 0, 0, 1)
+shader_parameter/outline_width = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bgj3r"]
+next_pass = SubResource("ShaderMaterial_e56wt")
+
+[sub_resource type="BoxMesh" id="BoxMesh_6siry"]
 
 [node name="Test" type="Node3D"]
 script = ExtResource("1_5ye0a")
@@ -163,70 +176,97 @@ grow_horizontal = 2
 [node name="Panel" type="Panel" parent="MarginContainer"]
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 8
 theme_override_constants/margin_top = 3
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 3
 
-[node name="ListCivilizationAssetItem" type="HBoxContainer" parent="MarginContainer/MarginContainer"]
+[node name="ListCivilizationAssetItem" type="HBoxContainer" parent="MarginContainer/VBoxContainer/MarginContainer"]
 layout_mode = 2
 
-[node name="MainCivilizationAssetItem" parent="MarginContainer/MarginContainer/ListCivilizationAssetItem" instance=ExtResource("5_otl46")]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/MarginContainer/ListCivilizationAssetItem"]
+layout_mode = 2
+
+[node name="MainCivilizationAssetItem" parent="MarginContainer/VBoxContainer/MarginContainer/ListCivilizationAssetItem/VBoxContainer" instance=ExtResource("5_otl46")]
 layout_mode = 2
 asset_id = "@asset::building_material"
 
-[node name="MainCivilizationAssetItem2" parent="MarginContainer/MarginContainer/ListCivilizationAssetItem" instance=ExtResource("5_otl46")]
-layout_mode = 2
-asset_id = "@asset::labor_force"
-
-[node name="MainCivilizationAssetItem3" parent="MarginContainer/MarginContainer/ListCivilizationAssetItem" instance=ExtResource("5_otl46")]
-layout_mode = 2
-asset_id = "@asset::food"
-
-[node name="MainCivilizationAssetItem4" parent="MarginContainer/MarginContainer/ListCivilizationAssetItem" instance=ExtResource("5_otl46")]
-layout_mode = 2
-asset_id = "@asset::research_point"
-
-[node name="VBoxContainer2" type="VBoxContainer" parent="."]
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_top = -40.0
-offset_right = 40.0
-grow_vertical = 0
-
-[node name="ButtonAddBuildingMaterial" type="Button" parent="VBoxContainer2"]
+[node name="ButtonAddBuildingMaterial" type="Button" parent="MarginContainer/VBoxContainer/MarginContainer/ListCivilizationAssetItem/VBoxContainer"]
 custom_minimum_size = Vector2(120, 55)
 layout_mode = 2
 text = "增加"
 icon = ExtResource("6_dygec")
 expand_icon = true
 
-[node name="ButtonAddLaborForce" type="Button" parent="VBoxContainer2"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/VBoxContainer/MarginContainer/ListCivilizationAssetItem"]
+layout_mode = 2
+
+[node name="MainCivilizationAssetItem2" parent="MarginContainer/VBoxContainer/MarginContainer/ListCivilizationAssetItem/VBoxContainer2" instance=ExtResource("5_otl46")]
+layout_mode = 2
+asset_id = "@asset::labor_force"
+
+[node name="ButtonAddLaborForce" type="Button" parent="MarginContainer/VBoxContainer/MarginContainer/ListCivilizationAssetItem/VBoxContainer2"]
 custom_minimum_size = Vector2(100, 55)
 layout_mode = 2
 text = "增加"
 icon = ExtResource("7_quuhd")
 expand_icon = true
 
-[node name="ButtonAddFood" type="Button" parent="VBoxContainer2"]
+[node name="VBoxContainer3" type="VBoxContainer" parent="MarginContainer/VBoxContainer/MarginContainer/ListCivilizationAssetItem"]
+layout_mode = 2
+
+[node name="MainCivilizationAssetItem3" parent="MarginContainer/VBoxContainer/MarginContainer/ListCivilizationAssetItem/VBoxContainer3" instance=ExtResource("5_otl46")]
+layout_mode = 2
+asset_id = "@asset::food"
+
+[node name="ButtonAddFood" type="Button" parent="MarginContainer/VBoxContainer/MarginContainer/ListCivilizationAssetItem/VBoxContainer3"]
 custom_minimum_size = Vector2(100, 55)
 layout_mode = 2
 text = "增加"
 icon = ExtResource("8_2tst2")
 expand_icon = true
 
-[node name="ButtonAddResearchPoint" type="Button" parent="VBoxContainer2"]
+[node name="VBoxContainer4" type="VBoxContainer" parent="MarginContainer/VBoxContainer/MarginContainer/ListCivilizationAssetItem"]
+layout_mode = 2
+
+[node name="MainCivilizationAssetItem4" parent="MarginContainer/VBoxContainer/MarginContainer/ListCivilizationAssetItem/VBoxContainer4" instance=ExtResource("5_otl46")]
+layout_mode = 2
+asset_id = "@asset::research_point"
+
+[node name="ButtonAddResearchPoint" type="Button" parent="MarginContainer/VBoxContainer/MarginContainer/ListCivilizationAssetItem/VBoxContainer4"]
 custom_minimum_size = Vector2(100, 55)
 layout_mode = 2
 text = "增加"
 icon = ExtResource("9_3bpfx")
 expand_icon = true
 
+[node name="VBoxContainer2" type="VBoxContainer" parent="."]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -40.0
+offset_right = 144.0
+grow_vertical = 0
+
+[node name="CheckButtonCivilizationTerritory" type="CheckButton" parent="VBoxContainer2"]
+layout_mode = 2
+text = "显示文明边疆"
+
+[node name="TerritoryDisplayer" parent="." instance=ExtResource("10_32e0s")]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+visible = false
+material_override = SubResource("StandardMaterial3D_bgj3r")
+mesh = SubResource("BoxMesh_6siry")
+
 [connection signal="pressed" from="VBoxContainer/ButtonGenerate" to="." method="_on_button_generate_pressed"]
-[connection signal="pressed" from="VBoxContainer2/ButtonAddBuildingMaterial" to="." method="_on_button_add_building_material_pressed"]
-[connection signal="pressed" from="VBoxContainer2/ButtonAddLaborForce" to="." method="_on_button_add_labor_force_pressed"]
-[connection signal="pressed" from="VBoxContainer2/ButtonAddFood" to="." method="_on_button_add_food_pressed"]
-[connection signal="pressed" from="VBoxContainer2/ButtonAddResearchPoint" to="." method="_on_button_add_research_point_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/MarginContainer/ListCivilizationAssetItem/VBoxContainer/ButtonAddBuildingMaterial" to="." method="_on_button_add_building_material_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/MarginContainer/ListCivilizationAssetItem/VBoxContainer2/ButtonAddLaborForce" to="." method="_on_button_add_labor_force_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/MarginContainer/ListCivilizationAssetItem/VBoxContainer3/ButtonAddFood" to="." method="_on_button_add_food_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/MarginContainer/ListCivilizationAssetItem/VBoxContainer4/ButtonAddResearchPoint" to="." method="_on_button_add_research_point_pressed"]
+[connection signal="toggled" from="VBoxContainer2/CheckButtonCivilizationTerritory" to="." method="_on_check_button_civilization_territory_toggled"]

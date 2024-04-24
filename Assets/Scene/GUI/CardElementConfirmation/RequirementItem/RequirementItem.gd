@@ -11,6 +11,9 @@ func set_valid(_valid):
 		valid = _valid
 
 func init():
+	if text.length() == 0:
+		hide()
+		return
 	_Label.text = tr(text)
 	_CheckBox.button_pressed = valid
 	_Label.modulate = Color.GREEN if valid else Color.RED

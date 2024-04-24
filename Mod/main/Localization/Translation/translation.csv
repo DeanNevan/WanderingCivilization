@@ -1,3 +1,5 @@
 keys,en,zh
 @str:main:name_building_lumbering,,伐木场
-@str:main:info_building_lumbering,,指定周围的一片树林或人造树林，每回合减少其1点血量，并提供+1建材+1食材
+@str:main:info_building_lumbering,,建材和食材的来源
+@str:main:name_building_ship_lander,,降落聚集地
+@str:main:info_building_ship_lander,,第一处基地
