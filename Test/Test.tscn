@@ -264,6 +264,17 @@ visible = false
 material_override = SubResource("StandardMaterial3D_bgj3r")
 mesh = SubResource("BoxMesh_6siry")
 
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+visible = false
+offset_left = 725.0
+offset_top = 615.0
+offset_right = 1000.0
+offset_bottom = 790.0
+mouse_filter = 2
+bbcode_enabled = true
+text = "[img=<16>]res://Assets/Icon/apple.png[/img]
+[color=skyblue]123[/color]"
+
 [connection signal="pressed" from="VBoxContainer/ButtonGenerate" to="." method="_on_button_generate_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/MarginContainer/ListCivilizationAssetItem/VBoxContainer/ButtonAddBuildingMaterial" to="." method="_on_button_add_building_material_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/MarginContainer/ListCivilizationAssetItem/VBoxContainer2/ButtonAddLaborForce" to="." method="_on_button_add_labor_force_pressed"]

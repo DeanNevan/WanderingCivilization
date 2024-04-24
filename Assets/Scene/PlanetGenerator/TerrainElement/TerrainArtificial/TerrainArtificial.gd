@@ -36,6 +36,25 @@ func _init():
 	super._init()
 	type_name = "@str::artificial_type_name"
 
+func get_common_info_tips() -> Array:
+	var arr : Array = super.get_common_info_tips()
+	if core:
+		arr.append("[color=red]" + tr("@str::core") + "[/color]")
+	elif outpost:
+		arr.append("[color=red]" + tr("@str::outpost") + "[/color]")
+	arr.append(tr("@str::expand_border") + ":%d" % expand_borderland)
+	if maintain_cost.size() > 0:
+		var str := ""
+		for id in maintain_cost:
+			var icon_path : String = R.get_asset_instance(id).icon.resource_path
+			var value : int = maintain_cost[id]
+			if str.length() > 0:
+				str += ","
+			str += ("%d" % value) + ("[img=<16>]%s[/img]" % icon_path)
+		if str.length() > 0:
+			arr.append("%s:%s" % [tr("@str::maintain_cost"), str])
+	return arr
+
 func added_to_terrain():
 	super.added_to_terrain()
 	civilization.territory_manager.artificial_added(self)

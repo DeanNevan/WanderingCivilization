@@ -75,8 +75,13 @@ func _init():
 		"@env_factor:main:wet" : "res://Mod/main/EnvFactor/Wet.gd",
 	}
 	self.cards = {
-		"@card:main:building_lumbering" : "res://Mod/main/Card/Building/CardLumbering.gd",
-		"@card:main:building_ship_lander" : "res://Mod/main/Card/Building/CardShipLander.gd",
+		"@card:main:building_lumbering" : "res://Mod/main/Card/Science/Building/CardLumbering.gd",
+		"@card:main:building_ship_lander" : "res://Mod/main/Card/Science/Building/CardShipLander.gd",
+		"@card:main:building_artificial_forest" : "res://Mod/main/Card/Science/Building/CardArtificialForest.gd",
+		"@card:main:building_domitory" : "res://Mod/main/Card/Science/Building/CardDormitory.gd",
+		"@card:main:building_research_lab" : "res://Mod/main/Card/Science/Building/CardResearchLab.gd",
+		"@card:main:building_rock_drill_station" : "res://Mod/main/Card/Science/Building/CardRockDrillStation.gd",
+		"@card:main:building_watchtower" : "res://Mod/main/Card/Science/Building/CardWatchtower.gd",
 	}
 	self.translations = [
 		"res://Mod/main/Localization/Translation/translation.en.translation",

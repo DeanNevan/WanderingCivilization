@@ -3,3 +3,13 @@ keys,en,zh
 @str:main:info_building_lumbering,,建材和食材的来源
 @str:main:name_building_ship_lander,,降落聚集地
 @str:main:info_building_ship_lander,,第一处基地
+@str:main:name_building_artificial_forest,,人造森林
+@str:main:info_building_artificial_forest,,通电就能再生，太合理了
+@str:main:name_building_domitory,,宿舍
+@str:main:info_building_domitory,,一个宿舍里住一个人也很合理
+@str:main:name_building_research_lab,,研究站
+@str:main:info_building_research_lab,,用于生产科研点数
+@str:main:name_building_rock_drill_station,,采石场
+@str:main:info_building_rock_drill_station,,顺带还有精炼功能
+@str:main:name_building_watchtower,,瞭望塔
+@str:main:info_building_watchtower,,为什么是中世纪画风？

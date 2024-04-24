@@ -185,6 +185,23 @@ var requirements := []
 func _init():
 	health_changed.connect(_on_self_health_changed)
 
+func get_common_info_tips() -> Array:
+	var arr := []
+	var str := ""
+	if layer < 0:
+		str += "[color=gray]" + tr("@str::no_monopolize_terrain") + "[/color]"
+	if only_with_liquid:
+		if str.length() > 0:
+			str += ","
+		str += "[color=skyblue]" + tr("@str::only_with_liquid") + "[/color]"
+	elif can_with_liquid:
+		if str.length() > 0:
+			str += ","
+		str += "[color=skyblue]" + tr("@str::can_with_liquid") + "[/color]"
+	if str.length() > 0:
+		arr.append(str)
+	return arr
+
 func trigger_all_abilities_every_turn():
 	for a in abilities:
 		if a is TerrainElement.AbilityEveryTurn:

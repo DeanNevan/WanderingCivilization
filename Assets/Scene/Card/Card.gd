@@ -19,6 +19,10 @@ var requirements := []
 func _init(_civilization = civilization):
 	civilization = _civilization
 
+func get_common_info_tips() -> Array:
+	var arr := []
+	return arr
+
 func delete():
 	queue_free()
 
@@ -26,6 +30,11 @@ func init_cost():
 	pass
 
 func init():
+	pass
+
+func use(_para):
+	for c in cost:
+		civilization.asset_manager.consume_asset(c, cost[c])
 	pass
 
 func get_cost():

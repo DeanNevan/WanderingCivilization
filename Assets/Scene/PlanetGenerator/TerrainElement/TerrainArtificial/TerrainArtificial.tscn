@@ -5,5 +5,13 @@
 
 [node name="TerrainArtificial" instance=ExtResource("1_brubv")]
 script = ExtResource("2_rip5d")
-maintain_cost = {}
-create_cost = {}
+maintain_cost = null
+create_cost = null
+id = null
+info = null
+element_name = null
+type_name = null
+on_liquid_surface = null
+only_with_liquid = null
+can_with_liquid = null
+layer = null

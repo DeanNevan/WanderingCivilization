@@ -53,7 +53,10 @@ func init():
 	if !is_instance_valid(card):
 		return
 	_LabelName.text = card.card_name
-	_LabelInfo.text = card.info
+	_LabelInfo.text = ""
+	for i in card.get_common_info_tips():
+		_LabelInfo.text += "·%s\n" % i
+	_LabelInfo.text += tr(card.info)
 	_Icon.texture = card.icon
 	_ListCardCostMark.set_card(card)
 	if is_markers_invalid:

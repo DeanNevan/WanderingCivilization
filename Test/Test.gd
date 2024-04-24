@@ -113,8 +113,10 @@ func _on_button_generate_pressed():
 	civilization.init()
 	
 	_TerritoryDisplayer.set_territory_manager(civilization.territory_manager)
-	#civilization.asset_manager.add_asset("@asset::building_material", 10)
-	#civilization.asset_manager.add_asset("@asset::labor_force", 2)
+	civilization.asset_manager.add_asset("@asset::building_material", 10)
+	civilization.asset_manager.add_asset("@asset::labor_force", 10)
+	civilization.asset_manager.add_asset("@asset::food", 10)
+	civilization.asset_manager.add_asset("@asset::research_point", 10)
 	
 	_CardHandUI.set_civilization(civilization)
 	
@@ -122,18 +124,20 @@ func _on_button_generate_pressed():
 		i.set_civilization(civilization)
 		i.init()
 	
-	var new_card : Card = R.get_card("@card:main:building_lumbering").new()
-	new_card.add_to_hand(civilization)
-	new_card.init()
-	
-	var new_card2 : Card = R.get_card("@card:main:building_ship_lander").new()
-	new_card2.add_to_hand(civilization)
-	new_card2.init()
-	
-	
-	
-	_CardHandUI.add_card(new_card)
-	_CardHandUI.add_card(new_card2)
+	var cards_id := [
+		"@card:main:building_ship_lander",
+		"@card:main:building_lumbering",
+		"@card:main:building_artificial_forest",
+		"@card:main:building_rock_drill_station",
+		"@card:main:building_domitory",
+		"@card:main:building_research_lab",
+		"@card:main:building_watchtower",
+	]
+	for id in cards_id:
+		var new_card : Card = R.get_card(id).new()
+		new_card.add_to_hand(civilization)
+		new_card.init()
+		_CardHandUI.add_card(new_card)
 	
 
 func _on_input(_sig : String, e : InputEventAction):
@@ -151,6 +155,15 @@ func update_card_confirmation():
 		_CardElementConfirmation.set_terrain(selected_terrain)
 		_CardElementConfirmation.init()
 		_CardElementConfirmation.enable()
+
+func use_card(card : Card, terrain : PlanetTerrain = null):
+	_CardElementConfirmation.disable()
+	if is_instance_valid(civilization):
+		_CardHandUI.remove_card(card)
+		civilization.card_hand.remove_card(card)
+		if card is CardElement:
+			card.use(terrain)
+	pass
 
 func _on_hand_card_selected(_card : Card):
 	update_card_confirmation()
@@ -193,11 +206,8 @@ func _on_button_add_research_point_pressed():
 	pass # Replace with function body.
 
 func _on_card_hand_confirmed(card : CardElement, terrain : PlanetTerrain):
-	_CardElementConfirmation.disable()
-	if is_instance_valid(civilization):
-		_CardHandUI.remove_card(card)
-		civilization.card_hand.remove_card(card)
-		terrain.add_element(card.element_instance)
+	use_card(card, terrain)
+	
 	pass
 
 

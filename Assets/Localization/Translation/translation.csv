@@ -24,3 +24,13 @@ keys,en,zh
 @str::requirement_env_factor,,该%s需求地块的环境要素
 @str::requirement_civilization_territory_outpost,,该%s仅可建造于紧邻文明边疆或文明内部
 @str::requirement_civilization_territory,,该%s仅可建造于文明内部
+@str::outpost,,前哨
+@str::core,,核心
+@str::health_for_building,,耐久
+@str::health_for_unit,,生命
+@str::health_for_resource,,储量
+@str::expand_border,,扩展边疆格
+@str::can_with_liquid,,与流体共存
+@str::only_with_liquid,,仅可位于流体
+@str::no_monopolize_terrain,,不独占地块
+@str::maintain_cost,,维护费

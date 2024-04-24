@@ -9,7 +9,7 @@ class_name PlanetInteractionManager
 
 var Scene_InteractionAreaForTerrain := preload("res://Assets/Scene/PlanetGenerator/PlanetInteractionManager/InteractionArea/InteractionAreaForTerrain/InteractionAreaForTerrain.tscn")
 
-var logger := LoggerManager.register_logger(self, "PH_NoiseBasedHeightLevelModifier")
+var logger := LoggerManager.register_logger(self, "PlanetInteractionManager")
 
 var _focusing_area : InteractionAreaForTerrain
 var _unfocused_area : InteractionAreaForTerrain

@@ -4,8 +4,8 @@ func _init():
 	super._init()
 	
 	id = "@element:main:building_watch_tower"
-	info = "@str:main:info_building_watch_tower"
 	element_name = "@str:main:name_building_watch_tower"
+	info = "@str:main:info_building_watch_tower"
 	only_with_liquid = false
 	on_liquid_surface = false
 	can_with_liquid = false
