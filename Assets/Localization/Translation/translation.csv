@@ -34,3 +34,12 @@ keys,en,zh
 @str::only_with_liquid,,仅可位于流体
 @str::no_monopolize_terrain,,不独占地块
 @str::maintain_cost,,维护费
+@str::confirmation,,确认
+@str::turn,,回合
+@str::end_player_turn,,结束玩家回合
+@str::switch_elements,,切换地块元素
+@str::detail,,详情
+@str::ability,,能力
+@str::cancel,,取消
+@str::warning,,警告
+@str::invalid_target,,非法目标

@@ -82,4 +82,11 @@ func maintain(neglect_check := false):
 		for i in maintain_cost:
 			civilization.asset_manager.consume_asset(i, maintain_cost[i])
 
-
+func _on_civilization_turn_operation_started(_civilization : Civilization):
+	if _civilization.asset_manager.can_consume_assets(maintain_cost):
+		_civilization.asset_manager.consume_assets(maintain_cost)
+	else:
+		for a in abilities:
+			a.disable()
+	for a in abilities:
+		a.civilization_turn_operation_started(_civilization)

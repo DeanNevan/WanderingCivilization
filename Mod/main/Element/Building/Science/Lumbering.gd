@@ -10,7 +10,6 @@ func _init():
 	on_liquid_surface = false
 	can_with_liquid = false
 	layer = 0
-	
 	building_type = BuildingType.PRODUCTION
 	
 	create_cost = {
@@ -23,11 +22,18 @@ func _init():
 	
 	add_requirement(RequirementLayer.new(self))
 	add_requirement(RequirementLiquid.new(self))
-	
 	outpost = false
 	core = false
 	expand_borderland = 1
 	add_requirement(RequirementCivilizationTerritory.new(self))
+	
+	abilities_id = [
+		"@ability:main:cut_tree",
+		"@ability:main:cut_tree",
+		"@ability:main:cut_tree",
+		"@ability:main:cut_tree",
+		"@ability:main:cut_tree",
+	]
 
 func init_display():
 	super.init_display()

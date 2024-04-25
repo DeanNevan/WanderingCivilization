@@ -86,6 +86,17 @@ var cards := {
 	"@card::default" : preload("res://Assets/Scene/Card/Card.gd")
 }
 
+var abilities := {
+	"@ability::default" : preload("res://Assets/Scene/Ability/ElementAbility.gd")
+}
+
+func get_ability(id : String) -> GDScript:
+	if abilities.get(id) != null:
+		return abilities.get(id)
+	else:
+		logger.error("Unable to find ability(%s)" % id)
+		return abilities.get("@ability::default")
+
 func get_card(id : String) -> GDScript:
 	if cards.get(id) != null:
 		return cards.get(id)
@@ -345,6 +356,8 @@ func load_mod(mod_id : String):
 		assets[a_id] = load(mod_gd.assets[a_id])
 	for c_id in mod_gd.cards:
 		cards[c_id] = load(mod_gd.cards[c_id])
+	for a_id in mod_gd.abilities:
+		abilities[a_id] = load(mod_gd.abilities[a_id])
 	
 	for i in mod_gd.translations:
 		TranslationServer.add_translation(load(i))

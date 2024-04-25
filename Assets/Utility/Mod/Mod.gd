@@ -14,6 +14,7 @@ var batch_objects := {}
 var env_factors := {}
 var liquid_areas := {}
 var assets := {}
+var abilities := {}
 var scenes := {}
 var cards := {}
 var translations := []

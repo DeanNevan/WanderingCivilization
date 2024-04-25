@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://dxyls78mtl6jp"]
+
+[ext_resource type="Script" path="res://Assets/Scene/GUI/CircularContainer/CircularContainer.gd" id="1_fmevb"]
+
+[node name="CircularContainer" type="Container"]
+offset_right = 543.0
+offset_bottom = 543.0
+script = ExtResource("1_fmevb")
+deg_step = 60.0
+
+[connection signal="sort_children" from="." to="." method="_on_sort_children"]

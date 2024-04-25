@@ -24,6 +24,7 @@ Global="*res://Autoload/Global/Global.tscn"
 LocalizationManager="*res://addons/localization_editor/LocalizationManager.gd"
 Math="*res://Autoload/Math/Math.gd"
 InputManager="*res://Autoload/InputManager/InputManager.gd"
+GUI="*res://Autoload/GUI/GUI.tscn"
 
 [display]
 

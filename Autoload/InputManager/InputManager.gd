@@ -11,6 +11,7 @@ signal pinch
 signal twist
 signal any_gesture
 signal focus_group_id_changed
+signal special_work_status_id_changed
 
 # Enum.
 enum Gestures {PINCH, MULTI_DRAG, TWIST}
@@ -223,6 +224,11 @@ func _add_timer(timer, callable):
 	if callable:
 		timer.connect("timeout", callable)
 	self.add_child(timer)
+
+var special_work_status_id := ""
+func change_special_work_status_id(id : String):
+	special_work_status_id = id
+	special_work_status_id_changed.emit()
 
 var focus_group_id := ""
 

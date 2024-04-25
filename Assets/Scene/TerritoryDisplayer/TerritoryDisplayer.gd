@@ -7,6 +7,8 @@ class_name TerritoryDisplayer
 var territory_manager : TerritoryManager:
 	set(_territory_manager):
 		territory_manager = _territory_manager
+		if !is_instance_valid(territory_manager):
+			return
 		if !territory_manager.is_connected("territory_changed", _on_territory_changed):
 			territory_manager.connect("territory_changed", _on_territory_changed)
 
@@ -18,7 +20,15 @@ var material_core_edge : Material = preload("res://Assets/Material/MaterialTerri
 var material : Material = preload("res://Assets/Material/MaterialTerritoryDisplay.tres")
 var material_edge : Material = preload("res://Assets/Material/MaterialTerritoryDisplay.tres")
 
-var enabled := false
+var enabled := false:
+	set(_enabled):
+		enabled = _enabled
+		update_display()
+		if enabled:
+			_on_territory_changed()
+
+func _init(_territory_manager = territory_manager):
+	territory_manager = _territory_manager
 
 func _ready():
 	update_display()
@@ -27,6 +37,9 @@ func update_display():
 	visible = enabled
 
 func _on_territory_changed():
+	if !enabled:
+		return
+	
 	var mesh := ArrayMesh.new()
 	var mesh_edge := ArrayMesh.new()
 	var st := SurfaceTool.new()
@@ -99,8 +112,6 @@ func _on_territory_changed():
 
 func enable():
 	enabled = true
-	update_display()
 
 func disable():
 	enabled = false
-	update_display()

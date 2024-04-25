@@ -34,7 +34,9 @@ class Territory:
 				set_core(true)
 				return
 		set_core(false)
-		
+	func clear():
+		for terrain in terrains:
+			terrain.remove_territory(id)
 
 @export var id := ""
 
@@ -49,6 +51,14 @@ var terrains_counter := {}
 func _init(_id, _civilization = civilization):
 	id = _id
 	civilization = _civilization
+
+func clear():
+	for territory in territories:
+		territory.clear()
+	territories.clear()
+	cores.clear()
+	terrains_counter.clear()
+	pass
 
 func add_core(_terrain : PlanetTerrain):
 	cores[_terrain] = true

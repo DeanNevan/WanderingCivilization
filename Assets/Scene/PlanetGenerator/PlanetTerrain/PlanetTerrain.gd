@@ -1,6 +1,13 @@
 extends Node3D
 class_name PlanetTerrain
 
+signal selected(terrain)
+signal unselected(terrain)
+signal focused(terrain)
+signal unfocused(terrain)
+
+signal element_dead(terrain, element)
+
 var id := "@terrain::default"
 var terrain_name := "@str::default_terrain_name"
 var material_id := "@material::default_terrain"
@@ -168,10 +175,10 @@ func get_corner_vertexes_via_round(_round : int):
 				vertexes[35],
 			]
 
-func get_neighbour_terrains_via_level(_level : int) -> Array:
+func get_neighbour_terrains_via_level(_level : int, exclude_self := false) -> Array:
 	if _level == 0:
-		return [self]
-	var result := [self]
+		return [self] if !exclude_self else []
+	var result := [self] if !exclude_self else []
 	var visited := {self : true}
 	var queue := [self]
 	for i in _level:
@@ -185,6 +192,32 @@ func get_neighbour_terrains_via_level(_level : int) -> Array:
 				next_queue.append(n.terrain)
 		queue = next_queue
 	return result
+
+func remove_element(target : TerrainElement):
+	for layer in elements:
+		for element in elements[layer]:
+			if element == target:
+				elements[layer].erase(target)
+				return
+
+func call_element_die(element : TerrainElement):
+	element_dead.emit(self, element)
+	remove_element(element)
+	element.confirm_die()
+
+func has_element(id : String) -> bool:
+	for layer in elements:
+		for element in elements[layer]:
+			if element.id == id:
+				return true
+	return false
+
+func get_element_via_id(id : String):
+	for layer in elements:
+		for element in elements[layer]:
+			if element.id == id:
+				return element
+	return null
 
 func get_territory(id : String) -> TerritoryManager.Territory:
 	if territories.has(id):
@@ -279,6 +312,8 @@ func get_vertex_pos_of_liquid(vertex_idx : int) -> Vector3:
 
 func get_elements():
 	return elements
+
+
 
 func copy_to(target : PlanetTerrain, do_duplicate := false):
 	if do_duplicate:
@@ -672,7 +707,13 @@ func place_model_scene(scene, on_liquid := false):
 	scene.scale *= get_edge_len() / 2.0
 
 func focus():
-	pass
+	focused.emit(self)
 
 func unfocus():
-	pass
+	unfocused.emit(self)
+
+func select():
+	selected.emit(self)
+
+func unselect():
+	unselected.emit(self)

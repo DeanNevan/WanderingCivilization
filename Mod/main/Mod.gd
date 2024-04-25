@@ -58,7 +58,13 @@ func _init():
 		"@element:main:resource_cactus" : "res://Mod/main/Element/Resource/Placement/Cactus.gd",
 		"@element:main:resource_wheat" : "res://Mod/main/Element/Resource/Placement/Wheat.gd",
 		"@element:main:resource_berry_bush" : "res://Mod/main/Element/Resource/Placement/BerryBush.gd",
-		
+		"@element:main:building_artificial_forest" : "res://Mod/main/Element/Building/Science/ArtificialForest.gd",
+		"@element:main:building_dormitory" : "res://Mod/main/Element/Building/Science/Dormitory.gd",
+		"@element:main:building_lumbering" : "res://Mod/main/Element/Building/Science/Lumbering.gd",
+		"@element:main:building_research_lab" : "res://Mod/main/Element/Building/Science/ResearchLab.gd",
+		"@element:main:building_rock_drill_station" : "res://Mod/main/Element/Building/Science/RockDrillStation.gd",
+		"@element:main:building_ship_lander" : "res://Mod/main/Element/Building/Science/ShipLander.gd",
+		"@element:main:building_watchtower" : "res://Mod/main/Element/Building/Science/Watchtower.gd",
 	}
 	self.env_factors = {
 		"@env_factor:main:acid" : "res://Mod/main/EnvFactor/Acid.gd",
@@ -82,6 +88,9 @@ func _init():
 		"@card:main:building_research_lab" : "res://Mod/main/Card/Science/Building/CardResearchLab.gd",
 		"@card:main:building_rock_drill_station" : "res://Mod/main/Card/Science/Building/CardRockDrillStation.gd",
 		"@card:main:building_watchtower" : "res://Mod/main/Card/Science/Building/CardWatchtower.gd",
+	}
+	self.abilities = {
+		"@ability:main:cut_tree" : "res://Mod/main/Ability/CutTree.gd",
 	}
 	self.translations = [
 		"res://Mod/main/Localization/Translation/translation.en.translation",

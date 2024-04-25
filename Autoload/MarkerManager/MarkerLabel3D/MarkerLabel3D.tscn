@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://t1cqvl02ad5"]
 
-[ext_resource type="Script" path="res://Assets/Scene/MarkerLabel3D/MarkerLabel3D.gd" id="1_4jcag"]
+[ext_resource type="Script" path="res://Autoload/MarkerManager/MarkerLabel3D/MarkerLabel3D.gd" id="1_4jcag"]
 
 [node name="MarkerLabel3D" type="Label3D"]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)

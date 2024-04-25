@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://cnifmcvec3nlf"]
+
+[ext_resource type="PackedScene" uid="uid://dxyls78mtl6jp" path="res://Assets/Scene/GUI/CircularContainer/CircularContainer.tscn" id="1_qvb0y"]
+[ext_resource type="Script" path="res://Assets/Scene/GUI/TerrainSelectionMenu/AbilityListUI/AbilityListUI.gd" id="2_swase"]
+
+[node name="AbilityListUI" instance=ExtResource("1_qvb0y")]
+script = ExtResource("2_swase")
+deg_step = 30.0

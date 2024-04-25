@@ -1,5 +1,7 @@
 extends Node
 
+signal planet_game_changed
+
 var rander := RandomNumberGenerator.new()
 
 var random_seed := int(Time.get_unix_time_from_system()):
@@ -12,6 +14,14 @@ var random_seed := int(Time.get_unix_time_from_system()):
 var logger := LoggerManager.register_logger(self, "Global", Logger.Level.DEBUG)
 
 var rander_for_decoration := RandomNumberGenerator.new()
+
+var planet_game : PlanetGame:
+	set(_planet_game):
+		planet_game = _planet_game
+		planet_game_changed.emit()
+
+func set_planet_game(_planet_game):
+	planet_game = _planet_game
 
 func _ready():
 	TranslationServer.set_locale("zh_CN")

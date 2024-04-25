@@ -2,6 +2,7 @@ extends Node3D
 class_name TerrainElement
 
 signal health_changed(resource)
+signal dead(resource)
 var max_health := 100
 var health := 100
 
@@ -132,36 +133,6 @@ func added_to_terrain():
 		#for 
 		#return true
 
-class Ability:
-	var ability_name := ""
-	var info := ""
-	
-	var element : TerrainElement
-	
-	var is_active := false
-	
-	func _init(_element):
-		element = _element
-	
-	func can_activate() -> bool:
-		return true
-	
-	func activate():
-		if can_activate():
-			is_active = true
-	
-	func inactivate():
-		is_active = false
-	
-	func trigger():
-		pass
-	pass
-
-class AbilityOneShot:
-	pass
-
-class AbilityEveryTurn:
-	pass
 
 var abilities := []
 
@@ -175,7 +146,15 @@ var abilities := []
 @export var can_with_liquid := false
 @export var layer := 0
 
-var terrain : PlanetTerrain
+@export var abilities_id := []
+
+var terrain : PlanetTerrain:
+	set(_terrain):
+		terrain = _terrain
+		if !terrain.planet.planet_game._TurnManager.is_connected("civilization_turn_operation_started", _on_civilization_turn_operation_started):
+			terrain.planet.planet_game._TurnManager.connect("civilization_turn_operation_started", _on_civilization_turn_operation_started)
+		if !terrain.planet.planet_game._TurnManager.is_connected("civilization_turn_operation_ended", _on_civilization_turn_operation_ended):
+			terrain.planet.planet_game._TurnManager.connect("civilization_turn_operation_ended", _on_civilization_turn_operation_ended)
 
 var env_factors_id_modification := {}
 var env_factors_id_modification_neighbour := {}
@@ -184,6 +163,14 @@ var requirements := []
 
 func _init():
 	health_changed.connect(_on_self_health_changed)
+
+func _ready():
+	for id in abilities_id:
+		var ability_script : GDScript = R.get_ability(id)
+		if !is_instance_valid(ability_script):
+			continue
+		add_ability(ability_script.new())
+	
 
 func get_common_info_tips() -> Array:
 	var arr := []
@@ -202,20 +189,34 @@ func get_common_info_tips() -> Array:
 		arr.append(str)
 	return arr
 
-func trigger_all_abilities_every_turn():
-	for a in abilities:
-		if a is TerrainElement.AbilityEveryTurn:
-			if a.is_active():
-				a.trigger()
-
-func add_ability(_ability : TerrainElement.Ability):
+func add_ability(_ability : ElementAbility):
+	_ability.element = self
 	abilities.append(_ability)
+	add_child(_ability)
 
-func init():
-	pass
+func can_afford_damage(count : int):
+	return health >= count
+
+func get_damage(count : int):
+	if count < 0:
+		return
+	print("%s get_damage %d" % [tr(element_name), count])
+	health = clamp(health - count, 0, max_health)
+	if health == 0:
+		call_die()
+
+func call_die():
+	if is_instance_valid(terrain):
+		terrain.call_element_die(self)
+
+func confirm_die():
+	dead.emit(self)
 
 func delete():
 	queue_free()
+
+func init():
+	pass
 
 func init_display():
 	pass
@@ -254,3 +255,13 @@ func _on_self_health_changed(_resource):
 func add_model_scene(scene : Node3D):
 	add_child(scene)
 	terrain.place_model_scene(scene, on_liquid_surface and can_with_liquid)
+
+func _on_civilization_turn_operation_started(_civilization : Civilization):
+	for a in abilities:
+		a.civilization_turn_operation_started(_civilization)
+	pass
+
+func _on_civilization_turn_operation_ended(_civilization : Civilization):
+	for a in abilities:
+		a.civilization_turn_operation_ended(_civilization)
+	pass

@@ -29,6 +29,8 @@ var _TerrainsMeshInstance : MeshInstance3D = $TerrainsMeshInstance
 
 @onready var _PlanetInteractionManager = $PlanetInteractionManager
 
+var planet_game : PlanetGame
+
 var terrains := []
 var liquid_areas := []
 
@@ -308,24 +310,26 @@ func set_terrain(_terrain : PlanetTerrain, _terrain_id : String):
 	change_terrain(_terrain.idx, new_terrain)
 
 func terrain_focus(_terrain : PlanetTerrain):
-	_terrain.focus()
 	terrain_focused.emit(_terrain)
+	_terrain.focus()
 	
 	#print("focus:%s" % _terrain)
 	pass
 
 func terrain_unfocus(_terrain : PlanetTerrain):
-	_terrain.unfocus()
 	terrain_unfocused.emit(_terrain)
+	_terrain.unfocus()
 	
 	#print("unfocus:%s" % _terrain)
 	pass
 
 func terrain_select(_terrain : PlanetTerrain):
 	terrain_selected.emit(_terrain)
+	_terrain.select()
 
 func terrain_unselect(_terrain : PlanetTerrain):
 	terrain_unselected.emit(_terrain)
+	_terrain.unselect()
 
 func get_focusing_terrain():
 	return _PlanetInteractionManager.get_focusing_terrain()

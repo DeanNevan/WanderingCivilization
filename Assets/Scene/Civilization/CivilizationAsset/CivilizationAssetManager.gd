@@ -52,6 +52,11 @@ func consume_asset(id : String, value : int):
 	if can_consume_asset(id, value):
 		assets[id].consume(value)
 
+func consume_assets(_assets : Dictionary):
+	for id in _assets:
+		if assets.has(id):
+			consume_asset(id, _assets[id])
+
 func _on_asset_used_out(_asset : CivilizationAsset):
 	asset_used_out.emit(_asset)
 

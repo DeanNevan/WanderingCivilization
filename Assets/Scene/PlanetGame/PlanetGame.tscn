@@ -1,9 +1,19 @@
-[gd_scene load_steps=11 format=3 uid="uid://bcc3egfuhhsp4"]
+[gd_scene load_steps=21 format=3 uid="uid://bcc3egfuhhsp4"]
 
 [ext_resource type="Script" path="res://Assets/Scene/PlanetGame/PlanetGame.gd" id="1_622am"]
-[ext_resource type="Script" path="res://Assets/Scene/Civilization/Civilization.gd" id="2_dfo3y"]
 [ext_resource type="Texture2D" uid="uid://nsrkl7gj2pjg" path="res://Assets/HDRI/HDR_blue_nebulae-1.hdr" id="2_f30f7"]
 [ext_resource type="Script" path="res://addons/orbit_camera/orbit_camera.gd" id="3_op2ny"]
+[ext_resource type="Script" path="res://Assets/Scene/PlanetGame/TurnManager.gd" id="5_2l4iw"]
+[ext_resource type="PackedScene" uid="uid://dp3sqtl5k5hxc" path="res://Assets/Scene/GUI/CardHandUI/CardHandUI.tscn" id="6_i4q55"]
+[ext_resource type="PackedScene" uid="uid://v5ews1ioygl2" path="res://Assets/Scene/GUI/CardElementConfirmation/CardElementConfirmation.tscn" id="7_6xfrc"]
+[ext_resource type="PackedScene" uid="uid://b031aswkctq01" path="res://Assets/Scene/GUI/MainCivilizationAssetItem/MainCivilizationAssetItem.tscn" id="8_wn410"]
+[ext_resource type="Texture2D" uid="uid://cl8cvvv0sqjue" path="res://Assets/Icon/brick.png" id="9_f21h3"]
+[ext_resource type="Texture2D" uid="uid://euoqa6hmc6as" path="res://Assets/Icon/hammer2.png" id="10_b7ik2"]
+[ext_resource type="Texture2D" uid="uid://b3rw4bgwrbnvx" path="res://Assets/Icon/apple.png" id="11_47xl2"]
+[ext_resource type="Texture2D" uid="uid://bhjy6ew5af725" path="res://Assets/Icon/science.png" id="12_snyxe"]
+[ext_resource type="Texture2D" uid="uid://cdui5gm8eme13" path="res://Assets/Icon/sand_clock.png" id="12_vrsxr"]
+[ext_resource type="PackedScene" uid="uid://e2c8b7ihtlw1" path="res://Assets/Scene/TerritoryDisplayer/TerritoryDisplayer.tscn" id="13_bqsqm"]
+[ext_resource type="PackedScene" uid="uid://cqup31alfnid" path="res://Assets/Scene/GUI/TerrainSelectionMenu/TerrainSelectionMenu.tscn" id="13_rbcag"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_0gvg1"]
 panorama = ExtResource("2_f30f7")
@@ -53,9 +63,6 @@ _data = {
 [node name="PlanetGame" type="Node3D"]
 script = ExtResource("1_622am")
 
-[node name="CivilizationPlayer" type="Node" parent="."]
-script = ExtResource("2_dfo3y")
-
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_bydhr")
 
@@ -91,3 +98,169 @@ transform = Transform3D(-0.707107, 0.5, 0.5, 0, 0.707107, -0.707107, -0.707107, 
 light_color = Color(0.196078, 0.329412, 0.447059, 1)
 light_energy = 0.1
 light_cull_mask = 4293918721
+
+[node name="TurnManager" type="Node3D" parent="."]
+script = ExtResource("5_2l4iw")
+planet_game_node_path = NodePath("..")
+
+[node name="TerritoryDisplayer" parent="." instance=ExtResource("13_bqsqm")]
+
+[node name="GUI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="CardHandUI" parent="GUI" instance=ExtResource("6_i4q55")]
+layout_mode = 1
+
+[node name="CardElementConfirmation" parent="GUI" instance=ExtResource("7_6xfrc")]
+visible = false
+layout_mode = 0
+offset_right = 200.0
+offset_bottom = 89.0
+
+[node name="TerrainSelectionMenu" parent="GUI" instance=ExtResource("13_rbcag")]
+visible = false
+
+[node name="MarginContainer" type="MarginContainer" parent="GUI"]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 187.0
+grow_horizontal = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GUI/MarginContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="GUI/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Panel" type="Panel" parent="GUI/MarginContainer/VBoxContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="GUI/MarginContainer/VBoxContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 3
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 3
+
+[node name="ListCivilizationAssetItem" type="HBoxContainer" parent="GUI/MarginContainer/VBoxContainer/MarginContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GUI/MarginContainer/VBoxContainer/MarginContainer/MarginContainer/ListCivilizationAssetItem"]
+layout_mode = 2
+
+[node name="MainCivilizationAssetItem" parent="GUI/MarginContainer/VBoxContainer/MarginContainer/MarginContainer/ListCivilizationAssetItem/VBoxContainer" instance=ExtResource("8_wn410")]
+layout_mode = 2
+asset_id = "@asset::building_material"
+
+[node name="ButtonAddBuildingMaterial" type="Button" parent="GUI/MarginContainer/VBoxContainer/MarginContainer/MarginContainer/ListCivilizationAssetItem/VBoxContainer"]
+custom_minimum_size = Vector2(120, 55)
+layout_mode = 2
+text = "增加"
+icon = ExtResource("9_f21h3")
+expand_icon = true
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="GUI/MarginContainer/VBoxContainer/MarginContainer/MarginContainer/ListCivilizationAssetItem"]
+layout_mode = 2
+
+[node name="MainCivilizationAssetItem2" parent="GUI/MarginContainer/VBoxContainer/MarginContainer/MarginContainer/ListCivilizationAssetItem/VBoxContainer2" instance=ExtResource("8_wn410")]
+layout_mode = 2
+asset_id = "@asset::labor_force"
+
+[node name="ButtonAddLaborForce" type="Button" parent="GUI/MarginContainer/VBoxContainer/MarginContainer/MarginContainer/ListCivilizationAssetItem/VBoxContainer2"]
+custom_minimum_size = Vector2(100, 55)
+layout_mode = 2
+text = "增加"
+icon = ExtResource("10_b7ik2")
+expand_icon = true
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="GUI/MarginContainer/VBoxContainer/MarginContainer/MarginContainer/ListCivilizationAssetItem"]
+layout_mode = 2
+
+[node name="MainCivilizationAssetItem3" parent="GUI/MarginContainer/VBoxContainer/MarginContainer/MarginContainer/ListCivilizationAssetItem/VBoxContainer3" instance=ExtResource("8_wn410")]
+layout_mode = 2
+asset_id = "@asset::food"
+
+[node name="ButtonAddFood" type="Button" parent="GUI/MarginContainer/VBoxContainer/MarginContainer/MarginContainer/ListCivilizationAssetItem/VBoxContainer3"]
+custom_minimum_size = Vector2(100, 55)
+layout_mode = 2
+text = "增加"
+icon = ExtResource("11_47xl2")
+expand_icon = true
+
+[node name="VBoxContainer4" type="VBoxContainer" parent="GUI/MarginContainer/VBoxContainer/MarginContainer/MarginContainer/ListCivilizationAssetItem"]
+layout_mode = 2
+
+[node name="MainCivilizationAssetItem4" parent="GUI/MarginContainer/VBoxContainer/MarginContainer/MarginContainer/ListCivilizationAssetItem/VBoxContainer4" instance=ExtResource("8_wn410")]
+layout_mode = 2
+asset_id = "@asset::research_point"
+
+[node name="ButtonAddResearchPoint" type="Button" parent="GUI/MarginContainer/VBoxContainer/MarginContainer/MarginContainer/ListCivilizationAssetItem/VBoxContainer4"]
+custom_minimum_size = Vector2(100, 55)
+layout_mode = 2
+text = "增加"
+icon = ExtResource("12_snyxe")
+expand_icon = true
+
+[node name="MarginContainer" type="MarginContainer" parent="GUI/MarginContainer/VBoxContainer/MarginContainer/MarginContainer/ListCivilizationAssetItem"]
+layout_mode = 2
+size_flags_horizontal = 10
+theme_override_constants/margin_right = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="GUI/MarginContainer/VBoxContainer/MarginContainer/MarginContainer/ListCivilizationAssetItem/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="GUI/MarginContainer/VBoxContainer/MarginContainer/MarginContainer/ListCivilizationAssetItem/MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"HeaderSmall"
+text = "@str::turn"
+
+[node name="TextureRect" type="TextureRect" parent="GUI/MarginContainer/VBoxContainer/MarginContainer/MarginContainer/ListCivilizationAssetItem/MarginContainer/HBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(64, 0)
+layout_mode = 2
+texture = ExtResource("12_vrsxr")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Label2" type="Label" parent="GUI/MarginContainer/VBoxContainer/MarginContainer/MarginContainer/ListCivilizationAssetItem/MarginContainer/HBoxContainer"]
+layout_mode = 2
+text = " : "
+
+[node name="LabelTurnCount" type="Label" parent="GUI/MarginContainer/VBoxContainer/MarginContainer/MarginContainer/ListCivilizationAssetItem/MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"HeaderLarge"
+text = "999"
+
+[node name="ButtonEndPlayerTurn" type="Button" parent="GUI/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(120, 60)
+layout_mode = 2
+size_flags_horizontal = 8
+text = "@str::end_player_turn"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="GUI"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -40.0
+offset_right = 144.0
+grow_vertical = 0
+
+[node name="CheckButtonCivilizationTerritory" type="CheckButton" parent="GUI/VBoxContainer2"]
+layout_mode = 2
+text = "显示文明边疆"
+
+[connection signal="pressed" from="GUI/MarginContainer/VBoxContainer/MarginContainer/MarginContainer/ListCivilizationAssetItem/VBoxContainer/ButtonAddBuildingMaterial" to="." method="_on_button_add_building_material_pressed"]
+[connection signal="pressed" from="GUI/MarginContainer/VBoxContainer/MarginContainer/MarginContainer/ListCivilizationAssetItem/VBoxContainer2/ButtonAddLaborForce" to="." method="_on_button_add_labor_force_pressed"]
+[connection signal="pressed" from="GUI/MarginContainer/VBoxContainer/MarginContainer/MarginContainer/ListCivilizationAssetItem/VBoxContainer3/ButtonAddFood" to="." method="_on_button_add_food_pressed"]
+[connection signal="pressed" from="GUI/MarginContainer/VBoxContainer/MarginContainer/MarginContainer/ListCivilizationAssetItem/VBoxContainer4/ButtonAddResearchPoint" to="." method="_on_button_add_research_point_pressed"]
+[connection signal="pressed" from="GUI/MarginContainer/VBoxContainer/ButtonEndPlayerTurn" to="." method="_on_button_end_player_turn_pressed"]
+[connection signal="toggled" from="GUI/VBoxContainer2/CheckButtonCivilizationTerritory" to="." method="_on_check_button_civilization_territory_toggled"]
